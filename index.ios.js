@@ -17,10 +17,10 @@ export default class LABR extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Hello from the index file!
         </Text>
         <Text style={styles.instructions}>
-          OKAY
+          testing one two three
         </Text>
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
