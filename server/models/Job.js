@@ -31,4 +31,4 @@ const jobSchema = mongoose.Schema({
 
 
 
-module.exports = mongoose.model('Provider', jobSchema)
+module.exports = mongoose.model('Job', jobSchema)
