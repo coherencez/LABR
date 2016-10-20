@@ -7,6 +7,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.4",
     "native-base": "^0.5.11",
     "react": "15.3.2",
     "react-native": "0.35.0",
