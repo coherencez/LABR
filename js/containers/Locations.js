@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { AppRegistry, StyleSheet, View, Image } from 'react-native';
+import { Actions } from 'react-native-router-flux'
+import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem } from 'native-base';
 
-export default class App extends Component {
+export default class Locations extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.instructions}>
-          Hello from the Home view!
-        </Text>
-      </View>
+      <Container style={styles.alignmentFix}>
+        <Content>
+          <List>
+            <ListItem>
+              <Card>
+                <CardItem>
+                  <Text>Nashville</Text>
+                </CardItem>
+                <CardItem cardBody>
+                  <Image source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} />
+                  <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
+                      389 Providers Online
+                  </Button>
+                </CardItem>
+              </Card>
+            </ListItem>
+            <ListItem>
+              <Card>
+                <CardItem>
+                  <Text>Las Vegas</Text>
+                </CardItem>
+                <CardItem cardBody>
+                  <Image source={{uri: 'https://www.firstoptiononline.com/wp-content/uploads/2014/10/las-vegas-skyline.jpg'}} />
+                  <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
+                      452 Providers Online
+                  </Button>
+                </CardItem>
+              </Card>
+            </ListItem>
+          </List>
+        </Content>
+      </Container>
     );
+  }
+
+  handleNashville() {
+    console.log('HANDLE NASHVILLE')
+    Actions.providers({type: 'push'})
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  alignmentFix: {
+    marginTop: 60
   },
 });

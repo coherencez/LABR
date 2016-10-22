@@ -30,7 +30,7 @@ export default class App extends Component {
           </Content>
           <Footer>
             <Button block onPress={this.handlePress}>
-              Click me
+              Currently Available Locations
             </Button>
           </Footer>
 
