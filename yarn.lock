@@ -4055,6 +4055,12 @@ react-native-checkbox@~1.0.8:
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/react-native-checkbox/-/react-native-checkbox-1.0.15.tgz#a4d7563a14ef4972faeb74afdd3e031d51ee5423"
 
+react-native-easy-grid:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-easy-grid/-/react-native-easy-grid-0.1.6.tgz#66733fb65d210a618afc67ad1166e431a9c70026"
+  dependencies:
+    lodash "^4.11.1"
+
 react-native-easy-grid@0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/react-native-easy-grid/-/react-native-easy-grid-0.1.5.tgz#357e26c891ba5818d83652eae79c9f7d669ff8d2"
@@ -4086,6 +4092,10 @@ react-native-router-flux:
     react-native-experimental-navigation "0.26.x"
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
+
+react-native-side-menu:
+  version "0.20.1"
+  resolved "https://registry.yarnpkg.com/react-native-side-menu/-/react-native-side-menu-0.20.1.tgz#df21b4bb9d8a1aa3bae53d74ddf8a739eb59bfc5"
 
 react-native-tabs@^1.0.9:
   version "1.0.9"
