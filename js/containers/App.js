@@ -1,31 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux'
-import { Button } from 'native-base'
+import { Button, Text, Container, Content, Header, Footer } from 'native-base'
+
+import SideNav from '../components/SideNav'
+import SideMenu from 'react-native-side-menu'
 
 export default class App extends Component {
   render() {
     console.log('HELLO', this.props)
+    const menu = <SideNav />
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Hello from the App file!
-        </Text>
-        <Button block onPress={this.handlePress}>
-          Click me
-        </Button>
-      </View>
+      <SideMenu menu={menu}>
+        <Container style={styles.container}>
+          <Header>
+            <Text style={styles.welcome}>
+              LABR
+            </Text>
+          </Header>
+          <Content>
+            <Text style={styles.instructions}>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+
+          </Content>
+          <Footer>
+            <Button block onPress={this.handlePress}>
+              Click me
+            </Button>
+          </Footer>
+
+        </Container>
+      </SideMenu>
     );
   }
   handlePress() {
@@ -39,16 +49,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    padding: 10,
+    marginTop: 60
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
-    margin: 10,
     fontFamily: 'nevis'
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    fontSize: 10,
+    fontFamily: 'nevis'
   },
 });
