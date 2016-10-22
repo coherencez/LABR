@@ -16,6 +16,7 @@ import { Button, Icon } from 'native-base'
 // Components
 import App from './js/containers/App'
 import Locations from './js/containers/Locations'
+import Providers from './js/containers/Providers'
 
 
 export default class LABR extends Component {
@@ -25,6 +26,7 @@ export default class LABR extends Component {
         <Scene key='root'>
           <Scene key='app' component={App} initial={true} title='Welcome' />
           <Scene key='locations' component={Locations} title='Locations' />
+          <Scene key='providers' component={Providers} title='Providers' />
         </Scene>
       </Router>
     )
