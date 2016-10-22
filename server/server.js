@@ -5,7 +5,7 @@ const        app = require('express')()
   ,  { connect } = require('./db/database')
   ,         PORT = process.env.PORT || 3000
 
-// only send or receive json 
+// only send or receive json
 app.use(bodyParser.json())
 
 app.get('/', (req,res) =>
@@ -16,5 +16,4 @@ app.get('/', (req,res) =>
 connect()
   .then(() =>
     app.listen(PORT, () => console.log(`Now listening on port: ${PORT}`))
-  )
-  .catch(console.error)
+  ).catch(console.error)
