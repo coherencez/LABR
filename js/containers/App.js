@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
       height: 2,
       width: 0
     },
-    borderRadius: 0,
   },
   text: {
     fontFamily,

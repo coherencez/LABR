@@ -47,7 +47,7 @@ export default class SignUp extends Component {
             </ListItem>
             <Text note style={styles.helperText2}>*These will be used to login</Text>
           </List>
-          <Button success style={styles.button}>Submit</Button>
+          <Button block success style={styles.button}>Submit</Button>
         </Content>
       </Container>
     )
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   button: {
-    left: 100,
     top: 20,
     backgroundColor: buttonBgColor,
   },
