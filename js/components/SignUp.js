@@ -56,11 +56,9 @@ export default class SignUp extends Component {
 
 const styles = StyleSheet.create({
   alignmentFix: {
-    marginTop: 60,
+    marginTop: 80,
     flex: 1,
-    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 15,
   },
   hidden: {
     opacity: 0,
