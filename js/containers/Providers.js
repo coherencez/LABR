@@ -10,7 +10,7 @@ export default class Providers extends Component {
         <Container style={styles.alignmentFix}>
           <Content>
           <Grid>
-              <Col style={{ backgroundColor: '#D954D7'}}>
+              <Col>
                 <List>
                   <ListItem>
                     <Card>
@@ -66,7 +66,7 @@ export default class Providers extends Component {
                   </ListItem>
                 </List>
               </Col>
-              <Col style={{ backgroundColor: '#D93735' }}>
+              <Col>
                 <List>
                   <ListItem>
                     <Card>
