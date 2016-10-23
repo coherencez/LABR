@@ -3,10 +3,15 @@ import { AppRegistry, StyleSheet, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem } from 'native-base';
 
+import SideNav from '../components/SideNav'
+import SideMenu from 'react-native-side-menu'
+
 export default class Locations extends Component {
   render() {
+    const menu = <SideNav />
     return (
-      <Container style={styles.alignmentFix}>
+      <SideMenu menu={menu}>
+      <Container style={styles.alignmentFix, styles.container}>
         <Content>
           <List>
             <ListItem>
@@ -38,6 +43,7 @@ export default class Locations extends Component {
           </List>
         </Content>
       </Container>
+      </SideMenu>
     );
   }
 
@@ -48,7 +54,8 @@ export default class Locations extends Component {
 }
 
 const styles = StyleSheet.create({
-  alignmentFix: {
-    marginTop: 60
-  },
+  container: {
+    backgroundColor: '#ffffff',
+    marginTop: 60,
+  }
 });

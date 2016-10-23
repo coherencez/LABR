@@ -12,14 +12,13 @@ import SideMenu from 'react-native-side-menu'
 
 export default class App extends Component {
   render() {
-    console.log('HELLO', this.props)
     const menu = <SideNav />
     return (
       <SideMenu menu={menu}>
         <Container style={styles.container}>
           <Header>
             <Text style={styles.welcome}>
-              LABR
+              Welcome
             </Text>
           </Header>
           <Content>
@@ -29,7 +28,7 @@ export default class App extends Component {
 
           </Content>
           <Footer>
-            <Button block onPress={this.handlePress}>
+            <Button block onPress={this.handlePress} style={styles.button}>
               Currently Available Locations
             </Button>
           </Footer>
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   welcome: {
-    fontSize: 30,
+    fontSize: 21,
     textAlign: 'center',
     fontFamily: 'nevis'
   },
@@ -62,5 +61,15 @@ const styles = StyleSheet.create({
     color: '#333333',
     fontSize: 10,
     fontFamily: 'nevis'
+  },
+  button: {
+    backgroundColor: '#4400FF',
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    },
   },
 });

@@ -3,10 +3,15 @@ import { AppRegistry, StyleSheet, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem } from 'native-base';
 
+import SideNav from '../components/SideNav'
+import SideMenu from 'react-native-side-menu'
+
 export default class Category extends Component {
   render() {
+    const menu = <SideNav />
     return (
-      <Container style={styles.alignmentFix}>
+      <SideMenu menu={menu}>
+      <Container style={styles.container}>
         <Content>
           <List>
             <ListItem  button onPress={this.handleNashville}>
@@ -20,6 +25,7 @@ export default class Category extends Component {
           </List>
         </Content>
       </Container>
+      </SideMenu>
     );
   }
 
@@ -30,8 +36,9 @@ export default class Category extends Component {
 }
 
 const styles = StyleSheet.create({
-  alignmentFix: {
-    marginTop: 60
+  container: {
+    backgroundColor: '#fff',
+    marginTop: 60,
   },
   spacing: {
     marginTop: 5,

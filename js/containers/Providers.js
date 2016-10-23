@@ -4,10 +4,15 @@ import { Col, Row, Grid } from 'react-native-easy-grid'
 import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem } from 'native-base';
 
 
+import SideNav from '../components/SideNav'
+import SideMenu from 'react-native-side-menu'
+
 export default class Providers extends Component {
   render() {
+    const menu = <SideNav />
     return (
-        <Container style={styles.alignmentFix}>
+        <SideMenu menu={menu}>
+        <Container style={styles.container}>
           <Content>
           <Grid>
               <Col>
@@ -125,12 +130,14 @@ export default class Providers extends Component {
           </Grid>
           </Content>
         </Container>
+        </SideMenu>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  alignmentFix: {
-    marginTop: 60
-  }
+  container: {
+    backgroundColor: '#fff',
+    marginTop: 60,
+  },
 });
