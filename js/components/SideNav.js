@@ -55,6 +55,7 @@ export default class SideNav extends Component {
   }
   handleBusinessPress() {
     console.log('BA PRESSED')
+    Actions.providersignup()
   }
   handleMessagesPress() {
     console.log('MESSAGES PRESSED')
