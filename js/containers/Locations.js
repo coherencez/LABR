@@ -14,9 +14,9 @@ export default class Locations extends Component {
                 <CardItem>
                   <Text>Nashville</Text>
                 </CardItem>
-                <CardItem cardBody>
+                <CardItem cardBody button onPress={this.handlePress}>
                   <Image source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} />
-                  <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
+                  <Button transparent textStyle={{color: '#87838B'}} >
                       389 Providers Online
                   </Button>
                 </CardItem>
@@ -27,9 +27,9 @@ export default class Locations extends Component {
                 <CardItem>
                   <Text>Las Vegas</Text>
                 </CardItem>
-                <CardItem cardBody>
+                <CardItem cardBody button onPress={this.handlePress}>
                   <Image source={{uri: 'https://www.firstoptiononline.com/wp-content/uploads/2014/10/las-vegas-skyline.jpg'}} />
-                  <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
+                  <Button transparent textStyle={{color: '#87838B'}}>
                       452 Providers Online
                   </Button>
                 </CardItem>
@@ -41,7 +41,7 @@ export default class Locations extends Component {
     );
   }
 
-  handleNashville() {
+  handlePress() {
     console.log('HANDLE NASHVILLE')
     Actions.category({type: 'push'})
   }
