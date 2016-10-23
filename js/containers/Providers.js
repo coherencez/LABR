@@ -31,14 +31,11 @@ export default class Providers extends Component {
                     <CardItem style={{backgroundColor: buttonBgColor}}>
                       <Text style={styles.text}>John Doe</Text>
                     </CardItem>
-                    <CardItem cardBody>
+                    <CardItem cardBody button onPress={this.handleProviderPress}>
                     <List>
                       <ListItem>
                         <Badge info>7</Badge>
                         <Text style={styles.listInfo}>Years Exp.</Text>
-                      </ListItem>
-                      <ListItem>
-                          <Text style={styles.listInfo}>Skills</Text>
                       </ListItem>
                       <ListItem>
                           <Text style={styles.listInfo}>$25 per hour</Text>
@@ -63,9 +60,6 @@ export default class Providers extends Component {
                         <Text style={styles.listInfo}>Years Exp.</Text>
                       </ListItem>
                       <ListItem>
-                          <Text style={styles.listInfo}>Skills</Text>
-                      </ListItem>
-                      <ListItem>
                           <Text style={styles.listInfo}>$25 per hour</Text>
                       </ListItem>
                     </List>
@@ -79,6 +73,10 @@ export default class Providers extends Component {
         </Container>
         </SideMenu>
     );
+  }
+
+  handleProviderPress() {
+    console.log('PROVIDER PRESS')
   }
 }
 

@@ -12,6 +12,8 @@ import App from './js/containers/App'
 import Locations from './js/containers/Locations'
 import Category from './js/containers/Category'
 import Providers from './js/containers/Providers'
+import SignUp from './js/components/SignUp'
+import Login from './js/components/Login'
 
 
 export default class LABR extends Component {
@@ -23,6 +25,8 @@ export default class LABR extends Component {
           <Scene key='locations' component={Locations} renderTitle={() => this.renderTitle('locations')}/>
           <Scene key='category' component={Category} renderTitle={() => this.renderTitle('categories')} />
           <Scene key='providers' component={Providers} renderTitle={() => this.renderTitle('providers')} />
+          <Scene key='signup' component={SignUp} renderTitle={() => this.renderTitle('signup')} />
+          <Scene key='login' component={Login} renderTitle={() => this.renderTitle('login')} />
         </Scene>
       </Router>
     )

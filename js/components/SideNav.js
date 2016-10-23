@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Text, Icon, Badge } from 'native-base';
 
 
@@ -13,6 +14,10 @@ export default class SideNav extends Component {
                 <Icon name='md-contact' />
                 <Text>Sign Up</Text>
                 <Text note>Note here</Text>
+              </ListItem>
+              <ListItem iconLeft button onPress={this.handleLoginPress}>
+                <Icon name='md-globe' />
+                <Text>Login</Text>
               </ListItem>
               <ListItem iconLeft button onPress={this.handleHistoryPress}>
                   <Icon name='md-archive' />
@@ -39,6 +44,11 @@ export default class SideNav extends Component {
   }
   handleSignUpPress() {
     console.log('SIGNUP PRESSED')
+    Actions.signup()
+  }
+  handleLoginPress() {
+    console.log('LOGIN PRESSED')
+    Actions.login()
   }
   handleHistoryPress() {
     console.log('HISTORY PRESSED')
