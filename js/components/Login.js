@@ -11,7 +11,7 @@ export default class Login extends Component {
         <List style={{ width: 250}}>
             <ListItem>
                 <InputGroup>
-                    <Icon name='ios-person' />
+                    <Icon name='ios-mail' />
                     <Input placeholder='EMAIL' />
                 </InputGroup>
             </ListItem>
