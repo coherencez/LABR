@@ -19,18 +19,19 @@ export default class LABR extends Component {
     return (
       <Router>
         <Scene key='root' navigationBarStyle={styles.navbar} >
-          <Scene key='app' component={App} initial={true} renderTitle={() => this.renderTitle('LABR')} />
-          <Scene key='locations' component={Locations} renderTitle={() => this.renderTitle('Locations')}/>
-          <Scene key='category' component={Category} renderTitle={() => this.renderTitle('Categories')} />
-          <Scene key='providers' component={Providers} renderTitle={() => this.renderTitle('Providers')} />
+          <Scene key='app' component={App} initial={true} renderTitle={() => this.renderTitle('labr')} />
+          <Scene key='locations' component={Locations} renderTitle={() => this.renderTitle('locations')}/>
+          <Scene key='category' component={Category} renderTitle={() => this.renderTitle('categories')} />
+          <Scene key='providers' component={Providers} renderTitle={() => this.renderTitle('providers')} />
         </Scene>
       </Router>
     )
   }
   renderTitle(title) {
+    const upperCaseTitle = title.toUpperCase()
     return (
       <View style={styles.title}>
-        <Text style={{fontFamily: 'nevis', color: 'white', fontSize: 21, fontWeight: '800'}}>{title}</Text>
+        <Text style={{fontFamily: 'nevis', color: 'white', fontSize: 21, fontWeight: '800'}}>{upperCaseTitle}</Text>
       </View>
     )
   }
