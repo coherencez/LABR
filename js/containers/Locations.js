@@ -43,7 +43,7 @@ export default class Locations extends Component {
 
   handleNashville() {
     console.log('HANDLE NASHVILLE')
-    Actions.providers({type: 'push'})
+    Actions.category({type: 'push'})
   }
 }
 

@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     padding: 10,
-    marginTop: 60
+    marginTop: 60,
   },
   welcome: {
     fontSize: 30,
