@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { Scene, Router, Actions } from 'react-native-router-flux'
 import { Button, Icon, Text } from 'native-base'
-
+import { navColor } from './js/css/variables'
 // Components
 import App from './js/containers/App'
 import Locations from './js/containers/Locations'
@@ -38,11 +38,8 @@ export default class LABR extends Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: 'white',
-  },
   navbar: {
-    backgroundColor: '#4400FF',
+    backgroundColor: navColor,
     height: 60,
     shadowColor: "#000000",
     shadowOpacity: 0.8,

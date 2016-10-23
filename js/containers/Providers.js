@@ -7,6 +7,15 @@ import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, List
 import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
 
+import {
+  navColor,
+  bgColor,
+  fontColorWhite,
+  buttonBgColor,
+  fontFamily
+} from '../css/variables'
+
+
 export default class Providers extends Component {
   render() {
     const menu = <SideNav />
@@ -18,53 +27,14 @@ export default class Providers extends Component {
               <Col>
                 <List>
                   <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Nashville</Text>
+                    <Card style={styles.card}>
+                      <CardItem style={{backgroundColor: buttonBgColor}}>
+                        <Text style={styles.text}>Nashville</Text>
                       </CardItem>
                       <CardItem cardBody>
                         <Image source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} />
                         <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
                             389 Providers Online
-                        </Button>
-                      </CardItem>
-                    </Card>
-                  </ListItem>
-                  <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Las Vegas</Text>
-                      </CardItem>
-                      <CardItem cardBody>
-                        <Image source={{uri: 'https://www.firstoptiononline.com/wp-content/uploads/2014/10/las-vegas-skyline.jpg'}} />
-                        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
-                            452 Providers Online
-                        </Button>
-                      </CardItem>
-                    </Card>
-                  </ListItem>
-                  <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Las Vegas</Text>
-                      </CardItem>
-                      <CardItem cardBody>
-                        <Image source={{uri: 'https://www.firstoptiononline.com/wp-content/uploads/2014/10/las-vegas-skyline.jpg'}} />
-                        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
-                            452 Providers Online
-                        </Button>
-                      </CardItem>
-                    </Card>
-                  </ListItem>
-                  <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Las Vegas</Text>
-                      </CardItem>
-                      <CardItem cardBody>
-                        <Image source={{uri: 'https://www.firstoptiononline.com/wp-content/uploads/2014/10/las-vegas-skyline.jpg'}} />
-                        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
-                            452 Providers Online
                         </Button>
                       </CardItem>
                     </Card>
@@ -74,53 +44,14 @@ export default class Providers extends Component {
               <Col>
                 <List>
                   <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Nashville</Text>
+                    <Card style={styles.card}>
+                      <CardItem style={{backgroundColor: buttonBgColor}}>
+                        <Text style={styles.text}>Nashville</Text>
                       </CardItem>
                       <CardItem cardBody>
                         <Image source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} />
                         <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
                             389 Providers Online
-                        </Button>
-                      </CardItem>
-                    </Card>
-                  </ListItem>
-                  <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Nashville</Text>
-                      </CardItem>
-                      <CardItem cardBody>
-                        <Image source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} />
-                        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
-                            389 Providers Online
-                        </Button>
-                      </CardItem>
-                    </Card>
-                  </ListItem>
-                  <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Nashville</Text>
-                      </CardItem>
-                      <CardItem cardBody>
-                        <Image source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} />
-                        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
-                            389 Providers Online
-                        </Button>
-                      </CardItem>
-                    </Card>
-                  </ListItem>
-                  <ListItem>
-                    <Card>
-                      <CardItem>
-                        <Text>Las Vegas</Text>
-                      </CardItem>
-                      <CardItem cardBody>
-                        <Image source={{uri: 'https://www.firstoptiononline.com/wp-content/uploads/2014/10/las-vegas-skyline.jpg'}} />
-                        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleNashville}>
-                            452 Providers Online
                         </Button>
                       </CardItem>
                     </Card>
@@ -137,7 +68,20 @@ export default class Providers extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: bgColor,
     marginTop: 60,
+  },
+  card: {
+    backgroundColor: '#fff',
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowOffset: {
+      height: 2,
+      width: 0,
+    },
+  },
+  text: {
+    fontFamily: fontFamily,
+    color: fontColorWhite,
   },
 });

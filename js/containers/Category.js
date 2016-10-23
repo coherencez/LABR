@@ -6,6 +6,14 @@ import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, List
 import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
 
+import {
+  navColor,
+  bgColor,
+  fontColorWhite,
+  buttonBgColor,
+  fontFamily
+} from '../css/variables'
+
 export default class Category extends Component {
   render() {
     const menu = <SideNav />
@@ -37,7 +45,7 @@ export default class Category extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: bgColor,
     marginTop: 60,
   },
   spacing: {
@@ -46,9 +54,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   font: {
-    fontFamily: 'nevis',
+    fontFamily: fontFamily,
     fontSize: 20,
     fontWeight: '800',
     top: 25,
+    color: fontColorWhite
   },
 });
