@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Image } from 'react-native'
 import { Col, Row, Grid } from 'react-native-easy-grid'
+import { Actions } from 'react-native-router-flux'
 import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Badge, Icon } from 'native-base';
 
 
@@ -28,10 +29,10 @@ export default class Providers extends Component {
               <List>
                 <ListItem>
                   <Card style={styles.card}>
-                    <CardItem style={{backgroundColor: buttonBgColor}}>
+                    <CardItem style={{backgroundColor: buttonBgColor}} button onPress={this.handleProviderPress}>
                       <Text style={styles.text}>John Doe</Text>
                     </CardItem>
-                    <CardItem cardBody button onPress={this.handleProviderPress}>
+                    <CardItem cardBody>
                     <List>
                       <ListItem>
                         <Badge info>7</Badge>
@@ -77,6 +78,7 @@ export default class Providers extends Component {
 
   handleProviderPress() {
     console.log('PROVIDER PRESS')
+    Actions.businessprofile()
   }
 }
 

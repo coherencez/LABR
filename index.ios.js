@@ -15,6 +15,7 @@ import Providers from './js/containers/Providers'
 import SignUp from './js/components/SignUp'
 import Login from './js/components/Login'
 import ProviderSignup from './js/components/ProviderSignup'
+import BusinessProfile from './js/components/BusinessProfile'
 
 
 export default class LABR extends Component {
@@ -28,7 +29,8 @@ export default class LABR extends Component {
           <Scene key='providers' component={Providers} renderTitle={() => this.renderTitle('providers')} />
           <Scene key='signup' component={SignUp} renderTitle={() => this.renderTitle('signup')} />
           <Scene key='login' component={Login} renderTitle={() => this.renderTitle('login')} />
-          <Scene key='providersignup' component={ProviderSignup} renderTitle={() => this.renderTitle('profile')} />
+          <Scene key='providersignup' component={ProviderSignup} renderTitle={() => this.renderTitle('register')} />
+          <Scene key='businessprofile' component={BusinessProfile} renderTitle={() => this.renderTitle('profile')} />
         </Scene>
       </Router>
     )
