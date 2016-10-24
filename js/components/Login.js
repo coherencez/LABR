@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button } from 'native-base';
 
-
+import { buttonBgColor } from '../css/variables'
 export default class Login extends Component {
   render() {
     return (
@@ -22,7 +22,7 @@ export default class Login extends Component {
                     <Input placeholder='PASSWORD' secureTextEntry={true}/>
                 </InputGroup>
             </ListItem>
-            <Button success style={styles.button}>Login</Button>
+            <Button block style={styles.button}>Login</Button>
           </List>
         </Content>
       </Container>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   button: {
-    left: 100,
     top: 20,
+    backgroundColor: buttonBgColor,
   },
 });
