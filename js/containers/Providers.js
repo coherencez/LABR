@@ -18,6 +18,20 @@ import {
 
 
 export default class Providers extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      providers: [
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
+      ]
+    }
+  }
   render() {
     const menu = <SideNav />
     return (
@@ -26,48 +40,10 @@ export default class Providers extends Component {
           <Content>
           <Grid>
             <Col>
-              <List>
-                <ListItem>
-                  <Card style={styles.card}>
-                    <CardItem style={{backgroundColor: buttonBgColor}} button onPress={this.handleProviderPress}>
-                      <Text style={styles.text}>John Doe</Text>
-                    </CardItem>
-                    <CardItem cardBody>
-                    <List>
-                      <ListItem>
-                        <Badge info>7</Badge>
-                        <Text style={styles.listInfo}>Years Exp.</Text>
-                      </ListItem>
-                      <ListItem>
-                          <Text style={styles.listInfo}>$25 per hour</Text>
-                      </ListItem>
-                    </List>
-                    </CardItem>
-                  </Card>
-                </ListItem>
-              </List>
+              {this.renderProviders().arr1}
             </Col>
             <Col>
-              <List>
-                <ListItem>
-                  <Card style={styles.card}>
-                    <CardItem style={{backgroundColor: buttonBgColor}}>
-                      <Text style={styles.text}>John Doe</Text>
-                    </CardItem>
-                    <CardItem cardBody>
-                    <List>
-                      <ListItem>
-                        <Badge info>7</Badge>
-                        <Text style={styles.listInfo}>Years Exp.</Text>
-                      </ListItem>
-                      <ListItem>
-                          <Text style={styles.listInfo}>$25 per hour</Text>
-                      </ListItem>
-                    </List>
-                    </CardItem>
-                  </Card>
-                </ListItem>
-              </List>
+              {this.renderProviders().arr2}
             </Col>
           </Grid>
           </Content>
@@ -80,14 +56,49 @@ export default class Providers extends Component {
     console.log('PROVIDER PRESS')
     Actions.businessprofile()
   }
+
+  renderProviders() {
+    const componentArray = this.state.providers.map((prov, i) =>
+      <Card style={styles.card} key={i}>
+        <CardItem style={{backgroundColor: buttonBgColor}} button onPress={this.handleProviderPress}>
+          <Text style={styles.text}>{prov.name}</Text>
+        </CardItem>
+        <CardItem cardBody>
+        <List>
+          <ListItem>
+            <Badge info>{prov.exp}</Badge>
+            <Text style={styles.listInfo}>Years Exp.</Text>
+          </ListItem>
+          <ListItem>
+              <Text style={styles.listInfo}>{prov.rate}</Text>
+          </ListItem>
+        </List>
+        </CardItem>
+      </Card>
+    )
+
+    const arr1 = componentArray.filter((v,i) => {
+      if(i % 2 === 0) {
+        return v
+      }
+    })
+    const arr2 = componentArray.filter((v,i) => {
+      if(i % 2 !== 0) {
+        return v
+      }
+    })
+    return { arr1, arr2 }
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: bgColor,
     marginTop: 60,
+    padding: 10,
   },
   card: {
+    margin: 5,
     backgroundColor: '#fff',
     shadowColor: "#000000",
     shadowOpacity: 0.8,
