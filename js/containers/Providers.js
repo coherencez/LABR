@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Image } from 'react-native'
+import { AppRegistry, StyleSheet, Image, View } from 'react-native'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Badge, Icon } from 'native-base';
 
+import ProviderCard from '../components/ProviderCard'
 
 import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
@@ -22,6 +23,7 @@ export default class Providers extends Component {
     super(props)
     this.state = {
       providers: [
+        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
         {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
         {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
         {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
@@ -59,16 +61,7 @@ export default class Providers extends Component {
 
   renderProviders() {
     const componentArray = this.state.providers.map((prov, i) =>
-      <Card style={styles.card} key={i}>
-        <CardItem style={{backgroundColor: buttonBgColor}} button onPress={this.handleProviderPress}>
-          <Text style={styles.text}>{prov.name}</Text>
-        </CardItem>
-        <CardItem cardBody>
-            <Badge info>{prov.exp}</Badge>
-            <Text style={styles.listInfo}>Years Exp.</Text>
-              <Text style={styles.listInfo}>{prov.rate}</Text>
-        </CardItem>
-      </Card>
+      <ProviderCard provider={prov} key={i} handlePress={this.handleProviderPress.bind(this)}/>
     )
 
     const arr1 = componentArray.filter((v,i) => {
@@ -104,10 +97,16 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily,
     color: fontColorWhite,
+
   },
   listInfo: {
-    fontFamily: fontFamily,
     color: '#000',
     fontSize: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  spacing: {
+    marginLeft: 7,
+    marginRight: 7,
   },
 });
