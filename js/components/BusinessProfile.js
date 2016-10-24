@@ -16,55 +16,51 @@ export default class BusinessProfile extends Component {
       <Container style={styles.alignmentFix}>
         <Content>
           <Grid>
-              <Col style={{ width: 150, padding: 5 }}>
+              <Col style={{ width: 115, padding: 5, justifyContent: 'center' }}>
                 <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
                 <List>
                   <ListItem>
-                      <Thumbnail source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
                       <Text style={{color: fontColorWhite}}>Roofing</Text>
-                      <Text note>since 1997</Text>
                   </ListItem>
                   <ListItem>
-                      <Thumbnail source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
                       <Text style={{color: fontColorWhite}}>Roofing</Text>
-                      <Text note>since 1997</Text>
                   </ListItem>
                   <ListItem>
-                      <Thumbnail source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
                       <Text style={{color: fontColorWhite}}>Roofing</Text>
-                      <Text note>since 1997</Text>
                   </ListItem>
                 </List>
+                <Row >
+                <View style={styles.infoBar}>
+                  <View style={{width: 50, height: 60 }} >
+                    <Icon name='ios-cash' style={{color: '#fff'}}/>
+                    <Text style={{color: fontColorWhite, fontSize: 10}}>25/hr</Text>
+                  </View>
+                  <View style={{width: 50, height: 60 }} >
+                    <Icon name='md-git-network' style={{color: '#fff'}}/>
+                    <Text style={{color: fontColorWhite, fontSize: 10}}>35 yrs.</Text>
+                  </View>
+                  <View style={{width: 50, height: 60, right: 77, top: 10 }} >
+                    <Text>{'\n'}</Text>
+                    <Icon name='ios-star' style={{color: '#fff'}}/>
+                    <Text style={{color: fontColorWhite, fontSize: 10}}>4/5</Text>
+                  </View>
+                </View>
+                </Row>
               </Col>
-              <Col style={{ width: 300, padding: 5 }}>
+              <Col style={{ width: 200, padding: 5 }}>
                 <Text style={styles.helperText}>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </Text>
-                <Row style={styles.infoBar}>
-                  <Col style={{width: 50, height: 40, backgroundColor: 'grey', justifyContent:'center', alignItems:'center'}} >
-                    <Icon name='ios-cash' />
-                  </Col>
-                  <Col style={{width: 50, height: 40, backgroundColor: 'grey', justifyContent:'center', alignItems:'center'}} >
-                    <Icon name='md-git-network' />
-                  </Col>
-                  <Col style={{width: 50, height: 40, backgroundColor: 'grey', justifyContent:'center', alignItems:'center'}} >
-                    <Icon name='md-git-network' />
-                  </Col>
-                  <Col style={{width: 50, height: 40, backgroundColor: 'grey', justifyContent:'center', alignItems:'center'}} >
-                    <Icon name='ios-star' />
-                  </Col>
 
-                </Row>
-                <Row>
-                  <Col style={{width: 200, marginLeft: 10}}>
-                    <Button block style={styles.button2}>New Job</Button>
-                    <Button block style={styles.button2}>Current Jobs</Button>
-                    <Button block style={styles.button2}>History</Button>
-                  </Col>
-                </Row>
               </Col>
           </Grid>
         </Content>
+          <View style={{ backgroundColor: bgColor }}>
+            <View style={{ flex:1, flexDirection: 'row' }}>
+              <Button block style={styles.button2}>Current Jobs</Button>
+              <Button block style={styles.button2}>History</Button>
+            </View>
+          </View>
         <Footer style={{backgroundColor: bgColor}}>
           <Button block style={styles.button}>
             Start A Conversation
@@ -81,6 +77,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: bgColor,
   },
   hidden: {
@@ -88,11 +85,11 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: buttonBgColor,
+    margin: 5,
   },
   button2: {
     backgroundColor: '#FF681F',
     margin: 5,
-    opacity: .5
   },
   helperText: {
     fontSize: 13,
@@ -109,8 +106,10 @@ const styles = StyleSheet.create({
     left: 55,
   },
   infoBar: {
-    marginLeft: 10,
     marginTop: 15,
+    flex:1,
+    flexDirection: 'row',
+    padding: 20,
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowRadius: 2,
