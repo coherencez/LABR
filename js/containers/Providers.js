@@ -64,15 +64,9 @@ export default class Providers extends Component {
           <Text style={styles.text}>{prov.name}</Text>
         </CardItem>
         <CardItem cardBody>
-        <List>
-          <ListItem>
             <Badge info>{prov.exp}</Badge>
             <Text style={styles.listInfo}>Years Exp.</Text>
-          </ListItem>
-          <ListItem>
               <Text style={styles.listInfo}>{prov.rate}</Text>
-          </ListItem>
-        </List>
         </CardItem>
       </Card>
     )
