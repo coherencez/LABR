@@ -15,6 +15,14 @@ import {
 } from '../css/variables'
 
 export default class Category extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      categories: [
+        'Car/Auto', 'Home Improvement', 'Lawn/Landscaping', 'Electrical', 'Plumbing', 'All'
+      ]
+    }
+  }
   render() {
     const menu = <SideNav />
     return (
@@ -22,14 +30,7 @@ export default class Category extends Component {
       <Container style={styles.container}>
         <Content>
           <List>
-            <ListItem  button onPress={this.handleNashville}>
-                <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
-                <Text style={styles.font}>Home Maintenance</Text>
-            </ListItem>
-            <ListItem >
-                <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
-                <Text style={styles.font}>Lawn Care</Text>
-            </ListItem>
+            {this.renderCategories()}
           </List>
         </Content>
       </Container>
@@ -40,6 +41,15 @@ export default class Category extends Component {
   handleNashville() {
     console.log('HANDLE NASHVILLE')
     Actions.providers({type: 'push'})
+  }
+
+  renderCategories() {
+    return this.state.categories.map((city, i) =>
+      <ListItem  button onPress={this.handleNashville} key={i}>
+          <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
+          <Text style={styles.font}>{city}</Text>
+      </ListItem>
+    )
   }
 }
 
