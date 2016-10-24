@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Thumbnail, Footer} from 'native-base';
+import { Actions } from 'react-native-router-flux'
+import { Container, Content, List, ListItem, Icon, Badge, InputGroup, Input, Button, Thumbnail, Footer, Text} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid'
 
 import { buttonBgColor, bgColor, fontColorWhite, fontFamily } from '../css/variables'
@@ -55,6 +56,7 @@ export default class BusinessProfile extends Component {
               </Col>
           </Grid>
         </Content>
+
           <View style={{ backgroundColor: bgColor }}>
             <View style={{ flex:1, flexDirection: 'row' }}>
               <Button block style={styles.button2}>Current Jobs</Button>
@@ -62,7 +64,7 @@ export default class BusinessProfile extends Component {
             </View>
           </View>
         <Footer style={{backgroundColor: bgColor}}>
-          <Button block style={styles.button}>
+          <Button block style={styles.button} onPress={Actions.startconvo}>
             Start A Conversation
           </Button>
         </Footer>

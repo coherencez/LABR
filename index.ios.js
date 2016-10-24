@@ -14,6 +14,7 @@ import Category from './js/containers/Category'
 import Providers from './js/containers/Providers'
 import SignUp from './js/components/SignUp'
 import Login from './js/components/Login'
+import StartConvo from './js/components/StartConvo'
 import ProviderSignup from './js/components/ProviderSignup'
 import BusinessProfile from './js/components/BusinessProfile'
 
@@ -31,6 +32,7 @@ export default class LABR extends Component {
           <Scene key='login' component={Login} renderTitle={() => this.renderTitle('login')} />
           <Scene key='providersignup' component={ProviderSignup} renderTitle={() => this.renderTitle('register')} />
           <Scene key='businessprofile' component={BusinessProfile} renderTitle={() => this.renderTitle('profile')} />
+          <Scene key='startconvo' component={StartConvo} renderTitle={() => this.renderTitle('new message')} />
         </Scene>
       </Router>
     )
