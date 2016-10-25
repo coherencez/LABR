@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Header } from 'native-base';
 
 import { buttonBgColor } from '../css/variables'
@@ -7,47 +7,32 @@ export default class SignUp extends Component {
   render() {
     return (
       <Container style={styles.alignmentFix}>
-        <Content>
-
-          <List style={{ width: 250}}>
+        <Content style={{width: 300}}>
             <Text note style={styles.helperText}>Basic Info</Text>
-            <ListItem>
-                <InputGroup iconLeft disabled>
-                    <Icon name='ios-person' />
-                    <Input inlineLabel label='NAME' placeholder='NAME' disabled={true} />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup >
-                    <Input placeholder='Jane' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup >
-                    <Input placeholder='Doe' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup >
-                    <Icon name='md-call' />
-                    <Input inlineLabel label='PHONE' placeholder='CELL' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup>
-                    <Icon name='ios-mail' />
-                    <Input placeholder='EMAIL*' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup>
-                    <Icon name='ios-unlock' />
-                    <Input placeholder='PASSWORD*' secureTextEntry={true}/>
-                </InputGroup>
-            </ListItem>
+              <InputGroup iconLeft disabled>
+                  <Icon name='ios-person' />
+                  <Input inlineLabel label='NAME' placeholder='NAME' disabled={true} />
+              </InputGroup>
+              <InputGroup >
+                  <Input placeholder='Jane' />
+              </InputGroup>
+              <InputGroup >
+                  <Input placeholder='Doe' />
+              </InputGroup>
+              <InputGroup >
+                  <Icon name='md-call' />
+                  <Input inlineLabel label='PHONE' placeholder='CELL' />
+              </InputGroup>
+              <InputGroup>
+                  <Icon name='ios-mail' />
+                  <Input placeholder='EMAIL*' />
+              </InputGroup>
+              <InputGroup>
+                  <Icon name='ios-unlock' />
+                  <Input placeholder='PASSWORD*' secureTextEntry={true}/>
+              </InputGroup>
             <Text note style={styles.helperText2}>*These will be used to login</Text>
-          </List>
-          <Button success style={styles.button}>Submit</Button>
+          <Button block success style={styles.button}>Submit</Button>
         </Content>
       </Container>
     )
@@ -56,15 +41,15 @@ export default class SignUp extends Component {
 
 const styles = StyleSheet.create({
   alignmentFix: {
-    marginTop: 80,
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 64,
   },
   hidden: {
     opacity: 0,
   },
   button: {
-    left: 100,
     top: 20,
     backgroundColor: buttonBgColor,
   },

@@ -61,11 +61,11 @@ export default class ProviderSignup extends Component {
             <ListItem>
                 <InputGroup >
                     <Icon name='md-attach' />
-                    <Input  inlineLabel label='BIO' placeholder='BIO' />
+                    <Input placeholder='BIO' multiline={true} style={{ height: 100, marginTop: 15 }}/>
                 </InputGroup>
             </ListItem>
           </List>
-          <Button success style={styles.button}>Submit</Button>
+          <Button block style={styles.button}>Submit</Button>
         </Content>
       </Container>
     )
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   button: {
-    left: 100,
     top: 20,
     backgroundColor: buttonBgColor,
   },
