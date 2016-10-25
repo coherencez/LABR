@@ -6,7 +6,7 @@ import { buttonBgColor } from '../css/variables'
 export default class SignUp extends Component {
   render() {
     return (
-      <Container style={styles.alignmentFix}>
+      <Container style={styles.container}>
         <Content style={{width: 300}}>
             <Text note style={styles.helperText}>Basic Info</Text>
               <InputGroup iconLeft disabled>
@@ -40,7 +40,7 @@ export default class SignUp extends Component {
 }
 
 const styles = StyleSheet.create({
-  alignmentFix: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
