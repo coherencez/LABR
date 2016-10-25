@@ -63,7 +63,7 @@ export default class SignUp extends Component {
                     autoCapitalize="none"/>
               </InputGroup>
             <Text note style={styles.helperText2}>*These will be used to login</Text>
-          <Button block success style={styles.button} onPress={() => this.consoleLog()}>Submit</Button>
+          <Button block success style={styles.button} onPress={() => this.signUpPressed()}>Submit</Button>
         </Content>
       </Container>
     )
@@ -84,8 +84,27 @@ export default class SignUp extends Component {
   passwordChanged(num) {
     this.setState({ password: num })
   }
-  consoleLog() {
-    console.log(this.state)
+  signUpPressed() {
+    const API_ENDPOINT = 'http://localhost:3000/labr/api/newuser'
+    const requestObj = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        cellPhone: this.state.cellPhone,
+        email: this.state.email,
+        password: this.state.password
+      })
+    }
+
+    fetch(API_ENDPOINT, requestObj)
+    .then(res => res.json())
+    .then(data => console.log('SERVER RESPONSE', data))
+    .catch(console.error)
   }
 
 }
