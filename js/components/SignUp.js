@@ -12,13 +12,22 @@ export default class SignUp extends Component {
       cellPhone: '',
       email: '',
       password: '',
-      errorMsg: ''
+      errorMessage: ''
     }
   }
   render() {
     return (
       <Container style={styles.container}>
         <Content style={{width: 300}}>
+          {(() => {
+            if(this.state.errorMessage) {
+              return (
+                <View>
+                  <Text>{this.state.errorMessage}</Text>
+                </View>
+              )
+            }
+          })()}
             <Text note style={styles.helperText}>Basic Info</Text>
               <InputGroup iconLeft disabled>
                   <Icon name='ios-person' />
@@ -85,7 +94,7 @@ export default class SignUp extends Component {
     this.setState({ password: num })
   }
   signUpPressed() {
-    const API_ENDPOINT = 'http://localhost:3000/labr/api/newuser'
+    const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/newuser'
     const requestObj = {
       method: 'POST',
       headers: {
@@ -102,11 +111,12 @@ export default class SignUp extends Component {
     }
 
     fetch(API_ENDPOINT, requestObj)
-    .then(res => res.json())
-    .then(data => console.log('SERVER RESPONSE', data))
-    .catch(console.error)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ errorMessage: data.msg })
+      })
+      .catch(console.error)
   }
-
 }
 
 const styles = StyleSheet.create({
