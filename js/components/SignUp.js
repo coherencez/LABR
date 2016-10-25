@@ -113,6 +113,7 @@ export default class SignUp extends Component {
     fetch(API_ENDPOINT, requestObj)
       .then(res => res.json())
       .then(data => {
+        console.log(data.user)
         this.setState({ errorMessage: data.msg })
       })
       .catch(console.error)

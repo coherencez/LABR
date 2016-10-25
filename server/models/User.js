@@ -2,7 +2,7 @@
 const { compare, hash } = require('bcrypt')
 const mongoose = require('mongoose')
 
-const BCRYPT_DIFFICULTY = 15
+const BCRYPT_DIFFICULTY = 13
 const HTML5_EMAIL_VALIDATION = /^[a-zA-Z0-9.!#$%&’*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PW_MAX_LENGTH = [250, 'The value of path `{PATH}` (`{VALUE}`) exceeds the maximum allowed length ({MAXLENGTH}).']
 const HTML5_PHONE_VALIDATION = /(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}/
@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
   lastName: {
     type: String,
     require: true,
-  }
+  },
 	email: {
 		type: String,
 		required: true,
@@ -25,7 +25,6 @@ const userSchema = mongoose.Schema({
 	},
   cellPhone: {
     type: String,
-    match: [HTML5_PHONE_VALIDATION, 'Please provide a valid phone number'],
     required: true,
   },
 	password: {
