@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux'
-import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Header } from 'native-base';
+import {
+  Container, Content,
+  List, ListItem,
+  Text, Icon, Badge,
+  InputGroup, Input,
+  Button, Header } from 'native-base';
 
 import { buttonBgColor } from '../css/variables'
 export default class SignUp extends Component {
@@ -95,7 +100,7 @@ export default class SignUp extends Component {
     this.setState({ password: num })
   }
   signUpPressed() {
-    const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/newuser'
+    const API_ENDPOINT = 'http://10.0.0.102:3000/labr/api/newuser'
     const requestObj = {
       method: 'POST',
       headers: {
