@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
+import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Header } from 'native-base';
 
 import { buttonBgColor } from '../css/variables'
@@ -113,8 +114,11 @@ export default class SignUp extends Component {
     fetch(API_ENDPOINT, requestObj)
       .then(res => res.json())
       .then(data => {
-        console.log(data.user)
-        this.setState({ errorMessage: data.msg })
+        if(data.msg) {
+          this.setState({ errorMessage: data.msg })
+          return
+        }
+        Actions.login({type: 'push'})
       })
       .catch(console.error)
   }

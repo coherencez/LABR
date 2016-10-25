@@ -17,18 +17,11 @@ app.get('/', (req,res) =>
 app.post('/labr/api/newuser', ({ body }, res, err) => {
   User.findOne({ email: body.email })
     .then(user => {
-      if(user) {
-        return res.json({ msg: 'That email already exists, please try again!'})
-      }
-      return User.create(body)
+      if(user) return res.json({ msg: 'That email already exists, please try again!'})
+      else return User.create(body)
     })
-    .then(({email, cellPhone, _id}) => {
-      const userObj = {
-        email,
-        cellPhone,
-        id: _id
-      }
-      res.json({ status: 200, user: userObj, msg: 'A OKAY'})
+    .then(newUser => {
+      res.json({ status: 200 })
     })
     .catch(console.error)
 })
