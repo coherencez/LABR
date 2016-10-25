@@ -60,10 +60,12 @@ export default class Providers extends Component {
   }
 
   renderProviders() {
+    // main array of card elements
     const componentArray = this.state.providers.map((prov, i) =>
       <ProviderCard provider={prov} key={i} handlePress={this.handleProviderPress.bind(this)}/>
     )
 
+    // to render cards in 2 separate columns
     const arr1 = componentArray.filter((v,i) => {
       if(i % 2 === 0) {
         return v

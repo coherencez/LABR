@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View
 } from 'react-native';
-import { Scene, Router, Actions } from 'react-native-router-flux'
+import { Scene, Router, Route, Actions } from 'react-native-router-flux'
 import { Button, Icon, Text } from 'native-base'
 import { navColor } from './js/css/variables'
 // Components
