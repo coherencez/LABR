@@ -7,22 +7,16 @@ export default class Login extends Component {
   render() {
     return (
       <Container style={styles.container}>
-        <Content>
-        <List style={{ width: 250}}>
-            <ListItem>
-                <InputGroup>
-                    <Icon name='ios-mail' />
-                    <Input placeholder='EMAIL' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup>
-                    <Icon name='ios-unlock' />
-                    <Input placeholder='PASSWORD' secureTextEntry={true}/>
-                </InputGroup>
-            </ListItem>
-            <Button block style={styles.button}>Login</Button>
-          </List>
+        <Content style={{ width: 300 }}>
+          <InputGroup>
+              <Icon name='ios-mail' />
+              <Input placeholder='EMAIL' />
+          </InputGroup>
+          <InputGroup>
+              <Icon name='ios-unlock' />
+              <Input placeholder='PASSWORD' secureTextEntry={true}/>
+          </InputGroup>
+          <Button block style={styles.button}>Login</Button>
         </Content>
       </Container>
     )
@@ -34,9 +28,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
     padding: 10,
-    marginTop: 100,
+    marginTop: 64,
   },
   hidden: {
     opacity: 0,

@@ -24,47 +24,37 @@ export default class ProviderSignup extends Component {
 
   render() {
     return (
-      <Container style={styles.alignmentFix}>
-        <Content>
-        <Text>Choose a category</Text>
-        <Picker
-            iosHeader="Select one"
-            mode="dropdown"
-            selectedValue={this.state.selected1}
-            onValueChange={this.onValueChange.bind(this)}>
-            <Item label="Jack Of All Trades" value="key0" />
-            <Item label="Car/Auto" value="key1" />
-            <Item label="Home Improvement" value="key2" />
-            <Item label="Lawn Care" value="key3" />
-            <Item label="Electrical" value="key4" />
-            <Item label="Plumbing" value="key5" />
-        </Picker>
-          <List style={{ width: 250 }}>
-            <ListItem>
-                <InputGroup iconLeft>
-                    <Icon name='ios-cog' />
-                    <Input inlineLabel label='SKILLS' placeholder='SKILLS' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup iconLeft>
-                    <Icon name='ios-cog' />
-                    <Input inlineLabel label='YEARS EXP' placeholder='YEARS EXP' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup iconLeft>
-                    <Icon name='ios-cash' />
-                    <Input inlineLabel label='HOURLY RATE' placeholder='HOURLY RATE' />
-                </InputGroup>
-            </ListItem>
-            <ListItem>
-                <InputGroup >
-                    <Icon name='md-attach' />
-                    <Input placeholder='BIO' multiline={true} style={{ height: 100, marginTop: 15 }}/>
-                </InputGroup>
-            </ListItem>
-          </List>
+      <Container style={styles.container}>
+        <Content style={{ width: 300 }}>
+          <Text>Choose a category</Text>
+          <Picker
+              iosHeader="Select one"
+              mode="dropdown"
+              selectedValue={this.state.selected1}
+              onValueChange={this.onValueChange.bind(this)}>
+              <Item label="Jack Of All Trades" value="key0" />
+              <Item label="Car/Auto" value="key1" />
+              <Item label="Home Improvement" value="key2" />
+              <Item label="Lawn Care" value="key3" />
+              <Item label="Electrical" value="key4" />
+              <Item label="Plumbing" value="key5" />
+          </Picker>
+          <InputGroup iconLeft>
+              <Icon name='ios-cog' />
+              <Input inlineLabel label='SKILLS' placeholder='SKILLS' />
+          </InputGroup>
+          <InputGroup iconLeft>
+              <Icon name='ios-cog' />
+              <Input inlineLabel label='YEARS EXP' placeholder='YEARS EXP' />
+          </InputGroup>
+          <InputGroup iconLeft>
+              <Icon name='ios-cash' />
+              <Input inlineLabel label='HOURLY RATE' placeholder='HOURLY RATE' />
+          </InputGroup>
+          <InputGroup >
+              <Icon name='md-attach' />
+              <Input placeholder='BIO' multiline={true} style={{ height: 100, marginTop: 15 }}/>
+          </InputGroup>
           <Button block style={styles.button}>Submit</Button>
         </Content>
       </Container>
@@ -73,10 +63,12 @@ export default class ProviderSignup extends Component {
 }
 
 const styles = StyleSheet.create({
-  alignmentFix: {
-    marginTop: 80,
+  container: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
+    marginTop: 64,
   },
   hidden: {
     opacity: 0,
