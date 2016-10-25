@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import {
   Container, Content,
@@ -58,7 +58,7 @@ export default class Login extends Component {
     this.setState({ password: txt })
   }
   handleLogin() {
-    const API_ENDPOINT = 'http://10.0.0.102:3000/labr/api/login'
+    const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/login'
     const requestObj = {
       method: 'POST',
       headers: {
@@ -73,9 +73,10 @@ export default class Login extends Component {
 
     fetch(API_ENDPOINT, requestObj)
       .then(res => res.json())
-      .then(({ pwMatch, msg }) => {
+      .then(({ pwMatch, msg, user }) => {
         if(pwMatch) {
-          Actions.app({type: 'reset'})
+          AsyncStorage.setItem('user', JSON.stringify(user))
+          Actions.app({ type: 'reset' })
         } else {
           this.setState({ errorMessage: msg})
         }

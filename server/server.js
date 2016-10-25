@@ -29,16 +29,29 @@ app.post('/labr/api/newuser', ({ body }, res, err) => {
 app.post('/labr/api/login', ({ body }, res, err) => {
   User.findOne({ email: body.email })
     .then(dbUser => {
-      if(!dbUser) {
-        return res.json({ msg: 'User not found'})
+      // if user exists, run comparePassword schema method
+      // then pass the user obj and compare results to the next
+      // then block
+      if(dbUser) {
+        return Promise.all([
+          Promise.resolve(dbUser),
+          dbUser.comparePassword(body.password)
+        ])
+      } else {
+        return res.json({ msg: 'Bad email and/or password. Please try again'})
       }
-      else return dbUser.comparePassword(body.password)
     })
-    .then(matches => {
-      if(matches) {
-        return res.json({ pwMatch: true })
+    .then(([user, matches]) => {
+      const { _id, firstName, isProvider } = user
+      const userObj = {
+        id: _id,
+        firstName,
+        isProvider
       }
-      return res.json({ pwMatch: false,  msg: 'Password incorrect, please try again!' })
+      if(matches) {
+        return res.json({ pwMatch: true, user: userObj })
+      }
+      return res.json({ pwMatch: false,  msg: 'Bad email and/or password. Please try again' })
     })
     .catch(console.error)
 })
