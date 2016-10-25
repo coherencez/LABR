@@ -12,6 +12,10 @@ app.get('/', (req,res) =>
   res.json({status: 200})
 )
 
+app.post('/labr/api/newuser', (req, res) => {
+  console.log(req.body)
+})
+
 // connect to mongo before loading server
 connect()
   .then(() =>
