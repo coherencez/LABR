@@ -1,43 +1,39 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Header, CheckBox, Picker } from 'native-base';
+import { StyleSheet, View } from 'react-native';
+import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Header, Footer, CheckBox, Picker } from 'native-base';
 
 const Item = Picker.Item
 
-import { buttonBgColor } from '../css/variables'
+import { buttonBgColor, button2BgColor } from '../css/variables'
 export default class ProviderSignup extends Component {
   constructor(props) {
     super(props)
     this.state = {
             selectedItem: undefined,
-            selected1: 'key0',
+            selected1: 'car',
             results: {
                 items: []
             }
         }
     }
-    onValueChange (value: string) {
-      this.setState({
-          selected1 : value
-      });
-    }
 
   render() {
+    console.log(this.state)
     return (
       <Container style={styles.container}>
         <Content style={{ width: 300 }}>
-          <Text>Choose a category</Text>
+          <Text>Category:</Text>
+          <Text>Choose one or multiple</Text>
           <Picker
-              iosHeader="Select one"
+              style={{backgroundColor: button2BgColor, width: 300, flex:1, alignItems: 'center', justifyContent: 'center' }}
               mode="dropdown"
               selectedValue={this.state.selected1}
               onValueChange={this.onValueChange.bind(this)}>
-              <Item label="Jack Of All Trades" value="key0" />
-              <Item label="Car/Auto" value="key1" />
-              <Item label="Home Improvement" value="key2" />
-              <Item label="Lawn Care" value="key3" />
-              <Item label="Electrical" value="key4" />
-              <Item label="Plumbing" value="key5" />
+              <Item label="Car/Auto" value="car" />
+              <Item label="Home Improvement" value="home" />
+              <Item label="Lawn Care" value="lawn" />
+              <Item label="Electrical" value="electrical" />
+              <Item label="Plumbing" value="plumbing" />
           </Picker>
           <InputGroup iconLeft>
               <Icon name='ios-cog' />
@@ -55,10 +51,37 @@ export default class ProviderSignup extends Component {
               <Icon name='md-attach' />
               <Input placeholder='BIO' multiline={true} style={{ height: 100, marginTop: 15 }}/>
           </InputGroup>
-          <Button block style={styles.button}>Submit</Button>
+          <View>
+            <Text>Selected Categories:</Text>
+            {this.state.results.items.map((skill, i) =>
+              <Button key={i} style={{ height: 35 }} onPress={() => this.removeCategory(i)}> {skill} X</Button>
+            )}
+          </View>
         </Content>
+        <Footer>
+          <Button block style={styles.button}>Submit</Button>
+        </Footer>
       </Container>
     )
+  }
+  onValueChange (value: string) {
+    console.log('VLAU CHANGE', value)
+    this.setState({
+        selected1 : value,
+        results: {
+          items: this.state.results.items.concat([value])
+        }
+    })
+  }
+
+  removeCategory(index) {
+    const itemToDelete = this.state.results.items[index]
+    const newItemStateArray = this.state.results.items.filter(el => el !== itemToDelete)
+    this.setState({
+      results: {
+        items: newItemStateArray
+      }
+    })
   }
 }
 
@@ -74,7 +97,6 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   button: {
-    top: 20,
     backgroundColor: buttonBgColor,
   },
   helperText: {

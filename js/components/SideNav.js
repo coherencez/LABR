@@ -25,10 +25,17 @@ export default class SideNav extends Component {
               {(() => {
                 if(this.state.user){
                   return (
+                    <View>
                     <ListItem iconLeft button onPress={() => this.handleLogout()}>
                       <Icon name='md-globe' />
                       <Text>Logout</Text>
                     </ListItem>
+                    <ListItem iconLeft iconRight button onPress={this.handleBusinessPress}>
+                        <Icon name='ios-briefcase' />
+                        <Text>Business Account</Text>
+                        <Icon name='ios-mic-outline' style={styles.hidden}/>
+                    </ListItem>
+                    </View>
                   )
                 } else {
                   return (
@@ -50,11 +57,6 @@ export default class SideNav extends Component {
               <ListItem iconLeft button onPress={this.handleHistoryPress}>
                   <Icon name='md-archive' />
                   <Text>History</Text>
-              </ListItem>
-              <ListItem iconLeft iconRight button onPress={this.handleBusinessPress}>
-                  <Icon name='ios-briefcase' />
-                  <Text>Business Account</Text>
-                  <Icon name='ios-mic-outline' style={styles.hidden}/>
               </ListItem>
               <ListItem iconLeft button onPress={this.handleMessagesPress}>
                   <Icon name='md-text' />
