@@ -58,6 +58,11 @@ app.post('/labr/api/login', ({ body }, res, err) => {
     .catch(console.error)
 })
 
+app.post('/labr/api/newprovider', (req,res) => {
+  console.log(req.body)
+  res.json({ status: 200})
+})
+
 // connect to mongo before loading server
 connect()
   .then(() =>

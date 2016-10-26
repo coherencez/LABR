@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, AsyncStorage } from 'react-native';
+import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Header, Footer, CheckBox, Picker } from 'native-base';
 
 const Item = Picker.Item
@@ -9,12 +10,16 @@ export default class ProviderSignup extends Component {
   constructor(props) {
     super(props)
     this.state = {
-            selectedItem: undefined,
-            selected1: 'car',
-            results: {
-                items: []
-            }
-        }
+        selectedItem: undefined,
+        selected1: 'car',
+        results: {
+          categories: [],
+        },
+        skills: '',
+        experience: '',
+        rate: '',
+        bio: '',
+      }
     }
 
   render() {
@@ -37,29 +42,47 @@ export default class ProviderSignup extends Component {
           </Picker>
           <InputGroup iconLeft>
               <Icon name='ios-cog' />
-              <Input inlineLabel label='SKILLS' placeholder='SKILLS' />
+              <Input
+                inlineLabel
+                label='SKILLS'
+                placeholder='SKILLS'
+                onChangeText={(txt) => this.onSkillsChange(txt)}/>
           </InputGroup>
           <InputGroup iconLeft>
               <Icon name='ios-cog' />
-              <Input inlineLabel label='YEARS EXP' placeholder='YEARS EXP' />
+              <Input
+                inlineLabel
+                label='YEARS EXP'
+                placeholder='YEARS EXP'
+                onChangeText={(txt) => this.onExpChange(txt)}
+                keyboardType='number-pad'/>
           </InputGroup>
           <InputGroup iconLeft>
               <Icon name='ios-cash' />
-              <Input inlineLabel label='HOURLY RATE' placeholder='HOURLY RATE' />
+              <Input
+                inlineLabel
+                label='HOURLY RATE'
+                placeholder='HOURLY RATE'
+                onChangeText={(txt) => this.onRateChange(txt)}
+                keyboardType='number-pad'/>
           </InputGroup>
           <InputGroup >
               <Icon name='md-attach' />
-              <Input placeholder='BIO' multiline={true} style={{ height: 100, marginTop: 15 }}/>
+              <Input
+                placeholder='BIO'
+                multiline={true}
+                style={{ height: 100, marginTop: 15 }}
+                onChangeText={(txt) => this.onBioChange(txt)}/>
           </InputGroup>
           <View>
             <Text>Selected Categories:</Text>
-            {this.state.results.items.map((skill, i) =>
+            {this.state.results.categories.map((skill, i) =>
               <Button key={i} style={{ height: 35 }} onPress={() => this.removeCategory(i)}> {skill} X</Button>
             )}
           </View>
         </Content>
         <Footer>
-          <Button block style={styles.button}>Submit</Button>
+          <Button block style={styles.button} onPress={() => this.handleProviderSignup()}>Submit</Button>
         </Footer>
       </Container>
     )
@@ -69,19 +92,79 @@ export default class ProviderSignup extends Component {
     this.setState({
         selected1 : value,
         results: {
-          items: this.state.results.items.concat([value])
+          categories: this.state.results.categories.concat([value])
         }
     })
   }
 
+  onSkillsChange(txt) {
+    this.setState({
+      skills: txt
+    })
+  }
+  onExpChange(txt) {
+    this.setState({
+      experience: txt
+    })
+  }
+  onRateChange(txt) {
+    this.setState({
+      rate: txt
+    })
+  }
+  onBioChange(txt) {
+    this.setState({
+      bio: txt
+    })
+  }
+
   removeCategory(index) {
-    const itemToDelete = this.state.results.items[index]
-    const newItemStateArray = this.state.results.items.filter(el => el !== itemToDelete)
+    const itemToDelete = this.state.results.categories[index]
+    const newItemStateArray = this.state.results.categories.filter(el => el !== itemToDelete)
     this.setState({
       results: {
-        items: newItemStateArray
+        categories: newItemStateArray
       }
     })
+  }
+
+  handleProviderSignup() {
+    AsyncStorage.getItem('user')
+    .then(res => JSON.parse(res))
+    .then(({ id }) => {
+      const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/newprovider'
+      const requestObj = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          skills: this.state.skills.split(' '),
+          experience: this.state.experience,
+          rate: this.state.rate,
+          bio: this.state.bio,
+          categories: this.state.results.categories,
+          userId: id
+        })
+      }
+      fetch(API_ENDPOINT, requestObj)
+        .then(res => res.json())
+        .then(data => {
+          if(data.msg) {
+            this.setState({ errorMessage: data.msg })
+            return
+          }
+          if(data.status === 200) {
+            Actions.businessprofile({type: 'push'})
+          }
+        })
+        .catch(console.error)
+    })
+    .catch(console.error)
+
+
+
   }
 }
 

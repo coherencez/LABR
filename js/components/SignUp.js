@@ -100,7 +100,7 @@ export default class SignUp extends Component {
     this.setState({ password: num })
   }
   signUpPressed() {
-    const API_ENDPOINT = 'http://10.0.0.102:3000/labr/api/newuser'
+    const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/newuser'
     const requestObj = {
       method: 'POST',
       headers: {
