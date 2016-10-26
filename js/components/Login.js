@@ -70,13 +70,34 @@ export default class Login extends Component {
         password: this.state.password
       })
     }
-
     fetch(API_ENDPOINT, requestObj)
       .then(res => res.json())
       .then(({ pwMatch, msg, user }) => {
         if(pwMatch) {
-          AsyncStorage.setItem('user', JSON.stringify(user))
-          Actions.app({ type: 'reset' })
+          if(user.isProvider) {
+            const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/getProviderId'
+            const requestObj = {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                userId: user.id
+              })
+            }
+            fetch(API_ENDPOINT, requestObj)
+              .then(res => res.json())
+              .then(data => {
+                const userObj = Object.assign({}, user, data)
+                AsyncStorage.setItem('user', JSON.stringify(userObj))
+                Actions.app({type: 'reset'})
+              })
+              .catch(console.error)
+          } else {
+            AsyncStorage.setItem('user', JSON.stringify(user))
+            Actions.app({ type: 'reset' })
+          }
         } else {
           this.setState({ errorMessage: msg})
         }

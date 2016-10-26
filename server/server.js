@@ -77,6 +77,15 @@ app.post('/labr/api/newprovider', ({ body },res) => {
     .catch(console.error)
 })
 
+app.post('/labr/api/getProviderId', ({ body },res) => {
+  console.log(body)
+  Provider.findOne({ userId: body.userId })
+    .then(provider => {
+      res.json({ providerId: provider._id })
+    })
+    .catch(console.error)
+})
+
 // connect to mongo before loading server
 connect()
   .then(() =>
