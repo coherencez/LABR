@@ -10,7 +10,9 @@ export default class SideNav extends Component {
     super(props)
     this.state = {
       user: false,
-      checked: false
+      isProvider: false,
+      checked: false,
+      statusMessage: 'Go Online!'
     }
   }
   componentWillMount() {
@@ -70,13 +72,24 @@ export default class SideNav extends Component {
                   <Icon name='md-aperture' />
                   <Text>Settings</Text>
               </ListItem>
-              <ListItem>
-                <CheckBox
-                  label='Label'
-                  checked={this.state.checked}
-                  onChange={(checked) => this.handleAvailableCheckbox(checked)}
-                />
+              <ListItem iconLeft button onPress={this.handleHomePress}>
+                  <Icon name='ios-home' />
+                  <Text>Home</Text>
               </ListItem>
+              {(() => {
+                if(this.state.isProvider) {
+                  return (
+                    <ListItem>
+                      <CheckBox
+                        label={this.state.statusMessage}
+                        checked={this.state.checked}
+                        onChange={(checked) => this.handleAvailableCheckbox(checked)}
+                      />
+                    </ListItem>
+                  )
+                }
+              })()}
+
             </List>
         </Content>
       </Container>
@@ -87,7 +100,7 @@ export default class SideNav extends Component {
     AsyncStorage.getItem('user')
       .then(res => JSON.parse(res))
       .then(data => {
-        if(data) this.setState({ user: true })
+        if(data) this.setState({ user: true, isProvider: data.isProvider })
       })
       .catch(console.error)
   }
@@ -100,7 +113,7 @@ export default class SideNav extends Component {
   }
   handleLogout() {
     AsyncStorage.removeItem('user')
-    this.setState({ user: false })
+    this.setState({ user: false, isProvider: false })
     Actions.app({ type: 'reset' })
   }
   handleHistoryPress() {
