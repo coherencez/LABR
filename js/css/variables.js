@@ -6,6 +6,7 @@ const navColor = '#3B026D'
   ,   buttonBgColor = '#008279'
   ,   fontFamily = 'nevis'
   ,   button2BgColor = '#FF681F'
+  ,   endpointIP = 'http://10.0.0.102:3000'
 
 export {
   navColor,
@@ -13,5 +14,6 @@ export {
   fontColorWhite,
   buttonBgColor,
   button2BgColor,
-  fontFamily
+  fontFamily,
+  endpointIP
 }

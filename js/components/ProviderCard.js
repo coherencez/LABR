@@ -9,7 +9,7 @@ import {
   Card, CardItem,
   Thumbnail} from 'native-base';
 
-import { buttonBgColor, bgColor, fontFamily, fontColorWhite } from '../css/variables'
+import { buttonBgColor, bgColor, fontFamily, fontColorWhite, endpointIP } from '../css/variables'
 export default class ProviderCard extends Component {
   render() {
     const { props } = this

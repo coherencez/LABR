@@ -136,7 +136,7 @@ export default class ProviderSignup extends Component {
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
     .then(({ id }) => {
-      const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/newprovider'
+      const API_ENDPOINT = `${endpointIP}/labr/api/newprovider`
       const requestObj = {
         method: 'POST',
         headers: {

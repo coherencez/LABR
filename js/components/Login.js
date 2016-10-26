@@ -6,7 +6,7 @@ import {
   Text, Icon, InputGroup,
   Input, Button } from 'native-base';
 
-import { buttonBgColor, bgColor } from '../css/variables'
+import { buttonBgColor, bgColor, endpointIP } from '../css/variables'
 export default class Login extends Component {
   constructor(props) {
     super(props)
@@ -58,7 +58,8 @@ export default class Login extends Component {
     this.setState({ password: txt })
   }
   handleLogin() {
-    const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/login'
+    const API_ENDPOINT = `${endpointIP}/labr/api/login`
+    console.log(endpointIP)
     const requestObj = {
       method: 'POST',
       headers: {
