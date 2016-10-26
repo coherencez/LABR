@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Icon, Badge, InputGroup, Input, Button, Thumbnail, Footer, Text} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid'
 
-import { buttonBgColor, bgColor, fontColorWhite, fontFamily } from '../css/variables'
+import { buttonBgColor, bgColor, fontColorWhite, fontFamily, button2BgColor } from '../css/variables'
 import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   button2: {
-    backgroundColor: '#FF681F',
+    backgroundColor: button2BgColor,
     margin: 5,
   },
   helperText: {

@@ -5,11 +5,13 @@ const navColor = '#3B026D'
   ,   fontColorWhite = '#FFF'
   ,   buttonBgColor = '#00E1D1'
   ,   fontFamily = 'nevis'
+  ,   button2BgColor = '#FF681F'
 
 export {
   navColor,
   bgColor,
   fontColorWhite,
   buttonBgColor,
+  button2BgColor,
   fontFamily
 }

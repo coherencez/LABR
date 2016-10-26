@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux'
-import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button, Header } from 'native-base';
+import {
+  Container, Content,
+  List, ListItem,
+  Text, Icon, Badge,
+  InputGroup, Input,
+  Button, Header } from 'native-base';
 
 import { buttonBgColor } from '../css/variables'
 export default class SignUp extends Component {
@@ -53,7 +58,7 @@ export default class SignUp extends Component {
                     label='PHONE'
                     placeholder='CELL'
                     onChangeText={(txt) => this.phoneChanged(txt)}
-                    keyboardType="numeric"
+                    keyboardType="phone-pad"
                     autoCapitalize="none" />
               </InputGroup>
               <InputGroup>
