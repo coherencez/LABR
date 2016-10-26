@@ -135,7 +135,7 @@ export default class ProviderSignup extends Component {
   handleProviderSignup() {
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
-    .then(({ id }) => {
+    .then(({ id, firstName, lastName }) => {
       const API_ENDPOINT = `${endpointIP}/labr/api/newprovider`
       const requestObj = {
         method: 'POST',
@@ -149,7 +149,8 @@ export default class ProviderSignup extends Component {
           rate: this.state.rate,
           bio: this.state.bio,
           categories: this.state.results.categories,
-          userId: id
+          userId: id,
+          name: `${firstName} ${lastName}`
         })
       }
       fetch(API_ENDPOINT, requestObj)

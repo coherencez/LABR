@@ -45,14 +45,8 @@ app.post('/labr/api/login', ({ body }, res, err) => {
     })
     .then(([user, matches]) => {
       const { _id, firstName, lastName, cellPhone, email, isProvider } = user
-      const userObj = {
-        id: _id,
-        firstName,
-        lastName,
-        cellPhone,
-        email,
-        isProvider
-      }
+      const userObj = { id: _id, firstName, lastName, cellPhone, email, isProvider }
+
       if(matches) {
         if(user.isProvider) {
           return Promise.all([
