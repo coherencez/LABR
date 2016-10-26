@@ -58,7 +58,7 @@ export default class SignUp extends Component {
                     label='PHONE'
                     placeholder='CELL'
                     onChangeText={(txt) => this.phoneChanged(txt)}
-                    keyboardType="numeric"
+                    keyboardType="phone-pad"
                     autoCapitalize="none" />
               </InputGroup>
               <InputGroup>

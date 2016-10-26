@@ -1,24 +1,54 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, AsyncStorage, View } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Text, Icon, Badge } from 'native-base';
 
 
 export default class SideNav extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: false
+    }
+  }
+  componentDidMount() {
+    AsyncStorage.getItem('user')
+      .then(res => JSON.parse(res))
+      .then(data => {
+        if(data) this.setState({ user: true })
+      })
+      .catch(console.error)
+  }
   render() {
     return (
       <Container>
         <Content>
             <List style={styles.alignmentFix}>
-              <ListItem iconLeft button onPress={this.handleSignUpPress}>
-                <Icon name='md-contact' />
-                <Text>Sign Up</Text>
-                <Text note>Note here</Text>
-              </ListItem>
-              <ListItem iconLeft button onPress={this.handleLoginPress}>
-                <Icon name='md-globe' />
-                <Text>Login</Text>
-              </ListItem>
+              {(() => {
+                if(this.state.user){
+                  return (
+                    <ListItem iconLeft button onPress={() => this.handleLogout()}>
+                      <Icon name='md-globe' />
+                      <Text>Logout</Text>
+                    </ListItem>
+                  )
+                } else {
+                  return (
+                    <View>
+                    <ListItem iconLeft button onPress={this.handleSignUpPress}>
+                      <Icon name='md-contact' />
+                      <Text>Sign Up</Text>
+                      <Text note>Note here</Text>
+                    </ListItem>
+                    <ListItem iconLeft button onPress={this.handleLoginPress}>
+                      <Icon name='md-globe' />
+                      <Text>Login</Text>
+                    </ListItem>
+                    </View>
+                  )
+                }
+              })()}
+
               <ListItem iconLeft button onPress={this.handleHistoryPress}>
                   <Icon name='md-archive' />
                   <Text>History</Text>
@@ -42,19 +72,22 @@ export default class SideNav extends Component {
       </Container>
     )
   }
+
   handleSignUpPress() {
-    console.log('SIGNUP PRESSED')
     Actions.signup()
   }
   handleLoginPress() {
-    console.log('LOGIN PRESSED')
     Actions.login()
+  }
+  handleLogout() {
+    AsyncStorage.removeItem('user')
+    this.setState({ user: false })
+    Actions.app({ type: 'reset' })
   }
   handleHistoryPress() {
     console.log('HISTORY PRESSED')
   }
   handleBusinessPress() {
-    console.log('BA PRESSED')
     Actions.providersignup()
   }
   handleMessagesPress() {
