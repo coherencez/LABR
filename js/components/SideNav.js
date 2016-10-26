@@ -11,13 +11,11 @@ export default class SideNav extends Component {
       user: false
     }
   }
+  componentWillMount() {
+    this.userCheck()
+  }
   componentDidMount() {
-    AsyncStorage.getItem('user')
-      .then(res => JSON.parse(res))
-      .then(data => {
-        if(data) this.setState({ user: true })
-      })
-      .catch(console.error)
+    this.userCheck()
   }
   render() {
     return (
@@ -71,6 +69,15 @@ export default class SideNav extends Component {
         </Content>
       </Container>
     )
+  }
+
+  userCheck() {
+    AsyncStorage.getItem('user')
+      .then(res => JSON.parse(res))
+      .then(data => {
+        if(data) this.setState({ user: true })
+      })
+      .catch(console.error)
   }
 
   handleSignUpPress() {
