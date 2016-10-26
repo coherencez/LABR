@@ -55,9 +55,19 @@ app.post('/labr/api/login', ({ body }, res, err) => {
         isProvider
       }
       if(matches) {
+        if(user.isProvider) {
+          return Promise.all([
+            Provider.findOne({ userId: user._id }),
+            Promise.resolve(userObj),
+          ])
+        }
         return res.json({ pwMatch: true, user: userObj })
       }
       return res.json({ pwMatch: false,  msg: 'Bad email and/or password. Please try again' })
+    })
+    .then(([provider, user]) => {
+      const userObj = Object.assign({}, user, {providerId: provider._id})
+      return res.json({ pwMatch: true, user: userObj })
     })
     .catch(console.error)
 })
