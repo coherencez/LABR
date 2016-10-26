@@ -38,16 +38,15 @@ export default class Category extends Component {
     );
   }
 
-  handleNashville() {
-    console.log('HANDLE NASHVILLE')
-    Actions.providers({type: 'push'})
+  handleCatgoryPress(data) {
+     Actions.providers({type: 'push'})
   }
 
   renderCategories() {
-    return this.state.categories.map((city, i) =>
-      <ListItem  button onPress={this.handleNashville} key={i}>
+    return this.state.categories.map((category, i) =>
+      <ListItem button key={i} name={category} onPress={() => this.handleCatgoryPress()}>
           <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
-          <Text style={styles.font}>{city}</Text>
+          <Text style={styles.font}>{category}</Text>
       </ListItem>
     )
   }

@@ -59,7 +59,6 @@ export default class Login extends Component {
   }
   handleLogin() {
     const API_ENDPOINT = `${endpointIP}/labr/api/login`
-    console.log(endpointIP)
     const requestObj = {
       method: 'POST',
       headers: {

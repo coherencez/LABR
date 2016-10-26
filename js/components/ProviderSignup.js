@@ -5,7 +5,7 @@ import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Inpu
 
 const Item = Picker.Item
 
-import { buttonBgColor, button2BgColor } from '../css/variables'
+import { buttonBgColor, button2BgColor, endpointIP } from '../css/variables'
 export default class ProviderSignup extends Component {
   constructor(props) {
     super(props)

@@ -14,7 +14,8 @@ import {
   bgColor,
   fontColorWhite,
   buttonBgColor,
-  fontFamily
+  fontFamily,
+  endpointIP
 } from '../css/variables'
 
 
