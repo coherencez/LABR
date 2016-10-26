@@ -86,6 +86,24 @@ app.post('/labr/api/newprovider', ({ body },res) => {
     .catch(console.error)
 })
 
+app.get('/labr/api/getProviders', (req,res) => {
+  Provider.find({available: false})
+  .then(providers => {
+    const promiseArray = [Promise.resolve(providers)]
+    const userIds = providers.map(provider => provider.userId)
+    const users = userIds.forEach(id => {
+        promiseArray.push(User.findOne({_id: id}))
+      })
+    return Promise.all(promiseArray)
+  })
+  .then(([providers, ...rest]) => {
+    console.log('Prov', providers)
+    console.log('User', rest)
+  })
+  .catch(console.error)
+  res.json({ status: 200})
+})
+
 // connect to mongo before loading server
 connect()
   .then(() =>

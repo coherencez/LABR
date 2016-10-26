@@ -23,17 +23,28 @@ export default class Providers extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      providers: [
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-      ]
+      providers: []
     }
+  }
+  componentWillMount() {
+    const API_ENDPOINT = `${endpointIP}/labr/api/getProviders`
+    const requestObj = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    }
+    fetch(API_ENDPOINT)
+      .then(res => res.json())
+      .then(data => {
+        console.log('PROVIDERS', data)
+      })
+      .catch(console.error)
   }
   render() {
     const menu = <SideNav />
@@ -55,8 +66,8 @@ export default class Providers extends Component {
     );
   }
 
-  handleProviderPress() {
-    console.log('PROVIDER PRESS')
+  handleProviderPress(data) {
+    console.log('PROVIDER PRESS', data)
     Actions.businessprofile()
   }
 
