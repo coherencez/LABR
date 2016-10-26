@@ -12,7 +12,8 @@ export default class SideNav extends Component {
       user: false,
       isProvider: false,
       checked: false,
-      statusMessage: 'Go Online!'
+      statusMessage: 'Go Online!',
+      statusColor: '#1AD9CB'
     }
   }
   componentWillMount() {
@@ -80,7 +81,7 @@ export default class SideNav extends Component {
         {(() => {
           if(this.state.isProvider) {
             return (
-              <Footer>
+              <Footer style={{backgroundColor: this.state.statusColor}}>
                 <CheckBox
                   label={this.state.statusMessage}
                   checked={this.state.checked}
@@ -140,10 +141,12 @@ export default class SideNav extends Component {
   }
   handleAvailableCheckbox(checked) {
     console.log('I am checked', checked)
-    let string = (checked) ? 'Go Offline :(' : 'Go Online!'
+    let message = (checked) ? 'Go Offline :(' : 'Go Online!'
+    let color = (checked) ? '#A23500' : '#1AD9CB'
     this.setState({
       checked: !!checked,
-      statusMessage: string
+      statusMessage: message,
+      statusColor: color
     })
   }
 }
