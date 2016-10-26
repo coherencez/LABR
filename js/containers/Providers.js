@@ -41,8 +41,11 @@ export default class Providers extends Component {
     }
     fetch(API_ENDPOINT)
       .then(res => res.json())
-      .then(data => {
-        console.log('PROVIDERS', data)
+      .then(({ providers }) => {
+        this.setState({
+          providers: this.state.providers.concat(providers)
+        })
+        console.log('STATE', this.state.providers)
       })
       .catch(console.error)
   }
@@ -73,10 +76,10 @@ export default class Providers extends Component {
 
   renderProviders() {
     // main array of card elements
-    const componentArray = this.state.providers.map((prov, i) =>
+    const componentArray = this.state.providers.map((prov, i) => (
       <ProviderCard provider={prov} key={i} handlePress={this.handleProviderPress.bind(this)}/>
-    )
-
+    ))
+    console.log('COMP ARAY', componentArray)
     // to render cards in 2 separate columns
     const arr1 = componentArray.filter((v,i) => {
       if(i % 2 === 0) {
