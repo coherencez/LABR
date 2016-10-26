@@ -33,16 +33,16 @@ export default class BusinessProfile extends Component {
                 <Row >
                 <View style={styles.infoBar}>
                   <View style={{width: 50, height: 60 }} >
-                    <Icon name='ios-cash' style={{color: '#fff'}}/>
+                    <Icon name='ios-cash' style={styles.iconStyles}/>
                     <Text style={{color: fontColorWhite, fontSize: 10}}>25/hr</Text>
                   </View>
                   <View style={{width: 50, height: 60 }} >
-                    <Icon name='md-git-network' style={{color: '#fff'}}/>
+                    <Icon name='md-git-network' style={styles.iconStyles}/>
                     <Text style={{color: fontColorWhite, fontSize: 10}}>35 yrs.</Text>
                   </View>
                   <View style={{width: 50, height: 60, right: 77, top: 10 }} >
                     <Text>{'\n'}</Text>
-                    <Icon name='ios-star' style={{color: '#fff'}}/>
+                    <Icon name='ios-star' style={styles.iconStyles}/>
                     <Text style={{color: fontColorWhite, fontSize: 10}}>4/5</Text>
                   </View>
                 </View>
@@ -112,6 +112,9 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'row',
     padding: 20,
+  },
+  iconStyles: {
+    color: '#fff',
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowRadius: 2,
