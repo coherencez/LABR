@@ -45,10 +45,13 @@ app.post('/labr/api/login', ({ body }, res, err) => {
       }
     })
     .then(([user, matches]) => {
-      const { _id, firstName, isProvider } = user
+      const { _id, firstName, lastName, cellPhone, email, isProvider } = user
       const userObj = {
         id: _id,
         firstName,
+        lastName,
+        cellPhone,
+        email,
         isProvider
       }
       if(matches) {
@@ -60,11 +63,16 @@ app.post('/labr/api/login', ({ body }, res, err) => {
 })
 
 app.post('/labr/api/newprovider', ({ body },res) => {
-  console.log(body)
   Provider.create(body)
     .then(data => {
-      console.log(data)
-      res.json(200)
+      User.findOneAndUpdate(
+        {_id: body.userId},
+        {isProvider: true}
+      )
+      .then(updatedUser => {
+        res.json({isProvider: true, providerId: data._id})
+      })
+      .catch(console.error)
     })
     .catch(console.error)
 })

@@ -154,9 +154,10 @@ export default class ProviderSignup extends Component {
       }
       fetch(API_ENDPOINT, requestObj)
         .then(res => res.json())
-        .then(data => {
-          if(data.status === 200) {
-            Actions.businessprofile({type: 'push'})
+        .then(resObj => {
+          if(resObj) {
+            AsyncStorage.mergeItem('user', JSON.stringify(resObj))
+            Actions.app({type: 'reset'})
           }
         })
         .catch(console.error)
