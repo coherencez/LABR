@@ -137,10 +137,15 @@ export default class SideNav extends Component {
   handleSettingsPress() {
     console.log('SETTINGS PRESSED')
   }
+  handleHomePress() {
+    Actions.app({type: 'reset'})
+  }
   handleAvailableCheckbox(checked) {
     console.log('I am checked', checked)
+    let string = (checked) ? 'Go Offline :(' : 'Go Online!'
     this.setState({
-      checked: !!checked
+      checked: !!checked,
+      statusMessage: string
     })
   }
 }
