@@ -46,7 +46,8 @@ export default class ProviderSignup extends Component {
                 inlineLabel
                 label='SKILLS'
                 placeholder='SKILLS'
-                onChangeText={(txt) => this.onSkillsChange(txt)}/>
+                onChangeText={(txt) => this.onSkillsChange(txt)}
+                autoCapitalize='none'/>
           </InputGroup>
           <InputGroup iconLeft>
               <Icon name='ios-cog' />
@@ -55,7 +56,8 @@ export default class ProviderSignup extends Component {
                 label='YEARS EXP'
                 placeholder='YEARS EXP'
                 onChangeText={(txt) => this.onExpChange(txt)}
-                keyboardType='number-pad'/>
+                keyboardType='number-pad'
+                autoCapitalize='none'/>
           </InputGroup>
           <InputGroup iconLeft>
               <Icon name='ios-cash' />
@@ -64,7 +66,8 @@ export default class ProviderSignup extends Component {
                 label='HOURLY RATE'
                 placeholder='HOURLY RATE'
                 onChangeText={(txt) => this.onRateChange(txt)}
-                keyboardType='number-pad'/>
+                keyboardType='number-pad'
+                autoCapitalize='none'/>
           </InputGroup>
           <InputGroup >
               <Icon name='md-attach' />
@@ -72,7 +75,8 @@ export default class ProviderSignup extends Component {
                 placeholder='BIO'
                 multiline={true}
                 style={{ height: 100, marginTop: 15 }}
-                onChangeText={(txt) => this.onBioChange(txt)}/>
+                onChangeText={(txt) => this.onBioChange(txt)}
+                autoCapitalize='none'/>
           </InputGroup>
           <View>
             <Text>Selected Categories:</Text>
@@ -151,10 +155,6 @@ export default class ProviderSignup extends Component {
       fetch(API_ENDPOINT, requestObj)
         .then(res => res.json())
         .then(data => {
-          if(data.msg) {
-            this.setState({ errorMessage: data.msg })
-            return
-          }
           if(data.status === 200) {
             Actions.businessprofile({type: 'push'})
           }

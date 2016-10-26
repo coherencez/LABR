@@ -6,6 +6,7 @@ const        app = require('express')()
   ,         PORT = process.env.PORT || 3000
 // database models
   ,         User = require('./models/User')
+  ,     Provider = require('./models/Provider')
 
 // only send or receive json
 app.use(json())
@@ -58,9 +59,14 @@ app.post('/labr/api/login', ({ body }, res, err) => {
     .catch(console.error)
 })
 
-app.post('/labr/api/newprovider', (req,res) => {
-  console.log(req.body)
-  res.json({ status: 200})
+app.post('/labr/api/newprovider', ({ body },res) => {
+  console.log(body)
+  Provider.create(body)
+    .then(data => {
+      console.log(data)
+      res.json(200)
+    })
+    .catch(console.error)
 })
 
 // connect to mongo before loading server
