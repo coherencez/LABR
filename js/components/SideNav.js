@@ -26,7 +26,7 @@ export default class SideNav extends Component {
         <Content>
             <List style={styles.alignmentFix}>
               {(() => {
-                if(this.state.user){
+                if(this.state.user) {
                   return (
                     <View>
                     <ListItem iconLeft button onPress={() => this.handleLogout()}>
@@ -107,7 +107,16 @@ export default class SideNav extends Component {
     console.log('HISTORY PRESSED')
   }
   handleBusinessPress() {
-    Actions.providersignup()
+    AsyncStorage.getItem('user')
+    .then(res => JSON.parse(res))
+    .then(({ isProvider }) => {
+      if(isProvider) {
+        Actions.businessprofile()
+      } else {
+        Actions.providersignup()
+      }
+    })
+    .catch(console.error)
   }
   handleMessagesPress() {
     console.log('MESSAGES PRESSED')
