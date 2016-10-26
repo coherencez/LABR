@@ -30,8 +30,7 @@ app.post('/labr/api/newuser', ({ body }, res, err) => {
 app.post('/labr/api/login', ({ body }, res, err) => {
   User.findOne({ email: body.email })
     .then(dbUser => {
-      // problem: need send user data back to the app, also
-      // need to compare passswords which returns another promise
+      // problem: need to resolve mutiple promises
       // solution: Promise.all: if user exists, run comparePassword schema method
       // then pass the user obj and compare results to the next
       // then block

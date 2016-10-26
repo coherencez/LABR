@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { StyleSheet, AsyncStorage, View } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Text, Icon, Badge } from 'native-base';
+import CheckBox from 'react-native-checkbox';
 
 
 export default class SideNav extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: false
+      user: false,
+      checked: false
     }
   }
   componentWillMount() {
@@ -18,6 +20,7 @@ export default class SideNav extends Component {
     this.userCheck()
   }
   render() {
+    console.log(this.state.checked)
     return (
       <Container>
         <Content>
@@ -30,7 +33,7 @@ export default class SideNav extends Component {
                       <Icon name='md-globe' />
                       <Text>Logout</Text>
                     </ListItem>
-                    <ListItem iconLeft iconRight button onPress={this.handleBusinessPress}>
+                    <ListItem iconLeft iconRight button onPress={() => this.handleBusinessPress()}>
                         <Icon name='ios-briefcase' />
                         <Text>Business Account</Text>
                         <Icon name='ios-mic-outline' style={styles.hidden}/>
@@ -66,6 +69,13 @@ export default class SideNav extends Component {
               <ListItem iconLeft button onPress={this.handleSettingsPress}>
                   <Icon name='md-aperture' />
                   <Text>Settings</Text>
+              </ListItem>
+              <ListItem>
+                <CheckBox
+                  label='Label'
+                  checked={this.state.checked}
+                  onChange={(checked) => this.handleAvailableCheckbox(checked)}
+                />
               </ListItem>
             </List>
         </Content>
@@ -104,6 +114,12 @@ export default class SideNav extends Component {
   }
   handleSettingsPress() {
     console.log('SETTINGS PRESSED')
+  }
+  handleAvailableCheckbox(checked) {
+    console.log('I am checked', checked)
+    this.setState({
+      checked: !!checked
+    })
   }
 }
 
