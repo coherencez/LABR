@@ -14,7 +14,8 @@ import {
   bgColor,
   fontColorWhite,
   buttonBgColor,
-  fontFamily
+  fontFamily,
+  endpointIP
 } from '../css/variables'
 
 
@@ -22,17 +23,30 @@ export default class Providers extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      providers: [
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-        {name: 'Jane Doe', exp: 7, rate: '$25/hr'},
-      ]
+      providers: []
     }
+  }
+  componentWillMount() {
+    const API_ENDPOINT = `${endpointIP}/labr/api/getProviders`
+    const requestObj = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    }
+    fetch(API_ENDPOINT)
+      .then(res => res.json())
+      .then(({ providers }) => {
+        this.setState({
+          providers: this.state.providers.concat(providers)
+        })
+      })
+      .catch(console.error)
   }
   render() {
     const menu = <SideNav />
@@ -54,27 +68,22 @@ export default class Providers extends Component {
     );
   }
 
-  handleProviderPress() {
-    console.log('PROVIDER PRESS')
-    Actions.businessprofile()
+  handleProviderPress(data) {
+    console.log('PROVIDER PRESS', data)
+    Actions.businessprofile({type: 'push', data: 'provider id'})
   }
 
   renderProviders() {
     // main array of card elements
-    const componentArray = this.state.providers.map((prov, i) =>
+    const componentArray = this.state.providers.map((prov, i) => (
       <ProviderCard provider={prov} key={i} handlePress={this.handleProviderPress.bind(this)}/>
-    )
-
+    ))
     // to render cards in 2 separate columns
     const arr1 = componentArray.filter((v,i) => {
-      if(i % 2 === 0) {
-        return v
-      }
+      if(i % 2 === 0) return v
     })
     const arr2 = componentArray.filter((v,i) => {
-      if(i % 2 !== 0) {
-        return v
-      }
+      if(i % 2 !== 0) return v
     })
     return { arr1, arr2 }
   }

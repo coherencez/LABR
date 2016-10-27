@@ -9,7 +9,7 @@ import {
   Card, CardItem,
   Thumbnail} from 'native-base';
 
-import { buttonBgColor, bgColor, fontFamily, fontColorWhite } from '../css/variables'
+import { buttonBgColor, bgColor, fontFamily, fontColorWhite, endpointIP } from '../css/variables'
 export default class ProviderCard extends Component {
   render() {
     const { props } = this
@@ -25,7 +25,7 @@ export default class ProviderCard extends Component {
         <CardItem button onPress={handlePress}>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start' }}>
             <Icon name='md-star' style={{color: '#6103B3', marginLeft: 7, marginRight: 7}}/>
-            <Badge info style={styles.spacing}>{provider.exp}</Badge>
+            <Badge info style={styles.spacing}>{provider.experience}</Badge>
             <Icon name='ios-cash' style={{color: '#6103B3', marginLeft: 7, marginRight: 7}}/>
           </View>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start' }}>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 5,
+    flex: 0,
     backgroundColor: '#fff',
     shadowColor: "#000000",
     shadowOpacity: 0.8,

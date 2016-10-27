@@ -6,7 +6,7 @@ import {
   Text, Icon, InputGroup,
   Input, Button } from 'native-base';
 
-import { buttonBgColor, bgColor } from '../css/variables'
+import { buttonBgColor, bgColor, endpointIP } from '../css/variables'
 export default class Login extends Component {
   constructor(props) {
     super(props)
@@ -24,7 +24,7 @@ export default class Login extends Component {
             if(this.state.errorMessage) {
               return (
                 <View>
-                  <Text>{this.state.errorMessage}</Text>
+                  <Text style={styles.error}>{this.state.errorMessage}</Text>
                 </View>
               )
             }
@@ -58,7 +58,7 @@ export default class Login extends Component {
     this.setState({ password: txt })
   }
   handleLogin() {
-    const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/login'
+    const API_ENDPOINT = `${endpointIP}/labr/api/login`
     const requestObj = {
       method: 'POST',
       headers: {
@@ -99,5 +99,11 @@ const styles = StyleSheet.create({
   button: {
     top: 20,
     backgroundColor: buttonBgColor,
+  },
+  error: {
+    color: 'red',
+    fontSize: 15,
+    fontWeight: '700',
+    margin: 10,
   },
 });

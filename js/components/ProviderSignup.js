@@ -5,7 +5,7 @@ import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Inpu
 
 const Item = Picker.Item
 
-import { buttonBgColor, button2BgColor } from '../css/variables'
+import { buttonBgColor, button2BgColor, endpointIP } from '../css/variables'
 export default class ProviderSignup extends Component {
   constructor(props) {
     super(props)
@@ -135,8 +135,8 @@ export default class ProviderSignup extends Component {
   handleProviderSignup() {
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
-    .then(({ id }) => {
-      const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/newprovider'
+    .then(({ id, firstName, lastName }) => {
+      const API_ENDPOINT = `${endpointIP}/labr/api/newprovider`
       const requestObj = {
         method: 'POST',
         headers: {
@@ -149,7 +149,8 @@ export default class ProviderSignup extends Component {
           rate: this.state.rate,
           bio: this.state.bio,
           categories: this.state.results.categories,
-          userId: id
+          userId: id,
+          name: `${firstName} ${lastName}`
         })
       }
       fetch(API_ENDPOINT, requestObj)

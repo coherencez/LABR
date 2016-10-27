@@ -8,7 +8,7 @@ import {
   InputGroup, Input,
   Button, Header } from 'native-base';
 
-import { buttonBgColor } from '../css/variables'
+import { buttonBgColor, endpointIP } from '../css/variables'
 export default class SignUp extends Component {
   constructor(props) {
     super(props)
@@ -100,7 +100,7 @@ export default class SignUp extends Component {
     this.setState({ password: num })
   }
   signUpPressed() {
-    const API_ENDPOINT = 'http://192.168.1.69:3000/labr/api/newuser'
+    const API_ENDPOINT = `${endpointIP}/labr/api/newuser`
     const requestObj = {
       method: 'POST',
       headers: {
