@@ -50,15 +50,15 @@ app.post('/labr/api/login', ({ body }, res, err) => {
       if(matches) {
         if(user.isProvider) {
           return Promise.all([
-            Provider.findOne({ userId: user._id }),
             Promise.resolve(userObj),
+            Provider.findOne({ userId: user._id })
           ])
         }
         return res.json({ pwMatch: true, user: userObj })
       }
       return res.json({ pwMatch: false,  msg: 'Bad email and/or password. Please try again' })
     })
-    .then(([provider, user]) => {
+    .then(([user, provider]) => {
       const userObj = Object.assign({}, user, {providerId: provider._id})
       return res.json({ pwMatch: true, user: userObj })
     })
@@ -68,14 +68,16 @@ app.post('/labr/api/login', ({ body }, res, err) => {
 app.post('/labr/api/newprovider', ({ body },res) => {
   Provider.create(body)
     .then(data => {
-      User.findOneAndUpdate(
-        {_id: body.userId},
-        {isProvider: true}
-      )
-      .then(updatedUser => {
-        res.json({isProvider: true, providerId: data._id})
-      })
-      .catch(console.error)
+      return Promise.all([
+        User.findOneAndUpdate(
+          {_id: body.userId},
+          {isProvider: true}
+        ),
+        Promise.resolve(data)
+      ])
+    })
+    .then(([updatedUser, data]) => {
+      res.json({isProvider: true, providerId: data._id})
     })
     .catch(console.error)
 })

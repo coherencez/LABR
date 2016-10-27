@@ -45,7 +45,6 @@ export default class Providers extends Component {
         this.setState({
           providers: this.state.providers.concat(providers)
         })
-        console.log('STATE', this.state.providers)
       })
       .catch(console.error)
   }
@@ -71,7 +70,7 @@ export default class Providers extends Component {
 
   handleProviderPress(data) {
     console.log('PROVIDER PRESS', data)
-    Actions.businessprofile()
+    Actions.businessprofile({type: 'push', data: 'provider id'})
   }
 
   renderProviders() {
@@ -79,17 +78,12 @@ export default class Providers extends Component {
     const componentArray = this.state.providers.map((prov, i) => (
       <ProviderCard provider={prov} key={i} handlePress={this.handleProviderPress.bind(this)}/>
     ))
-    console.log('COMP ARAY', componentArray)
     // to render cards in 2 separate columns
     const arr1 = componentArray.filter((v,i) => {
-      if(i % 2 === 0) {
-        return v
-      }
+      if(i % 2 === 0) return v
     })
     const arr2 = componentArray.filter((v,i) => {
-      if(i % 2 !== 0) {
-        return v
-      }
+      if(i % 2 !== 0) return v
     })
     return { arr1, arr2 }
   }

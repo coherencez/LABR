@@ -24,7 +24,7 @@ export default class Login extends Component {
             if(this.state.errorMessage) {
               return (
                 <View>
-                  <Text>{this.state.errorMessage}</Text>
+                  <Text style={styles.error}>{this.state.errorMessage}</Text>
                 </View>
               )
             }
@@ -99,5 +99,11 @@ const styles = StyleSheet.create({
   button: {
     top: 20,
     backgroundColor: buttonBgColor,
+  },
+  error: {
+    color: 'red',
+    fontSize: 15,
+    fontWeight: '700',
+    margin: 10,
   },
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Icon, Badge, InputGroup, Input, Button, Thumbnail, Footer, Text} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid'
@@ -9,8 +9,28 @@ import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
 
 export default class BusinessProfile extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isProvider: false
+    }
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('user')
+    .then(res => JSON.parse(res))
+    .then((user) => {
+      if(user) {
+        this.setState({
+          isProvider: user.isProvider
+        })
+      }
+    })
+    .catch(console.error)
+  }
 
   render() {
+    console.log(this.props)
     const menu = <SideNav />
     return (
       <SideMenu menu={menu}>
@@ -57,17 +77,26 @@ export default class BusinessProfile extends Component {
           </Grid>
         </Content>
 
-          <View style={{ backgroundColor: bgColor }}>
-            <View style={{ flex:1, flexDirection: 'row' }}>
-              <Button block style={styles.button2}>Current Jobs</Button>
-              <Button block style={styles.button2}>History</Button>
-            </View>
-          </View>
         <Footer style={{backgroundColor: bgColor}}>
-          <Button block style={styles.button} onPress={Actions.startconvo}>
-            Start A Conversation
-          </Button>
+          {(() => {
+            if(this.state.isProvider) {
+              return (
+                <View style={{ flex:1, flexDirection: 'row' }}>
+                  <Button block style={styles.button2}>New Jobs</Button>
+                  <Button block style={styles.button2}>Current Jobs</Button>
+                  <Button block style={styles.button2}>History</Button>
+                </View>
+              )
+            } else {
+              return (
+                <Button block style={styles.button} onPress={Actions.startconvo}>
+                  Start A Conversation
+                </Button>
+              )
+            }
+          })()}
         </Footer>
+
       </Container>
       </SideMenu>
     )
