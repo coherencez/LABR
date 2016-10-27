@@ -19,10 +19,10 @@ export default class ProviderCard extends Component {
         <CardItem style={{backgroundColor: buttonBgColor}}>
           <Text style={styles.text}>{provider.name}</Text>
         </CardItem>
-        <CardItem cardBody button onPress={handlePress} style={{alignItems: 'center', justifyContent:'center'}}>
+        <CardItem cardBody button onPress={handlePress()} style={{alignItems: 'center', justifyContent:'center'}}>
           <Thumbnail source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} size={100} square/>
         </CardItem>
-        <CardItem button onPress={handlePress}>
+        <CardItem button onPress={handlePress()}>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start' }}>
             <Icon name='md-star' style={{color: '#6103B3', marginLeft: 7, marginRight: 7}}/>
             <Badge info style={styles.spacing}>{provider.experience}</Badge>
