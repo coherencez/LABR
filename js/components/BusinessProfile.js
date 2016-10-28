@@ -39,16 +39,14 @@ export default class BusinessProfile extends Component {
           <Grid>
               <Col style={{ width: 115, padding: 5, justifyContent: 'center' }}>
                 <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
-                <List>
-                {this.props.provider.skills.map((v,i)=> {
-                  if(i <= 4) {
-                   return  (
-                      <ListItem key={i}>
-                          <Text style={{color: fontColorWhite}}>{v}</Text>
+                <List
+                  dataArray={this.props.provider.skills}
+                  renderRow={(skill) => (
+                      <ListItem>
+                          <Text style={{color: fontColorWhite}}>{skill}</Text>
                       </ListItem>
-                    )
-                  }
-                })}
+                  )}>
+
                 </List>
                 <Row >
                 <View style={styles.infoBar}>
