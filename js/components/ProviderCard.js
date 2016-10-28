@@ -16,7 +16,7 @@ export default class ProviderCard extends Component {
     const { provider, handlePress } = props
     return (
       <Card style={styles.card} >
-        <CardItem style={{backgroundColor: buttonBgColor}}>
+        <CardItem style={styles.cardTitle}>
           <Text style={styles.text}>{provider.name}</Text>
         </CardItem>
         <CardItem cardBody button onPress={handlePress()} style={{alignItems: 'center', justifyContent:'center'}}>
@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
       height: 2,
       width: 0,
     },
+  },
+  cardTitle: {
+    backgroundColor: buttonBgColor,
+    borderRadius: 5,
   },
   text: {
     fontFamily: fontFamily,
