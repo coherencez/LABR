@@ -36,29 +36,30 @@ export default class BusinessProfile extends Component {
       <SideMenu menu={menu}>
       <Container style={styles.alignmentFix}>
         <Content>
-          <Grid>
+          <Grid style={{ marginTop: 10}}>
               <Col style={{ width: 115, padding: 5, justifyContent: 'center' }}>
-                <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
-                <List>
-                  <ListItem>
-                      <Text style={{color: fontColorWhite}}>Roofing</Text>
-                  </ListItem>
-                  <ListItem>
-                      <Text style={{color: fontColorWhite}}>Roofing</Text>
-                  </ListItem>
-                  <ListItem>
-                      <Text style={{color: fontColorWhite}}>Roofing</Text>
-                  </ListItem>
+                <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'nevis', color: '#fff'}}>
+                  Info:
+                </Text>
+                <List
+                  style={{ marginTop: 15, height: 100}}
+                  dataArray={this.props.provider.skills}
+                  renderRow={(skill) => (
+                      <ListItem>
+                          <Text style={{color: fontColorWhite}}>{skill}</Text>
+                      </ListItem>
+                  )}>
+
                 </List>
                 <Row >
                 <View style={styles.infoBar}>
                   <View style={{width: 50, height: 60 }} >
                     <Icon name='ios-cash' style={styles.iconStyles}/>
-                    <Text style={{color: fontColorWhite, fontSize: 10}}>25/hr</Text>
+                    <Text style={{color: fontColorWhite, fontSize: 10}}>${this.props.provider.rate}/hr</Text>
                   </View>
                   <View style={{width: 50, height: 60 }} >
                     <Icon name='md-git-network' style={styles.iconStyles}/>
-                    <Text style={{color: fontColorWhite, fontSize: 10}}>35 yrs.</Text>
+                    <Text style={{color: fontColorWhite, fontSize: 10}}>{this.props.provider.experience} yrs.</Text>
                   </View>
                   <View style={{width: 50, height: 60, right: 77, top: 10 }} >
                     <Text>{'\n'}</Text>
@@ -68,11 +69,12 @@ export default class BusinessProfile extends Component {
                 </View>
                 </Row>
               </Col>
-              <Col style={{ width: 200, padding: 5 }}>
+              <Col style={{ width: 200, padding: 5, flex:1, justifyContent: 'center' }}>
+                <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'nevis', color: '#fff'}}>{this.props.provider.name}</Text>
                 <Text style={styles.helperText}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  {this.props.provider.bio}
                 </Text>
-
+                <Thumbnail square size={150} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
               </Col>
           </Grid>
         </Content>

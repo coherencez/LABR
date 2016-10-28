@@ -121,9 +121,9 @@ export default class SideNav extends Component {
   handleBusinessPress() {
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
-    .then(({ isProvider }) => {
-      if(isProvider) {
-        Actions.businessprofile()
+    .then((user) => {
+      if(user.isProvider) {
+        Actions.businessprofile({type: 'push', provider: user.provider})
       } else {
         Actions.providersignup()
       }

@@ -59,7 +59,7 @@ app.post('/labr/api/login', ({ body }, res, err) => {
       return res.json({ pwMatch: false,  msg: 'Bad email and/or password. Please try again' })
     })
     .then(([user, provider]) => {
-      const userObj = Object.assign({}, user, {providerId: provider._id})
+      const userObj = Object.assign({}, user, { provider })
       return res.json({ pwMatch: true, user: userObj })
     })
     .catch(console.error)

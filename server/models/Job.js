@@ -11,10 +11,22 @@ const jobSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  startDate: {
+  category: {
+    type: String,
+    required: true,
+  },
+  thumbnail: {
+    type: String,
+    required: true,
+    default: ''
+  }
+  createdDate: {
     type: Date,
     required: true,
     default: Date.now,
+  },
+  startDate: {
+    type: Date,
   },
   endDate: {
     type: Date,
