@@ -22,7 +22,7 @@ export default class ProviderCard extends Component {
         <CardItem cardBody button onPress={handlePress()} style={{alignItems: 'center', justifyContent:'center'}}>
           <Thumbnail source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} size={100} square/>
         </CardItem>
-        <CardItem button onPress={handlePress()}>
+        <CardItem button onPress={handlePress()} style={{ borderRadius: 5}}>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start' }}>
             <Icon name='md-star' style={{color: '#6103B3', marginLeft: 7, marginRight: 7}}/>
             <Badge info style={styles.spacing}>{provider.experience}</Badge>

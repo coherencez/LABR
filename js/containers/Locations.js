@@ -31,7 +31,7 @@ export default class Locations extends Component {
             <CardItem style={styles.cardTitle}>
               <Text style={styles.text}>Nashville</Text>
             </CardItem>
-            <CardItem cardBody button onPress={this.handlePress}>
+            <CardItem cardBody button onPress={this.handlePress} style={{ borderRadius: 5}}>
               <Image source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} />
               <Button transparent textStyle={{color: '#87838B'}} >
                   389 Providers Online
@@ -42,7 +42,7 @@ export default class Locations extends Component {
             <CardItem style={styles.cardTitle}>
               <Text style={styles.text}>Las Vegas</Text>
             </CardItem>
-            <CardItem cardBody button onPress={this.handlePress}>
+            <CardItem cardBody button onPress={this.handlePress} style={{ borderRadius: 5}}>
               <Image source={{uri: 'https://www.firstoptiononline.com/wp-content/uploads/2014/10/las-vegas-skyline.jpg'}} />
               <Button transparent textStyle={{color: '#87838B'}}>
                   452 Providers Online
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 10,
-    backgroundColor: '#fff',
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowOffset: {
