@@ -54,11 +54,11 @@ export default class BusinessProfile extends Component {
                 <View style={styles.infoBar}>
                   <View style={{width: 50, height: 60 }} >
                     <Icon name='ios-cash' style={styles.iconStyles}/>
-                    <Text style={{color: fontColorWhite, fontSize: 10}}>25/hr</Text>
+                    <Text style={{color: fontColorWhite, fontSize: 10}}>${this.props.provider.rate}/hr</Text>
                   </View>
                   <View style={{width: 50, height: 60 }} >
                     <Icon name='md-git-network' style={styles.iconStyles}/>
-                    <Text style={{color: fontColorWhite, fontSize: 10}}>35 yrs.</Text>
+                    <Text style={{color: fontColorWhite, fontSize: 10}}>{this.props.provider.experience} yrs.</Text>
                   </View>
                   <View style={{width: 50, height: 60, right: 77, top: 10 }} >
                     <Text>{'\n'}</Text>
