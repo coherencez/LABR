@@ -36,10 +36,13 @@ export default class BusinessProfile extends Component {
       <SideMenu menu={menu}>
       <Container style={styles.alignmentFix}>
         <Content>
-          <Grid>
+          <Grid style={{ marginTop: 10}}>
               <Col style={{ width: 115, padding: 5, justifyContent: 'center' }}>
-                <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
+                <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'nevis', color: '#fff'}}>
+                  Info:
+                </Text>
                 <List
+                  style={{ marginTop: 15, height: 100}}
                   dataArray={this.props.provider.skills}
                   renderRow={(skill) => (
                       <ListItem>
@@ -66,11 +69,12 @@ export default class BusinessProfile extends Component {
                 </View>
                 </Row>
               </Col>
-              <Col style={{ width: 200, padding: 5 }}>
+              <Col style={{ width: 200, padding: 5, flex:1, justifyContent: 'center' }}>
+                <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'nevis', color: '#fff'}}>{this.props.provider.name}</Text>
                 <Text style={styles.helperText}>
                   {this.props.provider.bio}
                 </Text>
-
+                <Thumbnail square size={150} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
               </Col>
           </Grid>
         </Content>
