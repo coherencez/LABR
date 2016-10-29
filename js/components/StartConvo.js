@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
+import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button } from 'native-base';
 
 import { buttonBgColor, endpointIP } from '../css/variables'
@@ -67,7 +68,18 @@ export default class StartConvo extends Component {
     fetch(API_ENDPOINT, requestObj)
       .then(res => res.json())
       .then(data => {
-        console.log('DATA CONVO', data)
+        if(data.status === 200) {
+          this.setState({
+            errorMessage: 'Thank you, your job request has been submitted! You will be redirected shortly'
+          })
+          setTimeout(() => {
+            Actions.app({type: 'reset'})
+          }, 3000)
+        } else {
+          this.setState({
+            errorMessage: data.msg
+          })
+        }
       })
       .catch(console.error)
 

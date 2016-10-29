@@ -22,8 +22,8 @@ const jobSchema = mongoose.Schema({
   thumbnail: {
     type: String,
     required: true,
-    default: ''
-  }
+    default: 'blank'
+  },
   createdDate: {
     type: Date,
     required: true,
