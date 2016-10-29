@@ -68,17 +68,17 @@ app.post('/labr/api/login', ({ body }, res, err) => {
 
 app.post('/labr/api/newprovider', ({ body },res) => {
   Provider.create(body)
-    .then(data => {
+    .then(provider => {
       return Promise.all([
         User.findOneAndUpdate(
           {_id: body.userId},
           {isProvider: true}
         ),
-        Promise.resolve(data)
+        Promise.resolve(provider)
       ])
     })
-    .then(([updatedUser, data]) => {
-      res.json({isProvider: true, providerId: data._id})
+    .then(([updatedUser, provider]) => {
+      res.json({isProvider: true, provider})
     })
     .catch(console.error)
 })
@@ -100,6 +100,20 @@ app.post('/labr/api/newjob', ({ body }, res) => {
       } else {
         return res.json({ status: 404, msg: 'Oh no! An Error occured'})
       }
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/jobs', ({ body },res) => {
+  Promise.resolve(body)
+    .then(({ isProvider, id }) => {
+      if(isProvider) {
+        return Job.find({ providerId: id })
+      }
+      return Job.find({ userId: id })
+    })
+    .then(jobs => {
+      res.json({ jobs })
     })
     .catch(console.error)
 })

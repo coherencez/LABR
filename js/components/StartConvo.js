@@ -10,6 +10,7 @@ export default class StartConvo extends Component {
     this.state = {
       jobDescription: '',
       errorMessage: null,
+      successMessage: null,
     }
   }
   render() {
@@ -21,7 +22,13 @@ export default class StartConvo extends Component {
             if(this.state.errorMessage) {
               return (
                 <View>
-                  <Text style={styles.error}>{this.state.errorMessage}</Text>
+                    <Text style={styles.error}>{this.state.errorMessage}</Text>
+                </View>
+              )
+            } else if (this.state.successMessage) {
+              return (
+                <View>
+                    <Text style={styles.success}>{this.state.successMessage}</Text>
                 </View>
               )
             }
@@ -70,7 +77,7 @@ export default class StartConvo extends Component {
       .then(data => {
         if(data.status === 200) {
           this.setState({
-            errorMessage: 'Thank you, your job request has been submitted! You will be redirected shortly'
+            successMessage: 'Thank you, your job request has been submitted! You will be redirected shortly'
           })
           setTimeout(() => {
             Actions.app({type: 'reset'})
@@ -108,6 +115,12 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
+    fontSize: 15,
+    fontWeight: '700',
+    margin: 10,
+  },
+  success: {
+    color: 'green',
     fontSize: 15,
     fontWeight: '700',
     margin: 10,
