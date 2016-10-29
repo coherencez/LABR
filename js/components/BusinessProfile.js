@@ -101,7 +101,7 @@ export default class BusinessProfile extends Component {
               )
             } else {
               return (
-                <Button block style={styles.button} onPress={() => this.handleNewJobPress(this.props.provider)}>
+                <Button block style={styles.button} onPress={() => this.handleNewJobPress(this.props.provider, this.props.category)}>
                   Hire Me!
                 </Button>
               )
@@ -114,12 +114,12 @@ export default class BusinessProfile extends Component {
     )
   }
 
-  handleNewJobPress(provider) {
+  handleNewJobPress(provider, category) {
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
     .then((user) => {
       if(user) {
-        Actions.startconvo({type: 'push', provider, user})
+        Actions.startconvo({type: 'push', provider, user, category})
       } else {
         this.setState({
           errorMessage: 'Please sign up or login to access that feature!'

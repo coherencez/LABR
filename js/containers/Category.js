@@ -38,13 +38,13 @@ export default class Category extends Component {
     );
   }
 
-  handleCatgoryPress(data) {
-     Actions.providers({type: 'push'})
+  handleCatgoryPress(category) {
+     Actions.providers({type: 'push', category})
   }
 
   renderCategories() {
     return this.state.categories.map((category, i) =>
-      <ListItem button key={i} name={category} onPress={() => this.handleCatgoryPress()}>
+      <ListItem button key={i} name={category} onPress={() => this.handleCatgoryPress(category)}>
           <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
           <Text style={styles.font}>{category}</Text>
       </ListItem>
