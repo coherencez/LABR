@@ -5,15 +5,20 @@ import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Inpu
 import { buttonBgColor } from '../css/variables'
 export default class StartConvo extends Component {
   render() {
+    const { props } = this
     return (
       <Container style={styles.alignmentFix}>
         <Content>
-          <Text>To</Text>
-          <Text>From</Text>
+          <Text>To: {props.provider.name}</Text>
+          <Text>From: {props.user.firstName} {props.user.lastName}</Text>
             <InputGroup >
-              <Input placeholder='MESSAGE' multiline={true} style={{ height: 200, marginTop: 15 }}/>
+              <Input
+                placeholder='A SHORT DESCRIPTION OF THE WORK YOU NEED'
+                multiline={true}
+                autoCapitalize='none'
+                style={{ height: 200, marginTop: 15 }}/>
             </InputGroup>
-          <Button block style={styles.button}>Send Message</Button>
+          <Button block style={styles.button}>Send Request For Work</Button>
         </Content>
       </Container>
     )
