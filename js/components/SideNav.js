@@ -50,7 +50,7 @@ export default class SideNav extends Component {
                         <Text>Messages</Text>
                         <Badge>3</Badge>
                     </ListItem>
-                    <ListItem iconLeft button onPress={this.handleSettingsPress}>
+                    <ListItem iconLeft button onPress={this.handleJobsPress}>
                         <Icon name='ios-contact' />
                         <Text>Jobs</Text>
                     </ListItem>
@@ -139,6 +139,9 @@ export default class SideNav extends Component {
   }
   handleSettingsPress() {
     console.log('SETTINGS PRESSED')
+  }
+  handleJobsPress() {
+    Actions.jobs()
   }
   handleHomePress() {
     Actions.app({type: 'reset'})
