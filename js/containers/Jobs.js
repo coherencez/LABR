@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Image } from 'react-native';
+import { AppRegistry, StyleSheet, View, Image, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Icon } from 'native-base';
 
@@ -14,19 +14,47 @@ import {
   fontFamily
 } from '../css/variables'
 
-export default class Locations extends Component {
+export default class Jobs extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      locations: ['Nashville', 'Las Vegas']
+      jobs: [],
+      statusMessage: null,
     }
+
   }
+
+  componentWillMount() {
+    AsyncStorage.getItem('user')
+    .then(res => JSON.parse(res))
+    .then((user) => {
+      if(user.isProvider) {
+
+      } else if (user) {
+
+      }
+      this.setState({
+        statusMessage: `Uh oh! We didn't find any jobs for you. Please login or signup to get started!`
+      })
+    })
+    .catch(console.error)
+  }
+
   render() {
     const menu = <SideNav />
     return (
       <SideMenu menu={menu}>
       <Container style={styles.alignmentFix, styles.container}>
         <Content>
+          {(() => {
+            if(this.state.statusMessage) {
+              return (
+                <View>
+                  <Text style={styles.error}>{this.state.statusMessage}</Text>
+                </View>
+              )
+            }
+          })()}
           <Card style={styles.card}>
             <CardItem style={styles.cardTitle}>
               <Text style={styles.text}>Home Improvement</Text>
@@ -86,5 +114,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily,
     color: fontColorWhite,
+  },
+  error: {
+    color: 'red',
+    fontSize: 15,
+    fontWeight: '700',
+    margin: 10,
   },
 });
