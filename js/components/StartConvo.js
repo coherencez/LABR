@@ -2,13 +2,29 @@ import React, { Component } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 import { Container, Content, List, ListItem, Text, Icon, Badge, InputGroup, Input, Button } from 'native-base';
 
-import { buttonBgColor } from '../css/variables'
+import { buttonBgColor, endpointIP } from '../css/variables'
 export default class StartConvo extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      jobDescription: '',
+      errorMessage: null,
+    }
+  }
   render() {
     const { props } = this
     return (
       <Container style={styles.alignmentFix}>
         <Content>
+          {(() => {
+            if(this.state.errorMessage) {
+              return (
+                <View>
+                  <Text style={styles.error}>{this.state.errorMessage}</Text>
+                </View>
+              )
+            }
+          })()}
           <Text>To: {props.provider.name}</Text>
           <Text>From: {props.user.firstName} {props.user.lastName}</Text>
           <Text>Category: {props.category}</Text>
@@ -17,15 +33,22 @@ export default class StartConvo extends Component {
                 placeholder='A SHORT DESCRIPTION OF THE WORK YOU NEED'
                 multiline={true}
                 autoCapitalize='none'
-                style={{ height: 200, marginTop: 15 }}/>
+                style={{ height: 200, marginTop: 15 }}
+                onChangeText={(txt) => this.handleDescriptionChange(txt)}/>
             </InputGroup>
-          <Button block style={styles.button} onPress={() => this.handleJobRequestPress(props.user, props.provider)}>Send Request For Work</Button>
+          <Button block style={styles.button} onPress={() => this.handleJobRequestPress(props.user, props.provider, props.category)}>Send Request For Work</Button>
         </Content>
       </Container>
     )
   }
 
-  handleJobRequestPress(user, prov) {
+  handleDescriptionChange(txt) {
+    this.setState({
+      jobDescription: txt
+    })
+  }
+
+  handleJobRequestPress(user, prov, category) {
     const API_ENDPOINT = `${endpointIP}/labr/api/newjob`
     const requestObj = {
       method: 'POST',
@@ -34,12 +57,19 @@ export default class StartConvo extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
+        userId: user.id,
+        providerId: prov._id,
+        category: category,
+        description: this.state.jobDescription
       })
     }
 
     fetch(API_ENDPOINT, requestObj)
+      .then(res => res.json())
+      .then(data => {
+        console.log('DATA CONVO', data)
+      })
+      .catch(console.error)
 
   }
 }
@@ -63,5 +93,11 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     backgroundColor: 'white',
     borderWidth: 1
+  },
+  error: {
+    color: 'red',
+    fontSize: 15,
+    fontWeight: '700',
+    margin: 10,
   },
 });

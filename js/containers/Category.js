@@ -39,7 +39,7 @@ export default class Category extends Component {
   }
 
   handleCatgoryPress(category) {
-     Actions.providers({type: 'push', category})
+    Actions.providers({type: 'push', category})
   }
 
   renderCategories() {
