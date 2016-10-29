@@ -68,17 +68,17 @@ app.post('/labr/api/login', ({ body }, res, err) => {
 
 app.post('/labr/api/newprovider', ({ body },res) => {
   Provider.create(body)
-    .then(data => {
+    .then(provider => {
       return Promise.all([
         User.findOneAndUpdate(
           {_id: body.userId},
           {isProvider: true}
         ),
-        Promise.resolve(data)
+        Promise.resolve(provider)
       ])
     })
-    .then(([updatedUser, data]) => {
-      res.json({isProvider: true, providerId: data._id})
+    .then(([updatedUser, provider]) => {
+      res.json({isProvider: true, provider})
     })
     .catch(console.error)
 })
