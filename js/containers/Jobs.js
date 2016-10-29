@@ -11,7 +11,8 @@ import {
   bgColor,
   fontColorWhite,
   buttonBgColor,
-  fontFamily
+  fontFamily,
+  endpointIP
 } from '../css/variables'
 
 export default class Jobs extends Component {
@@ -27,14 +28,42 @@ export default class Jobs extends Component {
   componentWillMount() {
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
-    .then((user) => {
-      if(user.isProvider) {
-
-      } else if (user) {
-
+    .then(user => {
+      const isProvider = user.isProvider
+      let id = null
+      if(user) {
+        switch(user.isProvider) {
+          case true:
+            id = user.provider._id
+            break
+          case false:
+            id = user.id
+            break
+        }
+        const API_ENDPOINT = `${endpointIP}/labr/api/jobs`
+        const requestObj = {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id,
+            isProvider
+          })
+        }
+        return fetch(API_ENDPOINT, requestObj)
+      } else {
+        this.setState({
+          statusMessage: `Uh oh! We didn't find any jobs for you. Please login or signup to get started!`
+        })
       }
+
+    })
+    .then(res => res.json())
+    .then(data => {
       this.setState({
-        statusMessage: `Uh oh! We didn't find any jobs for you. Please login or signup to get started!`
+        jobs: this.state.jobs.concat(data.jobs)
       })
     })
     .catch(console.error)
