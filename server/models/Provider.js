@@ -43,6 +43,11 @@ const providerSchema = mongoose.Schema({
     required: true,
     default: false,
   },
+  profilePic: {
+    type: String,
+    required: true,
+    default: '',
+  },
 })
 
 

@@ -68,14 +68,14 @@ export default class Providers extends Component {
     );
   }
 
-  handleProviderPress(provider) {
-    Actions.businessprofile({type: 'push', provider })
+  handleProviderPress(provider, category) {
+    Actions.businessprofile({type: 'push', provider, category })
   }
 
   renderProviders() {
     // main array of card elements
     const componentArray = this.state.providers.map((prov, i) => (
-        <ProviderCard provider={prov} key={i} handlePress={(i) => this.handleProviderPress.bind(this, prov)}/>
+        <ProviderCard provider={prov} key={i} handlePress={(i) => this.handleProviderPress.bind(this, prov, this.props.category)}/>
       ))
     // to render cards in 2 separate columns
     const arr1 = componentArray.filter((v,i) => {

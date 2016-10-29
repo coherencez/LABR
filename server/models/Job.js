@@ -15,11 +15,15 @@ const jobSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   thumbnail: {
     type: String,
     required: true,
-    default: ''
-  }
+    default: 'blank'
+  },
   createdDate: {
     type: Date,
     required: true,

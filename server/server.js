@@ -7,6 +7,7 @@ const        app = require('express')()
 // database models
   ,         User = require('./models/User')
   ,     Provider = require('./models/Provider')
+  ,          Job = require('./models/Job')
 
 // only send or receive json
 app.use(json())
@@ -89,6 +90,18 @@ app.get('/labr/api/getProviders', (req,res) => {
     res.json({ providers })
   })
   .catch(console.error)
+})
+
+app.post('/labr/api/newjob', ({ body }, res) => {
+  Job.create(body)
+    .then(jobObj => {
+      if(jobObj) {
+        return res.json({ status: 200 })
+      } else {
+        return res.json({ status: 404, msg: 'Oh no! An Error occured'})
+      }
+    })
+    .catch(console.error)
 })
 
 // connect to mongo before loading server

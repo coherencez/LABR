@@ -12,7 +12,8 @@ export default class BusinessProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isProvider: false
+      isProvider: false,
+      errorMessage: null,
     }
   }
 
@@ -36,6 +37,15 @@ export default class BusinessProfile extends Component {
       <SideMenu menu={menu}>
       <Container style={styles.alignmentFix}>
         <Content>
+          {(() => {
+            if(this.state.errorMessage) {
+              return (
+                <View>
+                  <Text style={styles.error}>{this.state.errorMessage}</Text>
+                </View>
+              )
+            }
+          })()}
           <Grid style={{ marginTop: 10}}>
               <Col style={{ width: 115, padding: 5, justifyContent: 'center' }}>
                 <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'nevis', color: '#fff'}}>
@@ -91,8 +101,8 @@ export default class BusinessProfile extends Component {
               )
             } else {
               return (
-                <Button block style={styles.button} onPress={Actions.startconvo}>
-                  Start A Conversation
+                <Button block style={styles.button} onPress={() => this.handleNewJobPress(this.props.provider, this.props.category)}>
+                  Hire Me!
                 </Button>
               )
             }
@@ -102,6 +112,22 @@ export default class BusinessProfile extends Component {
       </Container>
       </SideMenu>
     )
+  }
+
+  handleNewJobPress(provider, category) {
+    AsyncStorage.getItem('user')
+    .then(res => JSON.parse(res))
+    .then((user) => {
+      if(user) {
+        Actions.startconvo({type: 'push', provider, user, category})
+      } else {
+        this.setState({
+          errorMessage: 'Please sign up or login to access that feature!'
+        })
+      }
+      console.log('HELLO', user)
+    })
+    .catch(console.error)
   }
 }
 
@@ -153,5 +179,11 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0
     },
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: 15,
+    fontWeight: '700',
+    margin: 10,
+  },
 });
