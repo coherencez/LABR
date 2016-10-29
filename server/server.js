@@ -91,6 +91,11 @@ app.get('/labr/api/getProviders', (req,res) => {
   .catch(console.error)
 })
 
+app.post('/labr/api/newjob', (req, res) => {
+  console.log(req.body)
+  res.json({ status: 200 })
+})
+
 // connect to mongo before loading server
 connect()
   .then(() =>
