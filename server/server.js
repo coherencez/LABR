@@ -104,6 +104,20 @@ app.post('/labr/api/newjob', ({ body }, res) => {
     .catch(console.error)
 })
 
+app.post('/labr/api/jobs', ({ body },res) => {
+  Promise.resolve(body)
+    .then(({ isProvider, id }) => {
+      if(isProvider) {
+        return Job.find({ providerId: id })
+      }
+      return Job.find({ userId: id })
+    })
+    .then(jobs => {
+      res.json({ jobs })
+    })
+    .catch(console.error)
+})
+
 // connect to mongo before loading server
 connect()
   .then(() =>
