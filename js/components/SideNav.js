@@ -28,6 +28,10 @@ export default class SideNav extends Component {
       <Container>
         <Content>
             <List style={styles.alignmentFix}>
+              <ListItem iconLeft button onPress={this.handleHomePress}>
+                  <Icon name='ios-home' />
+                  <Text>Home</Text>
+              </ListItem>
               {(() => {
                 if(this.state.user) {
                   return (
@@ -41,41 +45,41 @@ export default class SideNav extends Component {
                         <Text>Business Account</Text>
                         <Icon name='ios-mic-outline' style={styles.hidden}/>
                     </ListItem>
-                    <ListItem iconLeft button onPress={this.handleHistoryPress}>
-                        <Icon name='md-archive' />
-                        <Text>History</Text>
-                    </ListItem>
                     <ListItem iconLeft button onPress={this.handleMessagesPress}>
                         <Icon name='md-text' />
                         <Text>Messages</Text>
                         <Badge>3</Badge>
                     </ListItem>
                     <ListItem iconLeft button onPress={this.handleSettingsPress}>
+                        <Icon name='ios-contact' />
+                        <Text>Jobs</Text>
+                    </ListItem>
+                    <ListItem iconLeft button onPress={this.handleHistoryPress}>
+                        <Icon name='md-archive' />
+                        <Text>History</Text>
+                    </ListItem>
+                    <ListItem iconLeft button onPress={this.handleSettingsPress}>
                         <Icon name='md-aperture' />
                         <Text>Settings</Text>
                     </ListItem>
+
                     </View>
                   )
                 } else {
                   return (
                     <View>
-                    <ListItem iconLeft button onPress={this.handleSignUpPress}>
-                      <Icon name='md-contact' />
-                      <Text>Sign Up</Text>
-                      <Text note>Note here</Text>
-                    </ListItem>
                     <ListItem iconLeft button onPress={this.handleLoginPress}>
                       <Icon name='md-globe' />
                       <Text>Login</Text>
+                    </ListItem>
+                    <ListItem iconLeft button onPress={this.handleSignUpPress}>
+                      <Icon name='md-contact' />
+                      <Text>Sign Up</Text>
                     </ListItem>
                     </View>
                   )
                 }
               })()}
-              <ListItem iconLeft button onPress={this.handleHomePress}>
-                  <Icon name='ios-home' />
-                  <Text>Home</Text>
-              </ListItem>
             </List>
         </Content>
         {(() => {
