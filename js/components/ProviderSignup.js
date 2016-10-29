@@ -10,7 +10,7 @@ export default class ProviderSignup extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        selectedItem: undefined,
+        selectedItem: null,
         selected1: 'car',
         results: {
           categories: [],
@@ -23,7 +23,6 @@ export default class ProviderSignup extends Component {
     }
 
   render() {
-    console.log(this.state)
     return (
       <Container style={styles.container}>
         <Content style={{ width: 300 }}>
@@ -78,10 +77,10 @@ export default class ProviderSignup extends Component {
                 onChangeText={(txt) => this.onBioChange(txt)}
                 autoCapitalize='none'/>
           </InputGroup>
-          <View>
-            <Text>Selected Categories:</Text>
+          <Text style={{ marginTop: 5 }}>Selected Categories:</Text>
+          <View style={{ flexDirection: 'row', flex: 0, alignItems: 'flex-start', justifyContent: 'center', flexWrap: 'wrap'}}>
             {this.state.results.categories.map((skill, i) =>
-              <Button key={i} style={{ height: 35 }} onPress={() => this.removeCategory(i)}> {skill} X</Button>
+              <Button key={i} style={{ height: 30, margin: 5, marginTop: 5 }} onPress={() => this.removeCategory(i)}> {skill} X</Button>
             )}
           </View>
         </Content>

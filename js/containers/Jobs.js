@@ -37,7 +37,7 @@ export default class Locations extends Component {
                   389 Providers Online
               </Button>
             </CardItem>
-            <CardItem cardBody button onPress={this.handlePress} style={{ borderRadius: 5}}>
+            <CardItem cardBody button onPress={this.handlePress} style={{ borderRadius: 5, flexDirection: 'row', flex: 1}}>
               <Button textStyle={{color: '#87838B'}} >
                   389
               </Button>
