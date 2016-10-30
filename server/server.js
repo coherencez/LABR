@@ -3,6 +3,7 @@
 const        app = require('express')()
   ,     { json } = require('body-parser')
   ,  { connect } = require('./db/database')
+  ,            _ = require('lodash')
   ,         PORT = process.env.PORT || 3000
 // database models
   ,         User = require('./models/User')
