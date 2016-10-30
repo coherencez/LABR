@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Image, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux'
-import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Icon } from 'native-base';
+import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Icon, Footer } from 'native-base';
 
 import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
@@ -22,6 +22,7 @@ export default class Jobs extends Component {
     this.state = {
       jobs: [],
       statusMessage: null,
+      isProvider: null,
     }
 
   }
@@ -53,6 +54,9 @@ export default class Jobs extends Component {
             isProvider
           })
         }
+        this.setState({
+          isProvider: user.isProvider
+        })
         return fetch(API_ENDPOINT, requestObj)
       } else {
         this.setState({
@@ -76,17 +80,10 @@ export default class Jobs extends Component {
       <SideMenu menu={menu}>
       <Container style={styles.alignmentFix, styles.container}>
         <Content>
-          {(() => {
-            if(this.state.statusMessage) {
-              return (
-                <View>
-                  <Text style={styles.error}>{this.state.statusMessage}</Text>
-                </View>
-              )
-            }
-          })()}
+          {(this.state.statusMessage) ? this.renderMessage() : null}
           {(this.state.jobs.length >= 1) ? this.renderJobs() : null}
         </Content>
+        {(this.state.isProvider) ? this.renderIsProviderJobsButton() : null}
       </Container>
       </SideMenu>
     );
@@ -95,6 +92,22 @@ export default class Jobs extends Component {
   renderJobs() {
     return this.state.jobs.map((job, i) =>
       <Job job={job} key={i}/>
+    )
+  }
+  renderMessage() {
+    return (
+      <View>
+        <Text style={styles.error}>{this.state.statusMessage}</Text>
+      </View>
+    )
+  }
+  renderIsProviderJobsButton() {
+    return (
+      <Footer>
+        <Button block style={{backgroundColor: buttonBgColor}} >
+            See My Providers
+        </Button>
+      </Footer>
     )
   }
 }

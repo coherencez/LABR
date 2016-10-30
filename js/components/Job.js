@@ -16,45 +16,27 @@ import {
 } from '../css/variables'
 
 export default class Job extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isProvider: false
-    }
-  }
-
-  componentWillMount() {
-    AsyncStorage.getItem('user')
-    .then(res => JSON.parse(res))
-    .then(user => {
-      if(user) {
-        this.setState({
-          isProvider: user.isProvider
-        })
-      }
-    })
-    .catch(console.error)
-  }
 
   render() {
     console.log('JOB PROPS',this.props.job)
+    const { props : { job } } = this
     return (
       <Card style={styles.card}>
         <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row'}}>
           <View style={{ padding: 5 }}>
             <Thumbnail source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} size={75}/>
-            <View style={{marginTop: 10}}>
-              <Text note style={{color: '#87838B', fontSize: 10}}>Date Created</Text>
+            <View style={{marginTop: 10, flexDirection: 'column', flexWrap: 'wrap'}}>
+              <Text note style={{color: '#87838B', fontSize: 10}}>{job.createdDate.split(' ').splice(0,4).join(' ')}</Text>
               <Text note style={{color: '#87838B', fontSize: 10}}>Time Start</Text>
               <Text note style={{color: '#87838B', fontSize: 10}}>Time End</Text>
             </View>
           </View>
           <View style={{flex: 1, flexDirection:'column'}}>
             <CardItem style={styles.cardTitle}>
-              <Text style={styles.text}>Home Improvement</Text>
+              <Text style={styles.text}>{job.category}</Text>
             </CardItem>
             <Text>Description:</Text>
-            <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+            <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
             <Button transparent textStyle={{color: '#87838B'}} >
                 Send Message
             </Button>
