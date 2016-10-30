@@ -7,17 +7,19 @@ import {
 import { Scene, Router, Route, Actions } from 'react-native-router-flux'
 import { Button, Icon, Text } from 'native-base'
 import { navColor } from './js/css/variables'
-// Components
+// Components:
+  // smart
 import App from './js/containers/App'
 import Locations from './js/containers/Locations'
 import Category from './js/containers/Category'
 import Providers from './js/containers/Providers'
 import Jobs from './js/containers/Jobs'
+import BusinessProfile from './js/containers/BusinessProfile'
+  // dumb
 import SignUp from './js/components/SignUp'
 import Login from './js/components/Login'
 import StartConvo from './js/components/StartConvo'
 import ProviderSignup from './js/components/ProviderSignup'
-import BusinessProfile from './js/components/BusinessProfile'
 
 
 export default class LABR extends Component {
