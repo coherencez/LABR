@@ -102,8 +102,10 @@ app.post('/labr/api/newjob', ({ body }, res) => {
     })
     .then(([jobReqObj, providerContact]) => {
       // password omit still not working ????
+      // not only is this not working, it is causing a buffer overflow
+      // RangeError to happen
+      // const newProvContactObj = _.omit(providerContact, ['password'])
       const         newJobObj = _.omit(jobReqObj, ['provider'])
-      // const newProvContactObj = _.omit(providerContact, ['password', '_id'])
       const      newJobReqObj = Object.assign({}, newJobObj, {providerContact})
       return Job.create(newJobReqObj)
     })

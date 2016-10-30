@@ -16,6 +16,25 @@ import {
 } from '../css/variables'
 
 export default class Job extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isProvider: false
+    }
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('user')
+    .then(res => JSON.parse(res))
+    .then(user => {
+      if(user) {
+        this.setState({
+          isProvider: user.isProvider
+        })
+      }
+    })
+    .catch(console.error)
+  }
 
   render() {
     console.log('JOB PROPS',this.props.job)
