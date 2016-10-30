@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux'
 import { Container, Content, List, ListItem, Text, Icon, Badge, Footer, Header } from 'native-base';
 import CheckBox from 'react-native-checkbox';
 
-
+import { endpointIP } from '../css/variables'
 export default class SideNav extends Component {
   constructor(props) {
     super(props)
@@ -154,6 +154,30 @@ export default class SideNav extends Component {
       checked: !!checked,
       statusMessage: message,
       statusColor: color
+    })
+
+    AsyncStorage.getItem('user')
+    .then(res => JSON.parse(res))
+    .then(({ provider }) => {
+      const API_ENDPOINT = `${endpointIP}/labr/api/available`
+      const requestObj = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          available: checked,
+          _id: provider._id
+        })
+      }
+
+      fetch(API_ENDPOINT, requestObj)
+        .then(res => res.json())
+        .then(data => {
+          return
+        })
+        .catch(console.error)
     })
   }
 }

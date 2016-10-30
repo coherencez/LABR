@@ -84,6 +84,21 @@ app.post('/labr/api/newprovider', ({ body },res) => {
     .catch(console.error)
 })
 
+app.post('/labr/api/available', ({ body : { _id, available }},res) => {
+  Provider.findOneAndUpdate(
+    {_id},
+    {available},
+    {new: true}
+  )
+  .then(provObj => {
+    if(provObj) {
+      console.log(provObj)
+      return res.json({ status: 200 })
+    }
+  })
+  .catch(console.error)
+})
+
 app.get('/labr/api/getProviders', (req,res) => {
   Provider.find()
   .then(providers => {
