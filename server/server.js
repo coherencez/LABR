@@ -86,20 +86,31 @@ app.post('/labr/api/newprovider', ({ body },res) => {
 app.get('/labr/api/getProviders', (req,res) => {
   Provider.find()
   .then(providers => {
-    console.log('PROVIDERS', providers)
     res.json({ providers })
   })
   .catch(console.error)
 })
 
 app.post('/labr/api/newjob', ({ body }, res) => {
-  Job.create(body)
+  Promise.resolve(body)
+    .then(jobReqObj => {
+      return Promise.all([
+        Promise.resolve(jobReqObj),
+        User.findOne({_id: jobReqObj.provider.userId})
+      ])
+    })
+    .then(([jobReqObj, providerContact]) => {
+      // password omit still not working ????
+      const         newJobObj = _.omit(jobReqObj, ['provider'])
+      // const newProvContactObj = _.omit(providerContact, ['password', '_id'])
+      const      newJobReqObj = Object.assign({}, newJobObj, {providerContact})
+      return Job.create(newJobReqObj)
+    })
     .then(jobObj => {
       if(jobObj) {
         return res.json({ status: 200 })
-      } else {
-        return res.json({ status: 404, msg: 'Oh no! An Error occured'})
       }
+      return res.json({ status: 404, msg: 'Oh no! An Error occured'})
     })
     .catch(console.error)
 })

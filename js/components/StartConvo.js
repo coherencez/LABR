@@ -68,7 +68,10 @@ export default class StartConvo extends Component {
         userId: user.id,
         providerId: prov._id,
         category: category,
-        description: this.state.jobDescription
+        description: this.state.jobDescription,
+        userContact: user,
+        provider: prov,
+        createdDate: new Date().toString(),
       })
     }
 
