@@ -85,11 +85,17 @@ export default class Jobs extends Component {
               )
             }
           })()}
-          <Job />
+          {(this.state.jobs.length >= 1) ? this.renderJobs() : null}
         </Content>
       </Container>
       </SideMenu>
     );
+  }
+
+  renderJobs() {
+    return this.state.jobs.map((job, i) =>
+      <Job job={job} key={i}/>
+    )
   }
 }
 

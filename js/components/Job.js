@@ -18,6 +18,7 @@ import {
 export default class Job extends Component {
 
   render() {
+    console.log('JOB PROPS',this.props.job)
     return (
       <Card style={styles.card}>
         <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row'}}>
