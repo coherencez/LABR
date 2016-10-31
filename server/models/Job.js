@@ -25,9 +25,8 @@ const jobSchema = mongoose.Schema({
     default: 'blank'
   },
   createdDate: {
-    type: Date,
+    type: String,
     required: true,
-    default: Date.now,
   },
   startDate: {
     type: Date,
@@ -42,6 +41,14 @@ const jobSchema = mongoose.Schema({
   completed: {
     type: Boolean,
     default: false,
+  },
+  userContact: {
+    type: Object,
+    required: true,
+  },
+  providerContact: {
+    type: Object,
+    required: true,
   }
 })
 

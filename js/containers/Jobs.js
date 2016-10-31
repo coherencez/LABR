@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Image, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux'
-import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Icon } from 'native-base';
+import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Icon, Footer } from 'native-base';
 
 import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
+import Job from '../components/Job'
 
 import {
   navColor,
@@ -21,6 +22,7 @@ export default class Jobs extends Component {
     this.state = {
       jobs: [],
       statusMessage: null,
+      isProvider: null,
     }
 
   }
@@ -52,6 +54,9 @@ export default class Jobs extends Component {
             isProvider
           })
         }
+        this.setState({
+          isProvider: user.isProvider
+        })
         return fetch(API_ENDPOINT, requestObj)
       } else {
         this.setState({
@@ -75,50 +80,35 @@ export default class Jobs extends Component {
       <SideMenu menu={menu}>
       <Container style={styles.alignmentFix, styles.container}>
         <Content>
-          {(() => {
-            if(this.state.statusMessage) {
-              return (
-                <View>
-                  <Text style={styles.error}>{this.state.statusMessage}</Text>
-                </View>
-              )
-            }
-          })()}
-          <Card style={styles.card}>
-            <CardItem style={styles.cardTitle}>
-              <Text style={styles.text}>Home Improvement</Text>
-            </CardItem>
-            <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row'}}>
-              <View style={{ padding: 5 }}>
-                <Thumbnail square source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} size={75}/>
-                <Text note style={{color: '#87838B', fontSize: 10}}>Date Created</Text>
-                <Text note style={{color: '#87838B', fontSize: 10}}>Time Start</Text>
-                <Text note style={{color: '#87838B', fontSize: 10}}>Time End</Text>
-              </View>
-              <View style={{flex: 1, flexDirection:'column'}}>
-                <Text>Description:</Text>
-                <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
-                <Button transparent textStyle={{color: '#87838B'}} >
-                    Send Message
-                </Button>
-              </View>
-            </CardItem>
-            <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row', flex: 1}}>
-              <Button textStyle={{color: '#87838B'}} >
-                  <Icon name='ios-contact'/>
-              </Button>
-              <Button textStyle={{color: '#87838B'}} >
-                  <Icon name='md-close'/>
-              </Button>
-              <Button textStyle={{color: '#87838B'}} >
-                  <Icon name='md-checkbox'/>
-              </Button>
-            </CardItem>
-          </Card>
+          {(this.state.statusMessage) ? this.renderMessage() : null}
+          {(this.state.jobs.length >= 1) ? this.renderJobs() : null}
         </Content>
+        {(this.state.isProvider) ? this.renderIsProviderJobsButton() : null}
       </Container>
       </SideMenu>
     );
+  }
+
+  renderJobs() {
+    return this.state.jobs.map((job, i) =>
+      <Job job={job} isProvider={this.state.isProvider} key={i}/>
+    )
+  }
+  renderMessage() {
+    return (
+      <View>
+        <Text style={styles.error}>{this.state.statusMessage}</Text>
+      </View>
+    )
+  }
+  renderIsProviderJobsButton() {
+    return (
+      <Footer>
+        <Button block style={{backgroundColor: buttonBgColor}} >
+            See My Providers
+        </Button>
+      </Footer>
+    )
   }
 }
 
@@ -139,6 +129,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     backgroundColor: buttonBgColor,
     borderRadius: 5,
+    alignItems: 'center',
   },
   text: {
     fontFamily: fontFamily,
@@ -149,5 +140,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     margin: 10,
+  },
+  button: {
+    height: 35,
+    width: 50,
   },
 });

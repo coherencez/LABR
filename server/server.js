@@ -3,6 +3,7 @@
 const        app = require('express')()
   ,     { json } = require('body-parser')
   ,  { connect } = require('./db/database')
+  ,            _ = require('lodash')
   ,         PORT = process.env.PORT || 3000
 // database models
   ,         User = require('./models/User')
@@ -83,23 +84,51 @@ app.post('/labr/api/newprovider', ({ body },res) => {
     .catch(console.error)
 })
 
+app.post('/labr/api/available', ({ body : { _id, available }},res) => {
+  Provider.findOneAndUpdate(
+    {_id},
+    {available},
+    {new: true}
+  )
+  .then(provObj => {
+    if(provObj) {
+      console.log(provObj)
+      return res.json({ status: 200 })
+    }
+  })
+  .catch(console.error)
+})
+
 app.get('/labr/api/getProviders', (req,res) => {
   Provider.find()
   .then(providers => {
-    console.log('PROVIDERS', providers)
     res.json({ providers })
   })
   .catch(console.error)
 })
 
 app.post('/labr/api/newjob', ({ body }, res) => {
-  Job.create(body)
+  Promise.resolve(body)
+    .then(jobReqObj => {
+      return Promise.all([
+        Promise.resolve(jobReqObj),
+        User.findOne({_id: jobReqObj.provider.userId})
+      ])
+    })
+    .then(([jobReqObj, providerContact]) => {
+      // password omit still not working ????
+      // not only is this not working, it is causing a buffer overflow
+      // RangeError to happen
+      // const newProvContactObj = _.omit(providerContact, ['password'])
+      const         newJobObj = _.omit(jobReqObj, ['provider'])
+      const      newJobReqObj = Object.assign({}, newJobObj, {providerContact})
+      return Job.create(newJobReqObj)
+    })
     .then(jobObj => {
       if(jobObj) {
         return res.json({ status: 200 })
-      } else {
-        return res.json({ status: 404, msg: 'Oh no! An Error occured'})
       }
+      return res.json({ status: 404, msg: 'Oh no! An Error occured'})
     })
     .catch(console.error)
 })

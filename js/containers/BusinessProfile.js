@@ -125,7 +125,6 @@ export default class BusinessProfile extends Component {
           errorMessage: 'Please sign up or login to access that feature!'
         })
       }
-      console.log('HELLO', user)
     })
     .catch(console.error)
   }
