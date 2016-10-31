@@ -91,7 +91,7 @@ export default class Jobs extends Component {
 
   renderJobs() {
     return this.state.jobs.map((job, i) =>
-      <Job job={job} key={i}/>
+      <Job job={job} isProvider={this.state.isProvider} key={i}/>
     )
   }
   renderMessage() {
