@@ -32,10 +32,6 @@ app.post('/labr/api/newuser', ({ body }, res, err) => {
 app.post('/labr/api/login', ({ body }, res, err) => {
   User.findOne({ email: body.email })
     .then(dbUser => {
-      // problem: need to resolve mutiple promises
-      // solution: Promise.all: if user exists, run comparePassword schema method
-      // then pass the user obj and compare results to the next
-      // then block
       if(dbUser) {
         return Promise.all([
           Promise.resolve(dbUser),
@@ -92,7 +88,6 @@ app.post('/labr/api/available', ({ body : { _id, available }},res) => {
   )
   .then(provObj => {
     if(provObj) {
-      console.log(provObj)
       return res.json({ status: 200 })
     }
   })
@@ -101,10 +96,10 @@ app.post('/labr/api/available', ({ body : { _id, available }},res) => {
 
 app.get('/labr/api/getProviders', (req,res) => {
   Provider.find()
-  .then(providers => {
-    res.json({ providers })
-  })
-  .catch(console.error)
+    .then(providers => {
+      res.json({ providers })
+    })
+    .catch(console.error)
 })
 
 app.post('/labr/api/newjob', ({ body }, res) => {
@@ -137,14 +132,28 @@ app.post('/labr/api/jobs', ({ body },res) => {
   Promise.resolve(body)
     .then(({ isProvider, id }) => {
       if(isProvider) {
-        return Job.find({ providerId: id })
+        return Job.find({ providerId: id }).where({ completed: false })
       }
-      return Job.find({ userId: id })
+      return Job.find({ userId: id }).where({ completed: false })
     })
     .then(jobs => {
       res.json({ jobs })
     })
     .catch(console.error)
+})
+
+app.post('/labr/api/acceptjob', ({ body: { _id } },res) => {
+  Job.findOneAndUpdate(
+    {_id},
+    {active: true},
+    {new: true}
+  )
+  .then(data => {
+    console.log('NEW JOB', data)
+    if(data) res.json({ status : 200 })
+    else res.json({ status: 400 })
+  })
+  .catch(console.error)
 })
 
 // connect to mongo before loading server
