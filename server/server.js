@@ -144,16 +144,21 @@ app.post('/labr/api/jobs', ({ body },res) => {
 
 app.post('/labr/api/acceptjob', ({ body: { _id } },res) => {
   Job.findOneAndUpdate(
-    {_id},
-    {active: true},
-    {new: true}
-  )
-  .then(data => {
-    console.log('NEW JOB', data)
-    if(data) res.json({ status : 200 })
-    else res.json({ status: 400 })
-  })
-  .catch(console.error)
+      {_id},
+      {active: true, startDate: new Date().toString()},
+      {new: true}
+    )
+    .then(data => {
+      console.log('NEW JOB', data)
+      if(data) res.json({ status : 200, job: data })
+      else res.json({ status: 400 })
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/canceljob', (req,res) => {
+  console.log(req.body)
+  res.json({ status: 200 })
 })
 
 // connect to mongo before loading server
