@@ -59,11 +59,11 @@ export default class Job extends Component {
     if(isProvider) {
       return (
         <View style={styles.flexRow}>
-          <Button style={styles.decline} textStyle={{ fontSize: 13 }}>
+          <Button style={styles.decline} textStyle={{ fontSize: 13 }} onPress={() => this.handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text>Decline</Text>
           </Button>
-          <Button style={styles.accept} textStyle={{ fontSize: 13 }}>
+          <Button style={styles.accept} textStyle={{ fontSize: 13 }} onPress={() => this.handleAcceptPress()}>
             <Icon name='ios-checkbox' style={{ fontSize: 15}}/>
             <Text>Accept</Text>
           </Button>
@@ -73,7 +73,7 @@ export default class Job extends Component {
       return (
         <View style={styles.flexRow}>
           <Text style={styles.error}>Not Accepted Yet</Text>
-          <Button style={styles.decline} textStyle={{fontSize: 10}}>
+          <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => this.handleCancelPress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text >Cancel</Text>
           </Button>
@@ -96,6 +96,16 @@ export default class Job extends Component {
         </Button>
       </View>
     )
+  }
+
+  handleAcceptPress() {
+    console.log('ACCEPT PRESSED')
+  }
+  handleDeclinePress() {
+    console.log('DECLINE PRESSED')
+  }
+  handleCancelPress() {
+    console.log('CANCEL PRESSED')
   }
 }
 
