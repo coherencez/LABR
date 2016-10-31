@@ -49,13 +49,13 @@ export default class Job extends Component {
           </View>
         </CardItem>
         <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
-          {(job.active) ? this.renderAcceptedButtons() : this.renderNotAcceptedButtons(isProvider)}
+          {(job.active) ? this.renderAcceptedButtons(isProvider, job) : this.renderNotAcceptedButtons(isProvider, job)}
         </CardItem>
       </Card>
     );
   }
 
-  renderNotAcceptedButtons(isProvider) {
+  renderNotAcceptedButtons(isProvider, job) {
     if(isProvider) {
       return (
         <View style={styles.flexRow}>
@@ -63,7 +63,7 @@ export default class Job extends Component {
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text>Decline</Text>
           </Button>
-          <Button style={styles.accept} textStyle={{ fontSize: 13 }} onPress={() => this.handleAcceptPress()}>
+          <Button style={styles.accept} textStyle={{ fontSize: 13 }} onPress={() => this.handleAcceptPress(job._id)}>
             <Icon name='ios-checkbox' style={{ fontSize: 15}}/>
             <Text>Accept</Text>
           </Button>
@@ -82,7 +82,7 @@ export default class Job extends Component {
     }
   }
 
-  renderAcceptedButtons() {
+  renderAcceptedButtons(isProvider, job) {
     return (
       <View style={styles.flexRow}>
         <Button style={styles.button} >
@@ -98,8 +98,25 @@ export default class Job extends Component {
     )
   }
 
-  handleAcceptPress() {
-    console.log('ACCEPT PRESSED')
+  handleAcceptPress(id) {
+    console.log('ACCEPT PRESSED', id)
+    const API_ENDPOINT = `${endpointIP}/labr/api/acceptjob`
+    const requestObj = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        _id: id
+      })
+    }
+    fetch(API_ENDPOINT, requestObj)
+      .then(res => res.json())
+      .then(data => {
+        console.log('FRONT END', data)
+      })
+      .catch(console.error)
   }
   handleDeclinePress() {
     console.log('DECLINE PRESSED')
