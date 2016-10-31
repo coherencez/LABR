@@ -40,7 +40,7 @@ export default class Job extends Component {
               <Text style={styles.text}>{job.category}</Text>
             </CardItem>
             <Text style={{fontSize: 10, fontWeight: '700'}}>Description:</Text>
-            <Content>
+            <Content style={{height: 50}}>
               <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
             </Content>
             <Button transparent textStyle={{color: '#87838B', fontSize: 13}} >
@@ -48,7 +48,7 @@ export default class Job extends Component {
             </Button>
           </View>
         </CardItem>
-        <CardItem cardBody style={{ borderRadius: 5 }}>
+        <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
           {(job.active) ? this.renderAcceptedButtons() : this.renderNotAcceptedButtons(isProvider)}
         </CardItem>
       </Card>
@@ -58,7 +58,7 @@ export default class Job extends Component {
   renderNotAcceptedButtons(isProvider) {
     if(isProvider) {
       return (
-        <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'space-around'}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
           <Button style={styles.decline} >
               <Icon name='md-close'/>
               <Text>Decline</Text>
@@ -70,9 +70,16 @@ export default class Job extends Component {
         </View>
       )
     } else {
+      console.log('ELSE FIRED')
       return (
-        <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'space-around', height: 35}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
           <Text style={styles.error}>Not Accepted Yet</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
+            <Text style={styles.text}>Cancel</Text>
+            <Button style={styles.decline} >
+                <Icon name='md-close' style={{ fontSize: 15}}/>
+            </Button>
+          </View>
         </View>
       )
     }
@@ -115,13 +122,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: fontFamily,
-    color: '#000',
+    color: '#333',
+    fontSize: 10,
+    marginRight: 5,
   },
   error: {
     color: 'red',
     fontSize: 15,
     fontWeight: '700',
-    margin: 10,
   },
   button: {
     height: 35,
@@ -130,9 +138,11 @@ const styles = StyleSheet.create({
   accept: {
     backgroundColor: 'green',
     height: 30,
+    width: 30,
   },
   decline: {
     backgroundColor: 'red',
     height: 30,
+    width: 30,
   },
 });
