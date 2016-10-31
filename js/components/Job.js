@@ -18,11 +18,10 @@ import {
 export default class Job extends Component {
 
   render() {
-    console.log('JOB PROPS',this.props.job)
     const { props : { job } } = this
     return (
       <Card style={styles.card}>
-        <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row'}}>
+        <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row' }}>
           <View style={{ padding: 5 }}>
             <Thumbnail source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} size={75}/>
             <View style={{marginTop: 10, flexDirection: 'column', flexWrap: 'wrap'}}>
