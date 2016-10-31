@@ -18,7 +18,11 @@ import {
 export default class Job extends Component {
 
   render() {
-    const { props : { job, isProvider } } = this
+    const { props : {
+      job,
+      isProvider,
+      handleAcceptPress,
+      handleDeclinePress } } = this
     return (
       <Card style={styles.card}>
         <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row' }}>
@@ -49,21 +53,21 @@ export default class Job extends Component {
           </View>
         </CardItem>
         <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
-          {(job.active) ? this.renderAcceptedButtons(isProvider, job) : this.renderNotAcceptedButtons(isProvider, job)}
+          {(job.active) ? this.renderAcceptedButtons(isProvider, job) : this.renderNotAcceptedButtons(isProvider, handleAcceptPress, handleDeclinePress)}
         </CardItem>
       </Card>
     );
   }
 
-  renderNotAcceptedButtons(isProvider, job) {
+  renderNotAcceptedButtons(isProvider, handleAcceptPress, handleDeclinePress) {
     if(isProvider) {
       return (
         <View style={styles.flexRow}>
-          <Button style={styles.decline} textStyle={{ fontSize: 13 }} onPress={() => this.handleDeclinePress()}>
+          <Button style={styles.decline} textStyle={{ fontSize: 13 }} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text>Decline</Text>
           </Button>
-          <Button style={styles.accept} textStyle={{ fontSize: 13 }} onPress={() => this.handleAcceptPress(job._id)}>
+          <Button style={styles.accept} textStyle={{ fontSize: 13 }} onPress={() => handleAcceptPress()}>
             <Icon name='ios-checkbox' style={{ fontSize: 15}}/>
             <Text>Accept</Text>
           </Button>
@@ -98,29 +102,6 @@ export default class Job extends Component {
     )
   }
 
-  handleAcceptPress(id) {
-    console.log('ACCEPT PRESSED', id)
-    const API_ENDPOINT = `${endpointIP}/labr/api/acceptjob`
-    const requestObj = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        _id: id
-      })
-    }
-    fetch(API_ENDPOINT, requestObj)
-      .then(res => res.json())
-      .then(data => {
-        console.log('FRONT END', data)
-      })
-      .catch(console.error)
-  }
-  handleDeclinePress() {
-    console.log('DECLINE PRESSED')
-  }
   handleCancelPress() {
     console.log('CANCEL PRESSED')
   }

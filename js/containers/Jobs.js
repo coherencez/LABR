@@ -91,7 +91,12 @@ export default class Jobs extends Component {
 
   renderJobs() {
     return this.state.jobs.map((job, i) =>
-      <Job job={job} isProvider={this.state.isProvider} key={i}/>
+      <Job
+        job={job}
+        isProvider={this.state.isProvider}
+        key={i}
+        handleAcceptPress={this.handleAcceptPress.bind(this, job)}
+        handleDeclinePress={this.handleDeclinePress.bind(this, job)}/>
     )
   }
   renderMessage() {
@@ -109,6 +114,37 @@ export default class Jobs extends Component {
         </Button>
       </Footer>
     )
+  }
+
+  handleAcceptPress(job) {
+    const API_ENDPOINT = `${endpointIP}/labr/api/acceptjob`
+    const requestObj = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        _id: job._id
+      })
+    }
+    fetch(API_ENDPOINT, requestObj)
+      .then(res => res.json())
+      .then(data => {
+        console.log('FRONT END', data)
+        let index = this.state.jobs.indexOf(data.job._id)
+        console.log(index)
+        console.log(this.state)
+        this.setState({
+          jobs: this.state.jobs.splice(index,1).concat([data.job])
+        })
+        console.log(this.state)
+      })
+      .catch(console.error)
+  }
+
+  handleDeclinePress(job) {
+    console.log('DECLINE PRESSED', job)
   }
 }
 
