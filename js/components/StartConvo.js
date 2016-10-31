@@ -18,21 +18,8 @@ export default class StartConvo extends Component {
     return (
       <Container style={styles.alignmentFix}>
         <Content>
-          {(() => {
-            if(this.state.errorMessage) {
-              return (
-                <View>
-                    <Text style={styles.error}>{this.state.errorMessage}</Text>
-                </View>
-              )
-            } else if (this.state.successMessage) {
-              return (
-                <View>
-                    <Text style={styles.success}>{this.state.successMessage}</Text>
-                </View>
-              )
-            }
-          })()}
+          {(this.state.errorMessage) ? this.renderErrorMessage() : null}
+          {(this.state.successMessage) ? this.renderSuccessMessage() : null}
           <Text>To: {props.provider.name}</Text>
           <Text>From: {props.user.firstName} {props.user.lastName}</Text>
           <Text>Category: {props.category}</Text>
@@ -47,6 +34,21 @@ export default class StartConvo extends Component {
           <Button block style={styles.button} onPress={() => this.handleJobRequestPress(props.user, props.provider, props.category)}>Send Request For Work</Button>
         </Content>
       </Container>
+    )
+  }
+
+  renderErrorMessage() {
+    return (
+      <View>
+          <Text style={styles.error}>{this.state.errorMessage}</Text>
+      </View>
+    )
+  }
+  renderSuccessMessage() {
+    return (
+      <View>
+          <Text style={styles.success}>{this.state.successMessage}</Text>
+      </View>
     )
   }
 
