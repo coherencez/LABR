@@ -130,21 +130,15 @@ export default class Jobs extends Component {
     }
     fetch(API_ENDPOINT, requestObj)
       .then(res => res.json())
-      .then(data => {
-        console.log('FRONT END', data)
-        let index = this.state.jobs.indexOf(data.job._id)
-        console.log(index)
-        console.log(this.state)
+      .then(({ job }) => {
         this.setState({
-          jobs: this.state.jobs.splice(index,1).concat([data.job])
+          jobs: this.state.jobs.filter(oldJob => oldJob._id !== job._id).concat([job])
         })
-        console.log(this.state)
       })
       .catch(console.error)
   }
-
   handleDeclinePress(job) {
-    console.log('DECLINE PRESSED', job)
+    console.log('DECLINED PRESSED')
   }
 }
 
