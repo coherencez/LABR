@@ -51,33 +51,32 @@ export default class SideNav extends Component {
   renderUserLinks() {
     return (
       <View>
-      <ListItem iconLeft button onPress={() => this.handleLogout()}>
-        <Icon name='md-globe' />
-        <Text>Logout</Text>
-      </ListItem>
-      <ListItem iconLeft iconRight button onPress={() => this.handleBusinessPress()}>
-        <Icon name='ios-briefcase' />
-        <Text>Business Account</Text>
-        <Icon name='ios-mic-outline' style={styles.hidden}/>
-      </ListItem>
-      <ListItem iconLeft button onPress={this.handleMessagesPress}>
-        <Icon name='md-text' />
-        <Text>Messages</Text>
-        <Badge>3</Badge>
-      </ListItem>
-      <ListItem iconLeft button onPress={this.handleJobsPress}>
-        <Icon name='ios-contact' />
-        <Text>Jobs</Text>
-      </ListItem>
-      <ListItem iconLeft button onPress={this.handleHistoryPress}>
-        <Icon name='md-archive' />
-        <Text>History</Text>
-      </ListItem>
-      <ListItem iconLeft button onPress={this.handleSettingsPress}>
-        <Icon name='md-aperture' />
-        <Text>Settings</Text>
-      </ListItem>
-
+        <ListItem iconLeft button onPress={() => this.handleLogout()}>
+          <Icon name='md-globe' />
+          <Text>Logout</Text>
+        </ListItem>
+        <ListItem iconLeft iconRight button onPress={() => this.handleBusinessPress()}>
+          <Icon name='ios-briefcase' />
+          <Text>Business Account</Text>
+          <Icon name='ios-mic-outline' style={styles.hidden}/>
+        </ListItem>
+        <ListItem iconLeft button onPress={this.handleMessagesPress}>
+          <Icon name='md-text' />
+          <Text>Messages</Text>
+          <Badge>3</Badge>
+        </ListItem>
+        <ListItem iconLeft button onPress={this.handleJobsPress}>
+          <Icon name='ios-contact' />
+          <Text>Jobs</Text>
+        </ListItem>
+        <ListItem iconLeft button onPress={this.handleHistoryPress}>
+          <Icon name='md-archive' />
+          <Text>History</Text>
+        </ListItem>
+        <ListItem iconLeft button onPress={this.handleSettingsPress}>
+          <Icon name='md-aperture' />
+          <Text>Settings</Text>
+        </ListItem>
       </View>
     )
   }
@@ -85,14 +84,14 @@ export default class SideNav extends Component {
   renderNoUserLinks() {
     return (
       <View>
-      <ListItem iconLeft button onPress={this.handleLoginPress}>
-        <Icon name='md-globe' />
-        <Text>Login</Text>
-      </ListItem>
-      <ListItem iconLeft button onPress={this.handleSignUpPress}>
-        <Icon name='md-contact' />
-        <Text>Sign Up</Text>
-      </ListItem>
+        <ListItem iconLeft button onPress={this.handleLoginPress}>
+          <Icon name='md-globe' />
+          <Text>Login</Text>
+        </ListItem>
+        <ListItem iconLeft button onPress={this.handleSignUpPress}>
+          <Icon name='md-contact' />
+          <Text>Sign Up</Text>
+        </ListItem>
       </View>
     )
   }
@@ -174,10 +173,6 @@ export default class SideNav extends Component {
       }
 
       fetch(API_ENDPOINT, requestObj)
-        .then(res => res.json())
-        .then(data => {
-          return
-        })
         .catch(console.error)
     })
   }

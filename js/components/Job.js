@@ -22,21 +22,28 @@ export default class Job extends Component {
     return (
       <Card style={styles.card}>
         <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row' }}>
-          <View style={{ padding: 5 }}>
+          <View style={{ padding: 5,  width: 75 }}>
             <View style={{ flexDirection: 'column', flexWrap: 'wrap' }}>
               <Text note style={{color: '#87838B', fontSize: 10}}>{job.createdDate.split(' ').splice(0,4).join(' ')}</Text>
-              <Text note style={{color: '#87838B', fontSize: 10}}>Time Start</Text>
-              <Text note style={{color: '#87838B', fontSize: 10}}>Time End</Text>
+              <Text note style={{color: '#87838B', fontSize: 10}}>{job.startDate}</Text>
+              <Text note style={{color: '#87838B', fontSize: 10}}>{job.endDate}</Text>
             </View>
-            <Thumbnail square source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} size={75}/>
+            <Thumbnail
+              square
+              button
+              source={{uri: 'http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Google-Maps-icon.png'}}
+              size={50}
+              style={{alignItems: 'flex-end'}}/>
           </View>
           <View style={{flex: 1, flexDirection:'column'}}>
             <CardItem style={styles.cardTitle}>
               <Text style={styles.text}>{job.category}</Text>
             </CardItem>
-            <Text>Description:</Text>
-            <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
-            <Button transparent textStyle={{color: '#87838B'}} >
+            <Text style={{fontSize: 10, fontWeight: '700'}}>Description:</Text>
+            <Content>
+              <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
+            </Content>
+            <Button transparent textStyle={{color: '#87838B', fontSize: 13}} >
                 Send Message
             </Button>
           </View>
@@ -63,8 +70,8 @@ export default class Job extends Component {
         </View>
       )
     } else {
-      return(
-        <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'space-around'}}>
+      return (
+        <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'space-around', height: 35}}>
           <Text style={styles.error}>Not Accepted Yet</Text>
         </View>
       )
@@ -103,13 +110,12 @@ const styles = StyleSheet.create({
     },
   },
   cardTitle: {
-    backgroundColor: buttonBgColor,
     borderRadius: 5,
     alignItems: 'center',
   },
   text: {
     fontFamily: fontFamily,
-    color: fontColorWhite,
+    color: '#000',
   },
   error: {
     color: 'red',
@@ -123,8 +129,10 @@ const styles = StyleSheet.create({
   },
   accept: {
     backgroundColor: 'green',
+    height: 30,
   },
   decline: {
     backgroundColor: 'red',
+    height: 30,
   },
 });
