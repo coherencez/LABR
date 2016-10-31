@@ -40,10 +40,10 @@ export default class Job extends Component {
               <Text style={styles.text}>{job.category}</Text>
             </CardItem>
             <Text style={{fontSize: 10, fontWeight: '700'}}>Description:</Text>
-            <Content style={{height: 50}}>
+            <Content style={{height: 65}}>
               <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
             </Content>
-            <Button transparent textStyle={{color: '#87838B', fontSize: 13}} >
+            <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
                 Send Message
             </Button>
           </View>
@@ -58,28 +58,25 @@ export default class Job extends Component {
   renderNotAcceptedButtons(isProvider) {
     if(isProvider) {
       return (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
-          <Button style={styles.decline} >
-              <Icon name='md-close'/>
-              <Text>Decline</Text>
+        <View style={styles.flexRow}>
+          <Button style={styles.decline} textStyle={{ fontSize: 13 }}>
+            <Icon name='md-close' style={{ fontSize: 15}}/>
+            <Text>Decline</Text>
           </Button>
-          <Button style={styles.accept} >
-              <Icon name='ios-checkbox'/>
-              <Text>Accept</Text>
+          <Button style={styles.accept} textStyle={{ fontSize: 13 }}>
+            <Icon name='ios-checkbox' style={{ fontSize: 15}}/>
+            <Text>Accept</Text>
           </Button>
         </View>
       )
     } else {
-      console.log('ELSE FIRED')
       return (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
+        <View style={styles.flexRow}>
           <Text style={styles.error}>Not Accepted Yet</Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
-            <Text style={styles.text}>Cancel</Text>
-            <Button style={styles.decline} >
-                <Icon name='md-close' style={{ fontSize: 15}}/>
-            </Button>
-          </View>
+          <Button style={styles.decline} textStyle={{fontSize: 10}}>
+            <Icon name='md-close' style={{ fontSize: 15}}/>
+            <Text >Cancel</Text>
+          </Button>
         </View>
       )
     }
@@ -87,7 +84,7 @@ export default class Job extends Component {
 
   renderAcceptedButtons() {
     return (
-      <View style={{flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'space-around'}}>
+      <View style={styles.flexRow}>
         <Button style={styles.button} >
             <Icon name='ios-contact'/>
         </Button>
@@ -123,7 +120,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: fontFamily,
     color: '#333',
-    fontSize: 10,
     marginRight: 5,
   },
   error: {
@@ -138,11 +134,15 @@ const styles = StyleSheet.create({
   accept: {
     backgroundColor: 'green',
     height: 30,
-    width: 30,
   },
   decline: {
     backgroundColor: 'red',
     height: 30,
-    width: 30,
+  },
+  flexRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
 });
