@@ -23,78 +23,18 @@ export default class SideNav extends Component {
     this.userCheck()
   }
   render() {
-    console.log(this.state.checked)
     return (
       <Container>
         <Content>
             <List style={styles.alignmentFix}>
               <ListItem iconLeft button onPress={this.handleHomePress}>
-                  <Icon name='ios-home' />
-                  <Text>Home</Text>
+                <Icon name='ios-home' />
+                <Text>Home</Text>
               </ListItem>
-              {(() => {
-                if(this.state.user) {
-                  return (
-                    <View>
-                    <ListItem iconLeft button onPress={() => this.handleLogout()}>
-                      <Icon name='md-globe' />
-                      <Text>Logout</Text>
-                    </ListItem>
-                    <ListItem iconLeft iconRight button onPress={() => this.handleBusinessPress()}>
-                        <Icon name='ios-briefcase' />
-                        <Text>Business Account</Text>
-                        <Icon name='ios-mic-outline' style={styles.hidden}/>
-                    </ListItem>
-                    <ListItem iconLeft button onPress={this.handleMessagesPress}>
-                        <Icon name='md-text' />
-                        <Text>Messages</Text>
-                        <Badge>3</Badge>
-                    </ListItem>
-                    <ListItem iconLeft button onPress={this.handleJobsPress}>
-                        <Icon name='ios-contact' />
-                        <Text>Jobs</Text>
-                    </ListItem>
-                    <ListItem iconLeft button onPress={this.handleHistoryPress}>
-                        <Icon name='md-archive' />
-                        <Text>History</Text>
-                    </ListItem>
-                    <ListItem iconLeft button onPress={this.handleSettingsPress}>
-                        <Icon name='md-aperture' />
-                        <Text>Settings</Text>
-                    </ListItem>
-
-                    </View>
-                  )
-                } else {
-                  return (
-                    <View>
-                    <ListItem iconLeft button onPress={this.handleLoginPress}>
-                      <Icon name='md-globe' />
-                      <Text>Login</Text>
-                    </ListItem>
-                    <ListItem iconLeft button onPress={this.handleSignUpPress}>
-                      <Icon name='md-contact' />
-                      <Text>Sign Up</Text>
-                    </ListItem>
-                    </View>
-                  )
-                }
-              })()}
+              {(this.state.user) ? this.renderUserLinks() : this.renderNoUserLinks()}
             </List>
         </Content>
-        {(() => {
-          if(this.state.isProvider) {
-            return (
-              <Footer style={{backgroundColor: this.state.statusColor}}>
-                <CheckBox
-                  label={this.state.statusMessage}
-                  checked={this.state.checked}
-                  onChange={(checked) => this.handleAvailableCheckbox(checked)}
-                />
-              </Footer>
-            )
-          }
-        })()}
+        {(this.state.isProvider) ? this.renderProviderGoOnline() : null}
       </Container>
     )
   }
@@ -106,6 +46,67 @@ export default class SideNav extends Component {
         if(data) this.setState({ user: true, isProvider: data.isProvider })
       })
       .catch(console.error)
+  }
+
+  renderUserLinks() {
+    return (
+      <View>
+      <ListItem iconLeft button onPress={() => this.handleLogout()}>
+        <Icon name='md-globe' />
+        <Text>Logout</Text>
+      </ListItem>
+      <ListItem iconLeft iconRight button onPress={() => this.handleBusinessPress()}>
+        <Icon name='ios-briefcase' />
+        <Text>Business Account</Text>
+        <Icon name='ios-mic-outline' style={styles.hidden}/>
+      </ListItem>
+      <ListItem iconLeft button onPress={this.handleMessagesPress}>
+        <Icon name='md-text' />
+        <Text>Messages</Text>
+        <Badge>3</Badge>
+      </ListItem>
+      <ListItem iconLeft button onPress={this.handleJobsPress}>
+        <Icon name='ios-contact' />
+        <Text>Jobs</Text>
+      </ListItem>
+      <ListItem iconLeft button onPress={this.handleHistoryPress}>
+        <Icon name='md-archive' />
+        <Text>History</Text>
+      </ListItem>
+      <ListItem iconLeft button onPress={this.handleSettingsPress}>
+        <Icon name='md-aperture' />
+        <Text>Settings</Text>
+      </ListItem>
+
+      </View>
+    )
+  }
+
+  renderNoUserLinks() {
+    return (
+      <View>
+      <ListItem iconLeft button onPress={this.handleLoginPress}>
+        <Icon name='md-globe' />
+        <Text>Login</Text>
+      </ListItem>
+      <ListItem iconLeft button onPress={this.handleSignUpPress}>
+        <Icon name='md-contact' />
+        <Text>Sign Up</Text>
+      </ListItem>
+      </View>
+    )
+  }
+
+  renderProviderGoOnline() {
+    return (
+      <Footer style={{backgroundColor: this.state.statusColor}}>
+        <CheckBox
+          label={this.state.statusMessage}
+          checked={this.state.checked}
+          onChange={(checked) => this.handleAvailableCheckbox(checked)}
+        />
+      </Footer>
+    )
   }
 
   handleSignUpPress() {
