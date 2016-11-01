@@ -111,7 +111,8 @@ export default class Jobs extends Component {
         isProvider={this.state.isProvider}
         key={i}
         handleAcceptPress={this.handleAcceptPress.bind(this, job)}
-        handleDeclinePress={this.handleDeclinePress.bind(this, job)}/>
+        handleDeclinePress={this.handleDeclinePress.bind(this, job)}
+        handleCompletePress={this.handleCompletePress.bind(this, job)}/>
     )
   }
   renderMessage() {
@@ -154,6 +155,27 @@ export default class Jobs extends Component {
   }
   handleDeclinePress(job) {
     const API_ENDPOINT = `${endpointIP}/labr/api/canceljob`
+    const requestObj = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        _id: job._id
+      })
+    }
+    fetch(API_ENDPOINT, requestObj)
+      .then(res => res.json())
+      .then(({ job }) => {
+        this.setState({
+          jobs: this.state.jobs.filter(oldJob => oldJob._id !== job._id)
+        })
+      })
+      .catch(console.error)
+  }
+  handleCompletePress(job) {
+    const API_ENDPOINT = `${endpointIP}/labr/api/completejob`
     const requestObj = {
       method: 'POST',
       headers: {

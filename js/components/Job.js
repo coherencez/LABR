@@ -22,7 +22,8 @@ export default class Job extends Component {
       job,
       isProvider,
       handleAcceptPress,
-      handleDeclinePress } } = this
+      handleDeclinePress,
+      handleCompletePress } } = this
     return (
       <Card style={styles.card}>
         <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row' }}>
@@ -55,7 +56,7 @@ export default class Job extends Component {
         <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
           {
             (job.active)
-              ? this.renderAcceptedButtons(isProvider, handleDeclinePress)
+              ? this.renderAcceptedButtons(isProvider, handleDeclinePress, handleCompletePress)
               : this.renderNotAcceptedButtons(isProvider, handleAcceptPress, handleDeclinePress)
           }
         </CardItem>
@@ -90,7 +91,7 @@ export default class Job extends Component {
     }
   }
 
-  renderAcceptedButtons(isProvider, handleDeclinePress) {
+  renderAcceptedButtons(isProvider, handleDeclinePress, handleCompletePress) {
     return (
       <View style={styles.flexRow}>
         <Button style={styles.button} >
@@ -99,7 +100,7 @@ export default class Job extends Component {
         <Button style={styles.button} onPress={() => handleDeclinePress()}>
             <Icon name='md-close'/>
         </Button>
-        <Button style={styles.button} >
+        <Button style={styles.button} onPress={() => handleCompletePress()}>
             <Icon name='md-checkbox'/>
         </Button>
       </View>
