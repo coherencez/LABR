@@ -29,13 +29,13 @@ app.post('/labr/api/newuser', ({ body }, res, err) => {
     .catch(console.error)
 })
 
-app.post('/labr/api/login', ({ body }, res, err) => {
-  User.findOne({ email: body.email })
+app.post('/labr/api/login', ({ body: { email, password } }, res, err) => {
+  User.findOne({ email })
     .then(dbUser => {
       if(dbUser) {
         return Promise.all([
           Promise.resolve(dbUser),
-          dbUser.comparePassword(body.password)
+          dbUser.comparePassword(password)
         ])
       } else {
         return res.json({ msg: 'Bad email and/or password. Please try again'})
@@ -80,18 +80,18 @@ app.post('/labr/api/newprovider', ({ body },res) => {
     .catch(console.error)
 })
 
-app.post('/labr/api/available', ({ body : { _id, available }},res) => {
+app.post('/labr/api/available', ({ body: { _id, available }},res) => {
   Provider.findOneAndUpdate(
-    {_id},
-    {available},
-    {new: true}
-  )
-  .then(provObj => {
-    if(provObj) {
-      return res.json({ status: 200 })
-    }
-  })
-  .catch(console.error)
+      {_id},
+      {available},
+      {new: true}
+    )
+    .then(provObj => {
+      if(provObj) {
+        return res.json({ status: 200 })
+      }
+    })
+    .catch(console.error)
 })
 
 app.get('/labr/api/getProviders', (req,res) => {
@@ -117,13 +117,14 @@ app.post('/labr/api/newjob', ({ body }, res) => {
       // const newProvContactObj = _.omit(providerContact, ['password'])
       const         newJobObj = _.omit(jobReqObj, ['provider'])
       const      newJobReqObj = Object.assign({}, newJobObj, {providerContact})
+
       return Job.create(newJobReqObj)
     })
     .then(jobObj => {
       if(jobObj) {
         return res.json({ status: 200 })
       }
-      return res.json({ status: 404, msg: 'Oh no! An Error occured'})
+      return res.json({ status: 400, msg: 'Oh no! An Error occured'})
     })
     .catch(console.error)
 })
@@ -149,16 +150,19 @@ app.post('/labr/api/acceptjob', ({ body: { _id } },res) => {
       {new: true}
     )
     .then(data => {
-      console.log('NEW JOB', data)
       if(data) res.json({ status : 200, job: data })
       else res.json({ status: 400 })
     })
     .catch(console.error)
 })
 
-app.post('/labr/api/canceljob', (req,res) => {
-  console.log(req.body)
-  res.json({ status: 200 })
+app.post('/labr/api/canceljob', ({ body: { _id } },res) => {
+  Job.findOneAndRemove({ _id })
+    .then(data => {
+      if(data) res.json({ status : 200, job: data })
+      else res.json({ status: 400 })
+    })
+    .catch(console.error)
 })
 
 // connect to mongo before loading server
