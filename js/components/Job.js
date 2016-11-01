@@ -53,7 +53,11 @@ export default class Job extends Component {
           </View>
         </CardItem>
         <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
-          {(job.active) ? this.renderAcceptedButtons(isProvider, job) : this.renderNotAcceptedButtons(isProvider, handleAcceptPress, handleDeclinePress)}
+          {
+            (job.active)
+              ? this.renderAcceptedButtons(isProvider, handleDeclinePress)
+              : this.renderNotAcceptedButtons(isProvider, handleAcceptPress, handleDeclinePress)
+          }
         </CardItem>
       </Card>
     );
@@ -77,7 +81,7 @@ export default class Job extends Component {
       return (
         <View style={styles.flexRow}>
           <Text style={styles.error}>Not Accepted Yet</Text>
-          <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => this.handleCancelPress()}>
+          <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text >Cancel</Text>
           </Button>
@@ -86,13 +90,13 @@ export default class Job extends Component {
     }
   }
 
-  renderAcceptedButtons(isProvider, job) {
+  renderAcceptedButtons(isProvider, handleDeclinePress) {
     return (
       <View style={styles.flexRow}>
         <Button style={styles.button} >
             <Icon name='ios-contact'/>
         </Button>
-        <Button style={styles.button} >
+        <Button style={styles.button} onPress={() => handleDeclinePress()}>
             <Icon name='md-close'/>
         </Button>
         <Button style={styles.button} >
@@ -100,10 +104,6 @@ export default class Job extends Component {
         </Button>
       </View>
     )
-  }
-
-  handleCancelPress() {
-    console.log('CANCEL PRESSED')
   }
 }
 
