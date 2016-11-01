@@ -145,6 +145,22 @@ app.post('/labr/api/jobs', ({ body },res) => {
     .catch(console.error)
 })
 
+app.post('/labr/api/jobshistory', ({ body },res) => {
+  Promise.resolve(body)
+    .then(({ isProvider, id }) => {
+      if(isProvider) {
+        return Job.find({ providerId: id }).where({ completed: true })
+      }
+      return Job.find({ userId: id }).where({ completed: true })
+    })
+    .then(jobs => {
+      if(jobs) {
+        res.json({ jobs })
+      }
+    })
+    .catch(console.error)
+})
+
 app.post('/labr/api/acceptjob', ({ body: { _id } },res) => {
   Job.findOneAndUpdate(
       {_id},
