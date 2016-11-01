@@ -138,7 +138,25 @@ export default class Jobs extends Component {
       .catch(console.error)
   }
   handleDeclinePress(job) {
-    console.log('DECLINED PRESSED')
+    const API_ENDPOINT = `${endpointIP}/labr/api/canceljob`
+    const requestObj = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        _id: job._id
+      })
+    }
+    fetch(API_ENDPOINT, requestObj)
+      .then(res => res.json())
+      .then(({ job }) => {
+        this.setState({
+          jobs: this.state.jobs.filter(oldJob => oldJob._id !== job._id)
+        })
+      })
+      .catch(console.error)
   }
 }
 
