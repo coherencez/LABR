@@ -138,7 +138,9 @@ app.post('/labr/api/jobs', ({ body },res) => {
       return Job.find({ userId: id }).where({ completed: false })
     })
     .then(jobs => {
-      res.json({ jobs })
+      if(jobs) {
+        res.json({ jobs })
+      }
     })
     .catch(console.error)
 })

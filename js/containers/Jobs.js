@@ -67,9 +67,15 @@ export default class Jobs extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      this.setState({
-        jobs: this.state.jobs.concat(data.jobs)
-      })
+      if(data.jobs) {
+        this.setState({
+          jobs: this.state.jobs.concat(data.jobs)
+        })
+      } else if (data.jobs.length === 0) {
+        this.setState({
+          statusMessage: `You currently have no active or pending jobs at this time`
+        })
+      }
     })
     .catch(console.error)
   }
@@ -80,6 +86,15 @@ export default class Jobs extends Component {
       <SideMenu menu={menu}>
       <Container style={styles.alignmentFix, styles.container}>
         <Content>
+        {(() => {
+          if(this.state.jobs.length === 0) {
+            return (
+              <View>
+                <Text style={styles.error}>You currently have no active or pending jobs at this time</Text>
+              </View>
+            )
+          }
+        })()}
           {(this.state.statusMessage) ? this.renderMessage() : null}
           {(this.state.jobs.length >= 1) ? this.renderJobs() : null}
         </Content>
