@@ -120,7 +120,7 @@ export default class SideNav extends Component {
     Actions.app({ type: 'reset' })
   }
   handleHistoryPress() {
-    console.log('HISTORY PRESSED')
+    Actions.history()
   }
   handleBusinessPress() {
     AsyncStorage.getItem('user')
