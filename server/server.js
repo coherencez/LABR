@@ -158,6 +158,19 @@ app.post('/labr/api/acceptjob', ({ body: { _id } },res) => {
     .catch(console.error)
 })
 
+app.post('/labr/api/completejob', ({ body: { _id } },res) => {
+  Job.findOneAndUpdate(
+      {_id},
+      {completed: true, active: false, endDate: new Date().toString()},
+      {new: true}
+    )
+    .then(data => {
+      if(data) res.json({ status : 200, job: data })
+      else res.json({ status: 400 })
+    })
+    .catch(console.error)
+})
+
 app.post('/labr/api/canceljob', ({ body: { _id } },res) => {
   Job.findOneAndRemove({ _id })
     .then(data => {
