@@ -30,8 +30,8 @@ export default class Job extends Component {
           <View style={{ padding: 5,  width: 75 }}>
             <View style={{ flexDirection: 'column', flexWrap: 'wrap' }}>
               <Text note style={{color: '#87838B', fontSize: 10}}>{job.createdDate.split(' ').splice(0,4).join(' ')}</Text>
-              <Text note style={{color: '#87838B', fontSize: 10}}>{job.startDate.split(' ').splice(0,4).join(' ')}</Text>
-              <Text note style={{color: '#87838B', fontSize: 10}}>{job.endDate.split(' ').splice(0,4).join(' ')}</Text>
+              <Text note style={{color: '#87838B', fontSize: 10}}>{job.startDate}</Text>
+              <Text note style={{color: '#87838B', fontSize: 10}}>{job.endDate}</Text>
             </View>
             <Thumbnail
               square
