@@ -26,13 +26,13 @@ export default class SideNav extends Component {
     return (
       <Container>
         <Content>
-            <List style={styles.alignmentFix}>
-              <ListItem iconLeft button onPress={this.handleHomePress}>
-                <Icon name='ios-home' />
-                <Text>Home</Text>
-              </ListItem>
-              {(this.state.user) ? this.renderUserLinks() : this.renderNoUserLinks()}
-            </List>
+          <List style={styles.alignmentFix}>
+            <ListItem iconLeft button onPress={this.handleHomePress}>
+              <Icon name='ios-home' />
+              <Text>Home</Text>
+            </ListItem>
+            {(this.state.user) ? this.renderUserLinks() : this.renderNoUserLinks()}
+          </List>
         </Content>
         {(this.state.isProvider) ? this.renderProviderGoOnline() : null}
       </Container>
