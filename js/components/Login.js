@@ -76,7 +76,7 @@ export default class Login extends Component {
       .then(({ pwMatch, msg, user }) => {
         if(pwMatch) {
           AsyncStorage.setItem('user', JSON.stringify(user))
-          Actions.app({ type: 'reset' })
+          Actions.locations({ type: 'reset' })
         } else {
           this.setState({ errorMessage: msg})
         }

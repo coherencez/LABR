@@ -18,7 +18,12 @@ import {
 export default class Job extends Component {
 
   render() {
-    const { props : { job, isProvider } } = this
+    const { props : {
+      job,
+      isProvider,
+      handleAcceptPress,
+      handleDeclinePress,
+      handleCompletePress } } = this
     return (
       <Card style={styles.card}>
         <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row' }}>
@@ -49,21 +54,25 @@ export default class Job extends Component {
           </View>
         </CardItem>
         <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
-          {(job.active) ? this.renderAcceptedButtons() : this.renderNotAcceptedButtons(isProvider)}
+          {
+            (job.active)
+              ? this.renderAcceptedButtons(isProvider, handleDeclinePress, handleCompletePress)
+              : this.renderNotAcceptedButtons(isProvider, handleAcceptPress, handleDeclinePress)
+          }
         </CardItem>
       </Card>
     );
   }
 
-  renderNotAcceptedButtons(isProvider) {
+  renderNotAcceptedButtons(isProvider, handleAcceptPress, handleDeclinePress) {
     if(isProvider) {
       return (
         <View style={styles.flexRow}>
-          <Button style={styles.decline} textStyle={{ fontSize: 13 }} onPress={() => this.handleDeclinePress()}>
+          <Button style={styles.decline} textStyle={{ fontSize: 13 }} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text>Decline</Text>
           </Button>
-          <Button style={styles.accept} textStyle={{ fontSize: 13 }} onPress={() => this.handleAcceptPress()}>
+          <Button style={styles.accept} textStyle={{ fontSize: 13 }} onPress={() => handleAcceptPress()}>
             <Icon name='ios-checkbox' style={{ fontSize: 15}}/>
             <Text>Accept</Text>
           </Button>
@@ -73,7 +82,7 @@ export default class Job extends Component {
       return (
         <View style={styles.flexRow}>
           <Text style={styles.error}>Not Accepted Yet</Text>
-          <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => this.handleCancelPress()}>
+          <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text >Cancel</Text>
           </Button>
@@ -82,30 +91,20 @@ export default class Job extends Component {
     }
   }
 
-  renderAcceptedButtons() {
+  renderAcceptedButtons(isProvider, handleDeclinePress, handleCompletePress) {
     return (
       <View style={styles.flexRow}>
         <Button style={styles.button} >
             <Icon name='ios-contact'/>
         </Button>
-        <Button style={styles.button} >
+        <Button style={styles.button} onPress={() => handleDeclinePress()}>
             <Icon name='md-close'/>
         </Button>
-        <Button style={styles.button} >
+        <Button style={styles.button} onPress={() => handleCompletePress()}>
             <Icon name='md-checkbox'/>
         </Button>
       </View>
     )
-  }
-
-  handleAcceptPress() {
-    console.log('ACCEPT PRESSED')
-  }
-  handleDeclinePress() {
-    console.log('DECLINE PRESSED')
-  }
-  handleCancelPress() {
-    console.log('CANCEL PRESSED')
   }
 }
 

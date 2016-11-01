@@ -29,17 +29,13 @@ app.post('/labr/api/newuser', ({ body }, res, err) => {
     .catch(console.error)
 })
 
-app.post('/labr/api/login', ({ body }, res, err) => {
-  User.findOne({ email: body.email })
+app.post('/labr/api/login', ({ body: { email, password } }, res, err) => {
+  User.findOne({ email })
     .then(dbUser => {
-      // problem: need to resolve mutiple promises
-      // solution: Promise.all: if user exists, run comparePassword schema method
-      // then pass the user obj and compare results to the next
-      // then block
       if(dbUser) {
         return Promise.all([
           Promise.resolve(dbUser),
-          dbUser.comparePassword(body.password)
+          dbUser.comparePassword(password)
         ])
       } else {
         return res.json({ msg: 'Bad email and/or password. Please try again'})
@@ -84,27 +80,26 @@ app.post('/labr/api/newprovider', ({ body },res) => {
     .catch(console.error)
 })
 
-app.post('/labr/api/available', ({ body : { _id, available }},res) => {
+app.post('/labr/api/available', ({ body: { _id, available }},res) => {
   Provider.findOneAndUpdate(
-    {_id},
-    {available},
-    {new: true}
-  )
-  .then(provObj => {
-    if(provObj) {
-      console.log(provObj)
-      return res.json({ status: 200 })
-    }
-  })
-  .catch(console.error)
+      {_id},
+      {available},
+      {new: true}
+    )
+    .then(provObj => {
+      if(provObj) {
+        return res.json({ status: 200 })
+      }
+    })
+    .catch(console.error)
 })
 
 app.get('/labr/api/getProviders', (req,res) => {
   Provider.find()
-  .then(providers => {
-    res.json({ providers })
-  })
-  .catch(console.error)
+    .then(providers => {
+      res.json({ providers })
+    })
+    .catch(console.error)
 })
 
 app.post('/labr/api/newjob', ({ body }, res) => {
@@ -122,13 +117,14 @@ app.post('/labr/api/newjob', ({ body }, res) => {
       // const newProvContactObj = _.omit(providerContact, ['password'])
       const         newJobObj = _.omit(jobReqObj, ['provider'])
       const      newJobReqObj = Object.assign({}, newJobObj, {providerContact})
+
       return Job.create(newJobReqObj)
     })
     .then(jobObj => {
       if(jobObj) {
         return res.json({ status: 200 })
       }
-      return res.json({ status: 404, msg: 'Oh no! An Error occured'})
+      return res.json({ status: 400, msg: 'Oh no! An Error occured'})
     })
     .catch(console.error)
 })
@@ -137,12 +133,65 @@ app.post('/labr/api/jobs', ({ body },res) => {
   Promise.resolve(body)
     .then(({ isProvider, id }) => {
       if(isProvider) {
-        return Job.find({ providerId: id })
+        return Job.find({ providerId: id }).where({ completed: false })
       }
-      return Job.find({ userId: id })
+      return Job.find({ userId: id }).where({ completed: false })
     })
     .then(jobs => {
-      res.json({ jobs })
+      if(jobs) {
+        res.json({ jobs })
+      }
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/jobshistory', ({ body },res) => {
+  Promise.resolve(body)
+    .then(({ isProvider, id }) => {
+      if(isProvider) {
+        return Job.find({ providerId: id }).where({ completed: true })
+      }
+      return Job.find({ userId: id }).where({ completed: true })
+    })
+    .then(jobs => {
+      if(jobs) {
+        res.json({ jobs })
+      }
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/acceptjob', ({ body: { _id } },res) => {
+  Job.findOneAndUpdate(
+      {_id},
+      {active: true, startDate: new Date().toString()},
+      {new: true}
+    )
+    .then(data => {
+      if(data) res.json({ status : 200, job: data })
+      else res.json({ status: 400 })
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/completejob', ({ body: { _id } },res) => {
+  Job.findOneAndUpdate(
+      {_id},
+      {completed: true, active: false, endDate: new Date().toString()},
+      {new: true}
+    )
+    .then(data => {
+      if(data) res.json({ status : 200, job: data })
+      else res.json({ status: 400 })
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/canceljob', ({ body: { _id } },res) => {
+  Job.findOneAndRemove({ _id })
+    .then(data => {
+      if(data) res.json({ status : 200, job: data })
+      else res.json({ status: 400 })
     })
     .catch(console.error)
 })

@@ -16,7 +16,7 @@ import {
   endpointIP
 } from '../css/variables'
 
-export default class Jobs extends Component {
+export default class History extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -42,7 +42,7 @@ export default class Jobs extends Component {
             id = user.id
             break
         }
-        const API_ENDPOINT = `${endpointIP}/labr/api/jobs`
+        const API_ENDPOINT = `${endpointIP}/labr/api/jobshistory`
         const requestObj = {
           method: 'POST',
           headers: {

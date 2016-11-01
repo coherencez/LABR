@@ -15,6 +15,7 @@ import Category from './js/containers/Category'
 import Providers from './js/containers/Providers'
 import Jobs from './js/containers/Jobs'
 import BusinessProfile from './js/containers/BusinessProfile'
+import History from './js/containers/History'
   // dumb
 import SignUp from './js/components/SignUp'
 import Login from './js/components/Login'
@@ -37,6 +38,7 @@ export default class LABR extends Component {
           <Scene key='businessprofile' component={BusinessProfile} renderTitle={() => this.renderTitle('profile')} />
           <Scene key='startconvo' component={StartConvo} renderTitle={() => this.renderTitle('new message')} />
           <Scene key='jobs' component={Jobs} renderTitle={() => this.renderTitle('jobs')} />
+          <Scene key='history' component={History} renderTitle={() => this.renderTitle('history')} />
         </Scene>
       </Router>
     )
