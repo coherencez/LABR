@@ -35,7 +35,7 @@ app.post('/labr/api/login', ({ body: { email, password } }, res, err) => {
     .then(dbUser => {
       if(dbUser) {
         return Promise.all([
-          Promise.resolve(dbUser),
+          dbUser,
           dbUser.comparePassword(password)
         ])
       } else {
@@ -49,7 +49,7 @@ app.post('/labr/api/login', ({ body: { email, password } }, res, err) => {
       if(matches) {
         if(user.isProvider) {
           return Promise.all([
-            Promise.resolve(userObj),
+            userObj,
             Provider.findOne({ userId: user._id })
           ])
         }
@@ -72,7 +72,7 @@ app.post('/labr/api/newprovider', ({ body },res) => {
           {_id: body.userId},
           {isProvider: true}
         ),
-        Promise.resolve(provider)
+        provider
       ])
     })
     .then(([updatedUser, provider]) => {
