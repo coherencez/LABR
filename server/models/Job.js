@@ -45,10 +45,42 @@ const jobSchema = mongoose.Schema({
   userContact: {
     type: Object,
     required: true,
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      reuqired: true,
+    },
+    cellPhone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
   },
   providerContact: {
     type: Object,
     required: true,
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      reuqired: true,
+    },
+    cellPhone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
   }
 })
 
