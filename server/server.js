@@ -104,20 +104,12 @@ app.get('/labr/api/getProviders', (req,res) => {
 })
 
 app.post('/labr/api/newjob', ({ body }, res) => {
-  Promise.resolve(body)
-    .then(jobReqObj => {
-      return Promise.all([
-        Promise.resolve(jobReqObj),
-        User.findOne({_id: jobReqObj.provider.userId})
+  Promise.all([
+        body,
+        User.findOne({_id: body.provider.userId})
       ])
-    })
     .then(([jobReqObj, providerContact]) => {
-      // password omit still not working ????
-      // not only is this not working, it is causing a buffer overflow
-      // RangeError to happen
-      // const newProvContactObj = _.omit(providerContact, ['password'])
-      const         newJobObj = _.omit(jobReqObj, ['provider'])
-      const      newJobReqObj = Object.assign({}, newJobObj, {providerContact})
+      const newJobReqObj = Object.assign({}, jobReqObj, {providerContact})
 
       return Job.create(newJobReqObj)
     })
