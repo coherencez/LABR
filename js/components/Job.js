@@ -16,6 +16,12 @@ import {
 } from '../css/variables'
 
 export default class Job extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      contact: false
+    }
+  }
 
   render() {
     const { props : {
@@ -23,15 +29,19 @@ export default class Job extends Component {
       isProvider,
       handleAcceptPress,
       handleDeclinePress,
-      handleCompletePress } } = this
+      handleCompletePress, } } = this
+  console.log('JOB',job)
     return (
       <Card style={styles.card}>
         <CardItem cardBody style={{ borderRadius: 5, flexDirection: 'row' }}>
           <View style={{ padding: 5,  width: 75 }}>
             <View style={{ flexDirection: 'column', flexWrap: 'wrap' }}>
-              <Text note style={{color: '#87838B', fontSize: 10}}>{job.createdDate.split(' ').splice(0,4).join(' ')}</Text>
-              <Text note style={{color: '#87838B', fontSize: 10}}>{job.startDate}</Text>
-              <Text note style={{color: '#87838B', fontSize: 10}}>{job.endDate}</Text>
+              <Text note style={{color: '#000', fontSize: 10}}>Created:</Text>
+              <Text note style={{color: '#87838B', fontSize: 7}}>{job.createdDate.split(' ').splice(0,4).join(' ')}</Text>
+              <Text note style={{color: '#000', fontSize: 10}}>Started:</Text>
+              <Text note style={{color: '#87838B', fontSize: 7}}>{job.startDate}</Text>
+              <Text note style={{color: '#000', fontSize: 10}}>Completed:</Text>
+              <Text note style={{color: '#87838B', fontSize: 7}}>{job.endDate}</Text>
             </View>
             <Thumbnail
               square
@@ -40,18 +50,54 @@ export default class Job extends Component {
               size={50}
               style={{alignItems: 'flex-end'}}/>
           </View>
-          <View style={{flex: 1, flexDirection:'column'}}>
-            <CardItem style={styles.cardTitle}>
-              <Text style={styles.text}>{job.category}</Text>
-            </CardItem>
-            <Text style={{fontSize: 10, fontWeight: '700'}}>Description:</Text>
-            <Content style={{height: 65}}>
-              <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
-            </Content>
-            <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
-                Send Message
-            </Button>
-          </View>
+          {(() => {
+            if(this.state.contact) {
+              if(isProvider) {
+                return (
+                    <View style={{flex: 1, flexDirection:'column'}}>
+                      <CardItem style={styles.cardTitle}>
+                        <Text style={styles.text}>Contact Info:</Text>
+                      </CardItem>
+                      <Content style={{height: 75}}>
+                        <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.firstName} {job.userContact.lastName}</Text>
+                        <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.email}</Text>
+                        <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.cellPhone}</Text>
+                      </Content>
+                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
+                          Send Message
+                      </Button>
+                    </View>
+                  )
+
+              } else {
+                return (
+                    <View style={{flex: 1, flexDirection:'column'}}>
+                      <Text style={{fontSize: 13, fontWeight: '700'}}>Contact Info:</Text>
+                      <Content style={{height: 75}}>
+                        <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.firstName} {job.providerContact.lastName}</Text>
+                        <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.email}</Text>
+                        <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.cellPhone}</Text>
+                      </Content>
+                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
+                          Send Message
+                      </Button>
+                    </View>
+                  )
+              }
+            } else {
+              return (
+                <View style={{flex: 1, flexDirection:'column'}}>
+                  <CardItem style={styles.cardTitle}>
+                    <Text style={styles.text}>{job.category}</Text>
+                  </CardItem>
+                  <Text style={{fontSize: 10, fontWeight: '700'}}>Description:</Text>
+                  <Content style={{height: 75}}>
+                    <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
+                  </Content>
+                </View>
+              )
+            }
+          })()}
         </CardItem>
         <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
           {
@@ -94,7 +140,7 @@ export default class Job extends Component {
   renderAcceptedButtons(isProvider, handleDeclinePress, handleCompletePress) {
     return (
       <View style={styles.flexRow}>
-        <Button style={styles.button} >
+        <Button style={styles.button} onPress={() => this.handleContactPress()}>
             <Icon name='ios-contact'/>
         </Button>
         <Button style={styles.button} onPress={() => handleDeclinePress()}>
@@ -105,6 +151,16 @@ export default class Job extends Component {
         </Button>
       </View>
     )
+  }
+
+  renderContactInfo(isProvider, job) {
+
+  }
+
+  handleContactPress() {
+    this.setState({
+      contact: !this.state.contact
+    })
   }
 }
 

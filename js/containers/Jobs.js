@@ -23,6 +23,7 @@ export default class Jobs extends Component {
       jobs: [],
       statusMessage: null,
       isProvider: null,
+      contactClicked: null,
     }
 
   }
@@ -112,7 +113,8 @@ export default class Jobs extends Component {
         key={i}
         handleAcceptPress={this.handleAcceptPress.bind(this, job)}
         handleDeclinePress={this.handleDeclinePress.bind(this, job)}
-        handleCompletePress={this.handleCompletePress.bind(this, job)}/>
+        handleCompletePress={this.handleCompletePress.bind(this, job)}
+        handleContactPress={this.handleContactPress.bind(this, job)}/>
     )
   }
   renderMessage() {
@@ -124,8 +126,8 @@ export default class Jobs extends Component {
   }
   renderIsProviderJobsButton() {
     return (
-      <Footer>
-        <Button block style={{backgroundColor: buttonBgColor}} >
+      <Footer style={{backgroundColor: bgColor}}>
+        <Button block style={{backgroundColor: buttonBgColor, margin: 10}} >
             See My Providers
         </Button>
       </Footer>
@@ -194,6 +196,9 @@ export default class Jobs extends Component {
         })
       })
       .catch(console.error)
+  }
+  handleContactPress() {
+    console.log('HEY HO')
   }
 }
 
