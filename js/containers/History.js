@@ -124,8 +124,8 @@ export default class History extends Component {
   }
   renderIsProviderJobsButton() {
     return (
-      <Footer>
-        <Button block style={{backgroundColor: buttonBgColor}} >
+      <Footer style={{backgroundColor: bgColor}}>
+        <Button block style={{backgroundColor: buttonBgColor, margin: 10}} >
             See My Providers
         </Button>
       </Footer>
