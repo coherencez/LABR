@@ -170,8 +170,8 @@ export default class SideNav extends Component {
       statusColor: color
     })
 
-    let test = JSON.stringify({ checked: !!checked, statusColor: color, statusMessage: message })
-    AsyncStorage.mergeItem('user', test)
+    const userOnlineStatus = JSON.stringify({ checked: !!checked, statusColor: color, statusMessage: message })
+    AsyncStorage.mergeItem('user', userOnlineStatus)
 
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
