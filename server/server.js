@@ -9,6 +9,7 @@ const        app = require('express')()
   ,         User = require('./models/User')
   ,     Provider = require('./models/Provider')
   ,          Job = require('./models/Job')
+  ,          Message = require('./models/Message')
 
 // only send or receive json
 app.use(json())
@@ -192,6 +193,22 @@ app.post('/labr/api/canceljob', ({ body: { _id } },res) => {
     .then(data => {
       if(data) res.json({ status : 200, job: data })
       else res.json({ status: 400 })
+    })
+    .catch(console.error)
+})
+
+app.get('/labr/api/getmessages', (req,res) => {
+  Message.find()
+    .then(data => {
+      res.json(data)
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/message', (req,res) => {
+  Message.create(req.body)
+    .then(res => {
+      console.log(res)
     })
     .catch(console.error)
 })
