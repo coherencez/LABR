@@ -37,7 +37,7 @@ export default class LABR extends Component {
           <Scene key='login' component={Login} renderTitle={() => this.renderTitle('login')} />
           <Scene key='providersignup' component={ProviderSignup} renderTitle={() => this.renderTitle('register')} />
           <Scene key='businessprofile' component={BusinessProfile} renderTitle={() => this.renderTitle('profile')} />
-          <Scene key='startconvo' component={StartConvo} renderTitle={() => this.renderTitle('new message')} />
+          <Scene key='startconvo' component={StartConvo} renderTitle={() => this.renderTitle('new job')} />
           <Scene key='jobs' component={Jobs} renderTitle={() => this.renderTitle('jobs')} />
           <Scene key='history' component={History} renderTitle={() => this.renderTitle('history')} />
           <Scene key='chat' component={Chat} renderTitle={() => this.renderTitle('chat')} />
