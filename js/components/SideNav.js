@@ -136,6 +136,7 @@ export default class SideNav extends Component {
   }
   handleMessagesPress() {
     console.log('MESSAGES PRESSED')
+    Actions.chat()
   }
   handleSettingsPress() {
     console.log('SETTINGS PRESSED')
