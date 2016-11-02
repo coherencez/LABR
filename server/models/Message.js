@@ -2,32 +2,30 @@
 const mongoose = require('mongoose')
 
 const messageSchema = mongoose.Schema({
-  jobId: {
+  _id: {
     type: String,
     required: true,
-  },
-  time: {
-    type: Date,
-    required: true,
-    default: Date.now
   },
   text: {
     type: String,
-    required: true
+    required: true,
   },
-  to: {
+  createdAt: {
     type: String,
     required: true,
   },
-  from: {
-    type: String,
-    required: true,
-  },
-  read: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
+  user: {
+    type: Object,
+    _id: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    }
+
+  }
 })
 
 
