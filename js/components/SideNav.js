@@ -43,7 +43,13 @@ export default class SideNav extends Component {
     AsyncStorage.getItem('user')
       .then(res => JSON.parse(res))
       .then(data => {
-        if(data) this.setState({ user: true, isProvider: data.isProvider })
+        if(data) this.setState({
+          user: true,
+          isProvider: data.isProvider,
+          checked: data.checked,
+          statusColor: data.statusColor,
+          statusMessage: data.statusMessage
+        })
       })
       .catch(console.error)
   }
@@ -156,6 +162,9 @@ export default class SideNav extends Component {
       statusMessage: message,
       statusColor: color
     })
+
+    let test = JSON.stringify({ checked: !!checked, statusColor: color, statusMessage: message })
+    AsyncStorage.mergeItem('user', test)
 
     AsyncStorage.getItem('user')
     .then(res => JSON.parse(res))
