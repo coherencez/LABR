@@ -43,13 +43,20 @@ export default class SideNav extends Component {
     AsyncStorage.getItem('user')
       .then(res => JSON.parse(res))
       .then(data => {
-        if(data) this.setState({
-          user: true,
-          isProvider: data.isProvider,
-          checked: data.checked,
-          statusColor: data.statusColor,
-          statusMessage: data.statusMessage
-        })
+        if(data && !data.checked) {
+         this.setState({
+            user: true,
+            isProvider: data.isProvider,
+          })
+        } else if (data && data.checked) {
+          this.setState({
+            user: true,
+            isProvider: data.isProvider,
+            checked: data.checked,
+            statusColor: data.statusColor,
+            statusMessage: data.statusMessage
+          })
+        }
       })
       .catch(console.error)
   }
