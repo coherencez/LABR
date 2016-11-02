@@ -58,7 +58,7 @@ export default class Job extends Component {
                       <CardItem style={styles.cardTitle}>
                         <Text style={styles.text}>Contact Info:</Text>
                       </CardItem>
-                      <Content style={{height: 75}}>
+                      <Content style={{height: 65}}>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.firstName} {job.userContact.lastName}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.email}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.cellPhone}</Text>
@@ -72,8 +72,10 @@ export default class Job extends Component {
               } else {
                 return (
                     <View style={{flex: 1, flexDirection:'column'}}>
-                      <Text style={{fontSize: 13, fontWeight: '700'}}>Contact Info:</Text>
-                      <Content style={{height: 75}}>
+                      <CardItem style={styles.cardTitle}>
+                        <Text style={styles.text}>Contact Info:</Text>
+                      </CardItem>
+                      <Content style={{height: 65}}>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.firstName} {job.providerContact.lastName}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.email}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.cellPhone}</Text>
@@ -91,7 +93,7 @@ export default class Job extends Component {
                     <Text style={styles.text}>{job.category}</Text>
                   </CardItem>
                   <Text style={{fontSize: 10, fontWeight: '700'}}>Description:</Text>
-                  <Content style={{height: 75}}>
+                  <Content style={{height: 65}}>
                     <Text note style={{color: '#87838B', fontSize: 13, padding: 10}}>{job.description}</Text>
                   </Content>
                 </View>
@@ -99,7 +101,7 @@ export default class Job extends Component {
             }
           })()}
         </CardItem>
-        <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
+        <CardItem cardBody style={{ borderRadius: 5, height: 64 }}>
           {
             (job.active)
               ? this.renderAcceptedButtons(isProvider, handleDeclinePress, handleCompletePress)
@@ -194,7 +196,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 35,
-    width: 50,
+    width: 35,
   },
   accept: {
     backgroundColor: 'green',
