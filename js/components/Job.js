@@ -63,7 +63,7 @@ export default class Job extends Component {
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.email}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.cellPhone}</Text>
                       </Content>
-                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
+                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} onPress={() => this.handleSendMessagePress(job.userContact.id, job.providerContact._id)}>
                           Send Message
                       </Button>
                     </View>
@@ -80,7 +80,7 @@ export default class Job extends Component {
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.email}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.cellPhone}</Text>
                       </Content>
-                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
+                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} onPress={() => this.handleSendMessagePress()}>
                           Send Message
                       </Button>
                     </View>
@@ -169,6 +169,10 @@ export default class Job extends Component {
     this.setState({
       contact: !this.state.contact
     })
+  }
+
+  handleSendMessagePress(userid, providerid) {
+    Actions.chat({ type: 'push', id1: userid, id2: providerid })
   }
 }
 
