@@ -20,7 +20,8 @@
     "react-native-gifted-chat": "^0.0.10",
     "react-native-router-flux": "^3.36.0",
     "react-native-side-menu": "^0.20.1",
-    "react-native-vector-icons": "^2.1.0"
+    "react-native-vector-icons": "^2.1.0",
+    "twilio": "^2.11.0"
   },
   "jest": {
     "preset": "jest-react-native"
