@@ -116,6 +116,9 @@ export default class Job extends Component {
     if(isProvider) {
       return (
         <View style={styles.flexRow}>
+          <Button style={styles.button} onPress={() => this.handleContactPress()}>
+              <Icon name='ios-contact'/>
+          </Button>
           <Button style={styles.decline} textStyle={{ fontSize: 13 }} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text>Decline</Text>
@@ -129,6 +132,9 @@ export default class Job extends Component {
     } else {
       return (
         <View style={styles.flexRow}>
+          <Button style={styles.button} onPress={() => this.handleContactPress()}>
+              <Icon name='ios-contact'/>
+          </Button>
           <Text style={styles.error}>Not Accepted Yet</Text>
           <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
