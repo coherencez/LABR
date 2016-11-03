@@ -101,7 +101,7 @@ export default class Job extends Component {
             }
           })()}
         </CardItem>
-        <CardItem cardBody style={{ borderRadius: 5, height: 64 }}>
+        <CardItem cardBody style={{ borderRadius: 5, height: 50 }}>
           {
             (job.active)
               ? this.renderAcceptedButtons(isProvider, handleDeclinePress, handleCompletePress)
@@ -132,7 +132,7 @@ export default class Job extends Component {
           <Text style={styles.error}>Not Accepted Yet</Text>
           <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
-            <Text >Cancel</Text>
+            <Text>Cancel</Text>
           </Button>
         </View>
       )
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 10,
+    height: 270,
     shadowColor: "#000000",
     shadowOpacity: 0.8,
     shadowOffset: {
