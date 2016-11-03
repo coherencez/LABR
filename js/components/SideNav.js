@@ -176,6 +176,7 @@ export default class SideNav extends Component {
       fetch(API_ENDPOINT, requestObj)
         .catch(console.error)
     })
+    .catch(console.error)
   }
 }
 
