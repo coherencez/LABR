@@ -9,6 +9,7 @@ const        app = require('express')()
   ,         User = require('./models/User')
   ,     Provider = require('./models/Provider')
   ,          Job = require('./models/Job')
+  ,          Message = require('./models/Message')
 
 // only send or receive json
 app.use(json())
@@ -34,7 +35,7 @@ app.post('/labr/api/login', ({ body: { email, password } }, res, err) => {
     .then(dbUser => {
       if(dbUser) {
         return Promise.all([
-          Promise.resolve(dbUser),
+          dbUser,
           dbUser.comparePassword(password)
         ])
       } else {
@@ -48,7 +49,7 @@ app.post('/labr/api/login', ({ body: { email, password } }, res, err) => {
       if(matches) {
         if(user.isProvider) {
           return Promise.all([
-            Promise.resolve(userObj),
+            userObj,
             Provider.findOne({ userId: user._id })
           ])
         }
@@ -71,7 +72,7 @@ app.post('/labr/api/newprovider', ({ body },res) => {
           {_id: body.userId},
           {isProvider: true}
         ),
-        Promise.resolve(provider)
+        provider
       ])
     })
     .then(([updatedUser, provider]) => {
@@ -103,20 +104,12 @@ app.get('/labr/api/getProviders', (req,res) => {
 })
 
 app.post('/labr/api/newjob', ({ body }, res) => {
-  Promise.resolve(body)
-    .then(jobReqObj => {
-      return Promise.all([
-        Promise.resolve(jobReqObj),
-        User.findOne({_id: jobReqObj.provider.userId})
+  Promise.all([
+        body,
+        User.findOne({_id: body.provider.userId})
       ])
-    })
     .then(([jobReqObj, providerContact]) => {
-      // password omit still not working ????
-      // not only is this not working, it is causing a buffer overflow
-      // RangeError to happen
-      // const newProvContactObj = _.omit(providerContact, ['password'])
-      const         newJobObj = _.omit(jobReqObj, ['provider'])
-      const      newJobReqObj = Object.assign({}, newJobObj, {providerContact})
+      const newJobReqObj = Object.assign({}, jobReqObj, {providerContact})
 
       return Job.create(newJobReqObj)
     })
@@ -192,6 +185,22 @@ app.post('/labr/api/canceljob', ({ body: { _id } },res) => {
     .then(data => {
       if(data) res.json({ status : 200, job: data })
       else res.json({ status: 400 })
+    })
+    .catch(console.error)
+})
+
+app.get('/labr/api/getmessages', (req,res) => {
+  Message.find()
+    .then(data => {
+      res.json(data)
+    })
+    .catch(console.error)
+})
+
+app.post('/labr/api/message', (req,res) => {
+  Message.create(req.body)
+    .then(res => {
+      console.log(res)
     })
     .catch(console.error)
 })
