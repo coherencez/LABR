@@ -189,20 +189,32 @@ app.post('/labr/api/canceljob', ({ body: { _id } },res) => {
     .catch(console.error)
 })
 
-app.get('/labr/api/getmessages', (req,res) => {
+app.post('/labr/api/getmessages', (req,res) => {
   Message.find()
     .then(data => {
-      res.json(data)
+      console.log(data)
+      res.json({messages: data[0].messages})
     })
     .catch(console.error)
 })
 
 app.post('/labr/api/message', (req,res) => {
-  Message.create(req.body)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(console.error)
+  // Message.create(req.body)
+  //   .then(res => {
+  //     console.log(res)
+  //   })
+  //   .catch(console.error)
+  console.log(req.body)
+    Message.findByIdAndUpdate(
+        {_id: `581aba8873fb656143cc8440`},
+        {$push: {"messages": req.body}},
+        {safe: true, upsert: true, new : true}
+      )
+      .then(data => {
+        console.log(data)
+        res.status(201).json({status: 201})
+      })
+      .catch(console.error)
 })
 
 // connect to mongo before loading server

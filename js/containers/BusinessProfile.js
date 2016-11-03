@@ -93,10 +93,9 @@ export default class BusinessProfile extends Component {
           {(() => {
             if(this.state.isProvider) {
               return (
-                <View style={{ flex:1, flexDirection: 'row' }}>
-                  <Button block style={styles.button2}>New Jobs</Button>
-                  <Button block style={styles.button2}>Current Jobs</Button>
-                  <Button block style={styles.button2}>History</Button>
+                <View style={{ flex:1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: 300 }}>
+                  <Button block style={styles.button2} onPress={this.handleJobsPress}>Jobs</Button>
+                  <Button block style={styles.button2} onPress={this.handleHistoryPress}>History</Button>
                 </View>
               )
             } else {
@@ -128,6 +127,13 @@ export default class BusinessProfile extends Component {
     })
     .catch(console.error)
   }
+
+  handleJobsPress() {
+    Actions.jobs()
+  }
+  handleHistoryPress() {
+    Actions.history()
+  }
 }
 
 const styles = StyleSheet.create({
@@ -148,6 +154,8 @@ const styles = StyleSheet.create({
   button2: {
     backgroundColor: button2BgColor,
     margin: 5,
+    height: 30,
+    top: 5,
   },
   helperText: {
     fontSize: 13,

@@ -63,7 +63,7 @@ export default class Job extends Component {
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.email}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.userContact.cellPhone}</Text>
                       </Content>
-                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
+                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} onPress={() => this.handleSendMessagePress(job.userContact.id, job.providerContact._id)}>
                           Send Message
                       </Button>
                     </View>
@@ -80,7 +80,7 @@ export default class Job extends Component {
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.email}</Text>
                         <Text note style={{color: '#000', fontSize: 13, padding: 5}}>{job.providerContact.cellPhone}</Text>
                       </Content>
-                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} >
+                      <Button transparent textStyle={{color: 'blue', fontSize: 13}} onPress={() => this.handleSendMessagePress()}>
                           Send Message
                       </Button>
                     </View>
@@ -116,6 +116,9 @@ export default class Job extends Component {
     if(isProvider) {
       return (
         <View style={styles.flexRow}>
+          <Button style={styles.button} onPress={() => this.handleContactPress()}>
+              <Icon name='ios-contact'/>
+          </Button>
           <Button style={styles.decline} textStyle={{ fontSize: 13 }} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
             <Text>Decline</Text>
@@ -129,6 +132,9 @@ export default class Job extends Component {
     } else {
       return (
         <View style={styles.flexRow}>
+          <Button style={styles.button} onPress={() => this.handleContactPress()}>
+              <Icon name='ios-contact'/>
+          </Button>
           <Text style={styles.error}>Not Accepted Yet</Text>
           <Button style={styles.decline} textStyle={{fontSize: 10}} onPress={() => handleDeclinePress()}>
             <Icon name='md-close' style={{ fontSize: 15}}/>
@@ -163,6 +169,10 @@ export default class Job extends Component {
     this.setState({
       contact: !this.state.contact
     })
+  }
+
+  handleSendMessagePress(userid, providerid) {
+    Actions.chat({ type: 'push', id1: userid, id2: providerid })
   }
 }
 
