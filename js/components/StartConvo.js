@@ -86,7 +86,7 @@ export default class StartConvo extends Component {
           })
           setTimeout(() => {
             Actions.app({type: 'reset'})
-          }, 3000)
+          }, 2200)
         } else {
           this.setState({
             errorMessage: data.msg

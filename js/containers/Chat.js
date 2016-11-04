@@ -42,22 +42,22 @@ export default class Chat extends Component {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
-    const API_ENDPOINT = `${endpointIP}/labr/api/message`
-    const requestObj = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newMessageObj)
-    }
-
-    fetch(API_ENDPOINT, requestObj)
-      .then(res => res.json())
-      .then(messages => {
-        console.log(messages)
-      })
-      .catch(console.error)
+    // const API_ENDPOINT = `${endpointIP}/labr/api/message`
+    // const requestObj = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(newMessageObj)
+    // }
+    //
+    // fetch(API_ENDPOINT, requestObj)
+    //   .then(res => res.json())
+    //   .then(messages => {
+    //     console.log(messages)
+    //   })
+    //   .catch(console.error)
   }
   render() {
     console.log('IDS',this.props)
