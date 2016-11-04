@@ -73,11 +73,6 @@ export default class SideNav extends Component {
           <Text>Business Account</Text>
           <Icon name='ios-mic-outline' style={styles.hidden}/>
         </ListItem>
-        <ListItem iconLeft button onPress={this.handleMessagesPress}>
-          <Icon name='md-text' />
-          <Text>Messages</Text>
-          <Badge>3</Badge>
-        </ListItem>
         <ListItem iconLeft button onPress={this.handleJobsPress}>
           <Icon name='ios-contact' />
           <Text>Jobs</Text>
@@ -85,10 +80,6 @@ export default class SideNav extends Component {
         <ListItem iconLeft button onPress={this.handleHistoryPress}>
           <Icon name='md-archive' />
           <Text>History</Text>
-        </ListItem>
-        <ListItem iconLeft button onPress={this.handleSettingsPress}>
-          <Icon name='md-aperture' />
-          <Text>Settings</Text>
         </ListItem>
       </View>
     )
@@ -147,13 +138,6 @@ export default class SideNav extends Component {
     })
     .catch(console.error)
   }
-  handleMessagesPress() {
-    console.log('MESSAGES PRESSED')
-    Actions.chat()
-  }
-  handleSettingsPress() {
-    console.log('SETTINGS PRESSED')
-  }
   handleJobsPress() {
     Actions.jobs()
   }
@@ -192,6 +176,7 @@ export default class SideNav extends Component {
       fetch(API_ENDPOINT, requestObj)
         .catch(console.error)
     })
+    .catch(console.error)
   }
 }
 

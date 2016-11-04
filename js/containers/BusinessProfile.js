@@ -46,7 +46,7 @@ export default class BusinessProfile extends Component {
               )
             }
           })()}
-          <Grid style={{ marginTop: 10}}>
+          <Grid style={{ marginTop: 10 }}>
               <Col style={{ width: 115, padding: 5, justifyContent: 'center' }}>
                 <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'nevis', color: '#fff'}}>
                   Info:
@@ -79,12 +79,12 @@ export default class BusinessProfile extends Component {
                 </View>
                 </Row>
               </Col>
-              <Col style={{ width: 200, padding: 5, flex:1, justifyContent: 'center' }}>
+              <Col style={{ width: 200, marginTop: 10, padding: 5, flex:1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'nevis', color: '#fff'}}>{this.props.provider.name}</Text>
                 <Text style={styles.helperText}>
                   {this.props.provider.bio}
                 </Text>
-                <Thumbnail square size={150} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
+                <Thumbnail size={150} source={require('../../lib/imgs/profile1.jpg')} style={{ marginTop: 15 }}/>
               </Col>
           </Grid>
         </Content>

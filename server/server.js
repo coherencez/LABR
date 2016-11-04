@@ -9,8 +9,9 @@ const        app = require('express')()
   ,         User = require('./models/User')
   ,     Provider = require('./models/Provider')
   ,          Job = require('./models/Job')
-  ,          Message = require('./models/Message')
-
+  ,      Message = require('./models/Message')
+  ,   { Twilio } = require('./utilities/Twilio')
+  , { to, from } = require('./utilities/secret').twilioCreds
 // only send or receive json
 app.use(json())
 
@@ -161,10 +162,21 @@ app.post('/labr/api/acceptjob', ({ body: { _id } },res) => {
       {new: true}
     )
     .then(data => {
-      if(data) res.json({ status : 200, job: data })
-      else res.json({ status: 400 })
+      if(data) {
+        Twilio.messages.create({
+            to,
+            from,
+            body: `Your ${data.category} job has just been accepted by ${data.providerContact.firstName} ${data.providerContact.lastName}. They will be on the way soon!`
+        }, function(err, message) {
+            console.log(message.sid);
+        })
+        res.json({ status : 200, job: data })
+      } else {
+         res.json({ status: 400 })
+      }
     })
     .catch(console.error)
+
 })
 
 app.post('/labr/api/completejob', ({ body: { _id } },res) => {
