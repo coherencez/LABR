@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux'
-import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem } from 'native-base';
+import { Container, Content, Card, CardItem, Thumbnail, Text, Button, List, ListItem, Icon } from 'native-base';
 
 import SideNav from '../components/SideNav'
 import SideMenu from 'react-native-side-menu'
@@ -20,6 +20,9 @@ export default class Category extends Component {
     this.state = {
       categories: [
         'Car/Auto', 'Home Improvement', 'Lawn/Landscaping', 'Electrical', 'Plumbing', 'All'
+      ],
+      icons: [
+        'ios-car', 'ios-home', 'ios-analytics', 'ios-flash', 'ios-body', 'ios-more'
       ]
     }
   }
@@ -28,8 +31,8 @@ export default class Category extends Component {
     return (
       <SideMenu menu={menu}>
       <Container style={styles.container}>
-        <Content>
-          <List>
+        <Content >
+          <List >
             {this.renderCategories()}
           </List>
         </Content>
@@ -45,8 +48,10 @@ export default class Category extends Component {
   renderCategories() {
     return this.state.categories.map((category, i) =>
       <ListItem button key={i} name={category} onPress={() => this.handleCatgoryPress(category)}>
-          <Thumbnail square size={80} source={{uri: 'http://www.freeiconspng.com/uploads/work-icon-0.png'}} />
-          <Text style={styles.font}>{category}</Text>
+      <View style={styles.category}>
+        <Icon name={this.state.icons[i]} style={{fontSize: 30, color: fontColorWhite, marginLeft: 5 }}/>
+        <Text style={styles.font}>{category}</Text>
+      </View>
       </ListItem>
     )
   }
@@ -56,6 +61,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: bgColor,
     marginTop: 60,
+    flex: 1,
+    flexDirection: 'column',
   },
   spacing: {
     marginTop: 5,
@@ -65,8 +72,18 @@ const styles = StyleSheet.create({
   font: {
     fontFamily: fontFamily,
     fontSize: 20,
-    fontWeight: '800',
-    top: 25,
-    color: fontColorWhite
+    fontWeight: '700',
+    color: fontColorWhite,
+    marginRight: 5,
+  },
+  category: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 60,
+    borderRadius: 5,
+    paddingLeft: 20,
+    backgroundColor: navColor,
   },
 });
