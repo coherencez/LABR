@@ -20,7 +20,7 @@ export default class ProviderCard extends Component {
           <Text style={styles.text}>{provider.name}</Text>
         </CardItem>
         <CardItem cardBody button onPress={handlePress()} style={{alignItems: 'center', justifyContent:'center'}}>
-          <Thumbnail source={{uri: 'https://c2.staticflickr.com/6/5509/12298744374_9441f9cbeb_b.jpg'}} size={100} square/>
+          <Thumbnail source={require('../../lib/imgs/profile1.jpg')} size={100} square/>
         </CardItem>
         <CardItem button onPress={handlePress()} style={{ borderRadius: 5}}>
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start' }}>
